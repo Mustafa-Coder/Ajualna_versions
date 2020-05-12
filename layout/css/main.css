@@ -1,0 +1,1278 @@
+body
+{
+    margin:0;
+    padding:0;
+    background-color: rgb(244, 244, 247);
+    font-family: 'Work Sans', sans-serif;
+    
+    
+
+}
+
+/* GLOBAL DESIGN */
+
+.name 
+{
+    margin: 15px auto;
+    background: rgba(0, 123, 255, 0.5490196078431373);
+    width: 90px;
+    height: 90px;
+    padding: 14px 27px;
+    border-radius: 50%;
+    font-size: 2.5em;
+}
+
+.display
+{
+    display: block !important;
+}
+
+.show
+{
+    opacity:1;
+}
+
+.hide
+{
+    opacity: .5 ;
+}
+
+.addLikeBlue 
+{
+    color:blue !important;
+}
+
+#waitingpost
+{
+    display:none;
+}
+
+.copyright
+{
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 30px;
+    color: rgb(139, 143, 164);
+}
+
+/* ADMIN LOGIN PAGE */
+
+.loginPages p
+{
+    color: rgb(175, 175, 175);
+    font-size: 15px;
+}
+
+.loginPages .card
+{
+    margin: 10% auto;
+    box-shadow:  0 0 15px rgba(221, 221, 221, 0.555);
+    border: 0;
+    min-height: 70vh;
+    overflow: hidden;
+}
+
+
+.loginPages .card .overlay
+{
+    position: absolute;
+    top: 0;
+    left: 14px;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 123, 255, 0.6509803921568628)
+}
+
+.loginPages .card .overlay h1,
+.loginPages .card .overlay p
+
+{
+    color: rgb(255, 255, 255);
+    transform: translateY(175px);
+}
+
+.loginPages .card .overlay p 
+{
+    width: 550px;
+}
+
+.loginPages .card .log-img
+{
+    width: 172%;
+}
+
+.loginPages .card .form-group
+{
+    transform: translateY(6em);
+   
+}
+
+.loginPages .card .login_name 
+{
+    font-size: 16px;
+    text-align: center;
+    margin-top: 12%;
+    font-weight: 600;
+}
+
+
+.loginPages .card .form-control
+{
+    margin-bottom: 15px;
+    /* border: 0; */
+    /* border-bottom: 2px solid #3fa9f5; */
+    /* padding: 5px; */
+    background-blend-mode: screen;
+    border:1px solid #eeeeee;
+    border-radius: 3px;
+}
+
+.loginPages .loading 
+{
+    border-radius: 50px;
+    width: 10px;
+    height: 10px;
+    border: 0;
+    background: #60a8f5;
+}
+
+
+.loginPages #text
+{
+    color: rgb(109, 136, 155);
+    margin: 12px;
+}
+
+/* END ADMIN LOGIN PAGE */
+/* SIGNUP PAGE STYLE IN HOMEPAGE */
+
+.Signuppage p
+{
+    color: rgb(175, 175, 175);
+    font-size: 15px;
+}
+
+.Signuppage .card
+{
+    margin: 5% auto;
+    box-shadow: 0 0 15px rgba(221, 221, 221, 0.555);
+    border: 0;
+    min-height: 70vh;
+    overflow: hidden;
+    margin-bottom: 31px;
+}
+
+
+.Signuppage .card .overlay
+{
+    position: absolute;
+    top: 0;
+    left: 14px;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 123, 255, 0.6509803921568628)
+}
+
+.Signuppage .card .overlay h1,
+.Signuppage .card .overlay p
+
+{
+    color: rgb(255, 255, 255);
+    transform: translateY(175px);
+}
+
+.Signuppage .card .overlay p 
+{
+    width: 550px;
+}
+
+.Signuppage .card .log-img
+{
+    width: 179%;
+}
+
+
+
+.Signuppage .card .signname 
+{
+    font-size: 30px;
+    text-align: left;
+    margin-top: 12%;
+    margin-left: 24px;
+}
+
+
+.Signuppage .card .title_sign 
+{
+    margin-left: 26px;
+    width: 454px;
+    text-align: left;
+    font-weight: 500;
+    color: rgb(204, 204, 204);
+}
+
+.Signuppage .card .form-control
+{
+    margin-bottom: 15px;
+    /* border: 0; */
+    /* border-bottom: 2px solid #3fa9f5; */
+    /* padding: 5px; */
+    background-blend-mode: screen;
+    border:1px solid #eeeeee;
+    border-radius: 3px;
+}
+
+.Signuppage .loading 
+{
+    border-radius: 50px;
+    width: 10px;
+    height: 10px;
+    border: 0;
+    background: #60a8f5;
+}
+
+
+.Signuppage #text
+{
+    color: rgb(109, 136, 155);
+    margin: 12px;
+}
+/* Landing page =================================================== */
+/* Navbar landing page */
+.navbar .navbar-brand h1
+{
+    font-size: 19px;
+    font-weight: bold;
+    margin: 6px;
+}
+
+.navbar .navbar-brand h1 .text
+{
+    color: #3fa9f5;
+}
+
+.navbar .navbar-brand h1 .text-two
+{
+    color: #282828;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 2.5rem;
+    padding-left: 0.5rem;
+    color: black;
+}
+
+
+
+
+.navbar .collapse .navbar-nav .nav-item .btn-outline-primary {
+    margin-right: 17px;
+    color: #555bff;
+    border-color: #7e49e9;
+    transition: .6s ease;
+}
+
+.navbar .collapse .navbar-nav .nav-item .btn-outline-primary:hover {
+    transition: .6s ease;
+    background-color: #7e49e9;
+    color: white;
+
+}
+
+
+/* End Navbar landing page */
+
+/* Home  page */
+
+.home-page 
+{
+    margin-top: 25px;
+} 
+
+.home-page .title-sign
+{
+    font-size: 22px;
+}
+
+.home-page .form-group .form-control
+{
+    margin-bottom: 15px;
+    border: 0;
+    border-bottom: 2px solid #3fa9f5;
+    border-radius: 0;
+}
+
+/* ======================================================== */
+/* Sign  up page */
+
+.Signup .navbar
+{
+    box-shadow:  0 0 10px #ddd;
+}
+
+.Signup p
+{
+    color: rgb(175, 175, 175);
+    font-size: 15px;
+}
+
+.Signup .card
+{
+    margin: 5% auto;
+    box-shadow:  0 0 15px rgba(221, 221, 221, 0.555);
+    border: 0;
+}
+
+.Signup .card .form-control
+{
+    margin-bottom: 15px;
+    border: 0;
+    border-bottom: 2px solid #3fa9f5;
+    border-radius: 0;
+}
+
+
+.Signup .helper
+{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.Signup .helper li 
+{
+    padding: 0 15px;
+}
+
+.Signup .helper li  a
+{
+    color:gray;
+}
+
+
+/* ======================================================== */
+/* Sign  up page */
+
+.login .navbar
+{
+    box-shadow:  0 0 10px #ddd;
+}
+
+.login p
+{
+    color: rgb(175, 175, 175);
+    font-size: 15px;
+}
+
+.login .card
+{
+    margin: 5% auto;
+    box-shadow:  0 0 15px rgba(221, 221, 221, 0.555);
+    border: 0;
+    width: 450px;
+}
+
+.login .card .form-control
+{
+    margin-bottom: 15px;
+    border: 0;
+    border-bottom: 2px solid #3fa9f5;
+    border-radius: 0;
+}
+
+
+.login .helper
+{
+    display: inline-flex;
+    list-style: none;
+    margin: 0% auto ;
+    padding: 0;
+}
+
+.login .helper li 
+{
+    padding: 15px 15px;
+    margin: 0% auto;
+
+}
+
+.login .helper li  a
+{
+    color:gray;
+}
+
+
+/* menu  Navbar */
+
+.menu-home 
+{
+    width: 100%;
+    background: white;
+    box-shadow: 6px 2px 8px #ddd;
+    position: fixed;
+    top: 0;
+    height: 56px;
+    z-index: 2;
+    line-height: 3;
+}
+
+.menu-home .brand 
+{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.menu-home  .menu 
+{
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    right: 12px;
+    top: 1px;
+    display: flex;
+}
+
+.menu-home  .menu .link-img img
+{
+    width: 40px;
+    height: 40px;
+    background: rgb(234, 234, 234);
+    border-radius: 50%;
+    padding: 5px;
+    
+}
+
+.menu-home  .menu .linkMenu
+{
+    position: fixed;
+    left: 8px;
+}
+
+.menu-home  .menu .link 
+{
+    padding: 4px 15px;
+    list-style: none;
+    position: relative;
+    font-size: 14px;
+    cursor: pointer;
+    color: rgb(139, 142, 159);
+}
+
+.menu-home .menu .link span 
+{
+    position: absolute;
+    background: rgb(255, 0, 0);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    top: 24px;
+    left: 21px;
+    display: none;
+}
+
+/* moadl menu navbar */
+
+ /* Modal notification */
+
+ .modalNotif 
+ {
+    position: fixed;
+    top: 48px;
+    right: 100px;
+    z-index: 2;
+    box-shadow: 0 0 10px #ddd;
+    width: auto;
+    /* overflow: hidden; */
+    overflow: scroll;
+    display: none;
+ }
+
+ .modalNotif .info
+ {
+    display:flex;
+    position: relative;
+    transition: .5s ease;
+    border-bottom: 1px solid #eee;
+ }
+
+ .modalNotif .info:hover
+ {
+    background: #f8f8f8;
+    transition: .5s ease;
+    cursor: pointer;
+ }
+
+ .modalNotif  .notif
+ {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    padding-bottom: 14px;
+    padding-top: 15px;
+ }
+
+ .modalNotif .info .user 
+ {
+    margin-right: 118px;
+ }
+
+ 
+ .modalNotif .info img
+ {
+    width: 40px;
+    height: 40px;
+    margin: 12px;
+    margin-top: 11px;
+    border-radius: 50%;
+ }
+
+ .modalNotif .info h2
+ {
+    font-size: 14px;
+    margin: 15px;
+}
+
+.modalNotif .info .desc
+{
+    margin-top: -10px;
+    color: rgb(116, 113, 113);
+    padding-left: 12px;
+    font-size: 13px;
+}
+
+.modalNotif .info .time
+{
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 12px;
+    color: rgb(204, 204, 204);
+}
+
+
+.modalNotif .info p span
+{
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #ed1f52;
+    border-radius: 50%;
+    right: 8px;
+    top: 8px;
+}
+
+.modalNotif .end 
+{
+    background-color: #79c1ffcc;
+    padding: 5px;
+}
+
+.modalNotif .end h2
+{
+    font-size: 15px;
+    margin: 5px;
+}
+
+/* Moadl menu  user*/
+
+
+/* modals page */
+
+.modal-menu
+{
+   width: auto;
+   position: fixed;
+   top: 51px;
+   /* border-radius: 5px; */
+   right: 33px;
+   overflow: hidden;
+   z-index: 4;
+   display: none;
+   text-align: right;
+   box-shadow: 0 0 14px #2c2b2b42;
+}
+
+.modal-menu ul 
+{
+   margin: 0;
+   list-style: none;
+   padding: 0;
+}
+
+
+.modal-menu ul li
+{
+   transition: .5s ease;
+    color: rgb(139, 142, 159) ;
+    padding: 12px 20px 12px 20px;
+   cursor: pointer;
+   font-size: 14px;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.048);
+   margin-left: 32px;
+
+
+}
+
+.modal-menu ul li a 
+{
+    color: rgb(139, 142, 159) ;
+    text-decoration: none;
+    
+
+}
+
+.modal-menu ul li a > .fa-cog,.fa-power-off,.fa-user-alt,.fa-tachometer-alt
+{
+    position: absolute;
+    left: 16px;
+    margin-top:2px;
+}
+.modal-menu ul li:hover
+{
+   transition: .5s ease;
+   background: #d1d1d15d;
+
+}
+
+
+/* End menu Navbar */
+
+/* HOME PAGE STYLE ONLY  */
+
+.titleinfo
+{
+    text-align: center;
+    font-size: 23px;
+    margin-top: 5em;
+}
+
+.titlepra 
+{
+    text-align: center;
+    font-size: 15px;
+    color: rgb(117, 116, 116);
+}
+
+.home .card
+{
+    width: 100%;
+    border: 1px solid rgb(238, 238, 238);
+    border-radius: .5px;
+    box-shadow: 0 0px 1px #ddd;
+    transition:.5s ease;
+    
+    
+}
+
+.home .card:hover
+{
+    transition:.5s ease;
+    box-shadow: 0 6px 1px #ddd;
+
+}
+
+.home .card img
+{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.home .card h2
+{
+    font-size: 24px;
+}
+
+.home .card .btn-primary
+{
+    background-image: linear-gradient(150deg,#555bff,#7e49e9);
+    border:none;
+}
+
+.home .infor
+{
+    border-radius: 10px;
+    overflow: hidden;
+    animation: danager 1s ease infinite;
+    transform:translateY(0);
+
+}
+
+@keyframes danager 
+{
+    0%{transform:translateY(0)}
+    20%{transform:translateY(5px)}
+    40%{transform:translateY(0)}
+    60%{transform:translateY(5px)}
+    100%{transform:translateY(0)}
+}
+
+.home .infor p
+{
+    text-align: center;
+    margin: 8px;
+    color: rgb(49, 48, 48);
+    font-weight: bold;
+}
+
+.home .infor .btn-primary
+{
+    width: 150px;
+    margin: 0 auto;
+    margin-bottom: 13px;
+}
+
+.home .infor .btn-primary a 
+{
+    text-decoration:none;
+    color:white;
+}
+/* PROFILE ======================================================== */
+
+/* SETTINGS */
+
+.settings  .set-box {
+    box-shadow: 0px 0px 18px rgba(63, 81, 181, 0.16);
+
+}
+
+.settings .avatar-box
+{
+    box-shadow: 0px 0px 18px rgba(63, 81, 181, 0.16);
+
+}
+
+.settings .avatar-box .display-4
+{
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.settings .avatar-box .avatar img
+{
+    width:150px;
+    height: auto;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: .5;
+}
+
+.settings .avatar-box .btn-primary
+{
+    width: 150px;
+    margin-left: 10px;
+}
+
+.settings .set-box .form-control
+{
+    
+
+    margin-bottom: 15px;
+    border: 0;
+    border-bottom: 2px solid #3fa9f5;
+     border-radius: 0;
+
+
+}
+
+.settings .menu-settings 
+{
+    position: fixed;
+    width: 274px;
+    height: 80vh;
+    border: 0;
+    overflow: hidden;
+    box-shadow: 0px 0px 18px rgba(63, 81, 181, 0.16);
+}
+
+
+.settings .menu-settings .profile-info img 
+{
+    margin: 17px auto;
+    display: block;
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    padding: 10px;
+}
+
+.settings .menu-settings .profile-info .username
+{
+    font-size: 17px;
+    text-align: center;
+    border-bottom: 1px solid rgba(238, 238, 238, 0.9333333333333333);
+    padding-bottom: 17px;
+}
+
+.settings .menu-settings .pages
+{
+    margin:0;
+    padding: 0;
+    list-style: none;
+}
+
+.settings .menu-settings .pages .nav-item 
+{
+    padding: 5px;
+    margin-top: 5px;
+    transition: .5s ease;
+}
+
+.settings .menu-settings .pages .nav-item:hover{
+    transition: .5s ease;
+    background-color: rgba(211, 211, 211, 0.384);
+    color: white !important;
+}
+
+.settings .menu-settings .pages .nav-item .nav-link
+{
+    color: rgb(51, 51, 51);
+}
+
+/* PROFILE DESIGN GLOBAL  */
+
+.profile-page .card .avatar img
+{
+    width: 125px;
+    height: 125px;
+    margin: 0 auto;
+    display: block;
+}
+
+
+.profile-page .card .info .username
+{
+    font-size: 27px;
+    margin-left: 23px;
+}
+
+.profile-page .card .info .linke  {
+    display: flex;
+    list-style: none;
+    margin-left: 25px;
+    margin-top: 15px;
+    padding: 0px;
+}
+
+.profile-page .card .info .linke li {
+    margin-right: 25px;
+}
+/* Menu page  profile-page-about*/
+
+.profile-page-about .link-set {
+    list-style: none;
+    margin-left: 25px;
+    margin-top: 15px;
+    padding: 0px;
+}
+
+.profile-page-about .link-set li {
+    margin-right: 25px;
+    padding: 10px 16px;
+    transition: 1s ease;
+    border-radius: 46px;
+
+}
+
+.profile-page-about .link-set li a
+{
+    text-decoration: none;
+    color: black;
+}
+
+.profile-page-about .link-set li:hover
+{
+    transition: 1s ease;
+    background-color: white;
+}
+
+.profile-page-about .infoweb
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: fixed;
+    bottom: 1px;
+}
+
+.profile-page-about .infoweb li
+{
+    display: inline-block;
+    padding: 12px 7px;
+    font-size: 14px;
+}
+/* END PROFILE DESIGN GLOBAL  */
+
+/* INCLUDE HOME PAGE FILE  */
+
+
+.homeglobal .card
+{
+    border-radius: 2px;
+}
+
+.homeglobal .user-info
+{
+    display: -webkit-box;
+    overflow: hidden;
+}
+
+.homeglobal .card .avatar .name
+{
+    
+    margin: 24px;
+    background: rgba(0, 123, 255, 0.5490196078431373);
+    width: 40px;
+    height: 40px;
+    padding: 2px 10px;
+    border-radius: 50%;
+    font-size: 1.5em;
+}
+
+.homeglobal .card .avatar img
+{
+    
+    margin: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+
+.homeglobal .card .info h1
+{
+    font-size: 1em;
+    margin-top: 18px;
+}
+
+.homeglobal .card .info p
+{
+    font-size: 13px;
+    color: rgb(139, 142, 159);
+    margin-top: -3px;
+}
+
+.homeglobal .college-pages 
+{
+    
+    position: relative;
+}
+.homeglobal .college-pages h2
+{
+    font-size: 15px;
+    position: absolute;
+}
+
+.homeglobal .college-pages ul li  a  > .fa-university
+{
+    color: rgb(139, 142, 159);
+}
+
+.homeglobal .college-pages ul li
+{
+    list-style: decimal-leading-zero;
+} 
+
+
+
+.homeglobal .postsystem textarea
+{
+    border:1px solid gray;
+
+}
+
+.homeglobal .postsystem .btn-primary
+{   
+    width: 80px;
+    margin-top: 15px;
+}
+
+.homeglobal #postsuccess 
+{
+    padding: 15px;
+    width: 180px;
+    background: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    right: 10px;
+    color: rgb(0, 123, 255);
+    top: 90px;
+    box-shadow: 0 0 10px #ececec;
+}
+
+/* POST Show It */
+
+
+.homeglobal .postshow
+{
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.homeglobal .postshow .avatar img
+{
+      
+    margin: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.homeglobal .postshow .avatar
+{
+    display: flex;
+}
+
+.homeglobal .postshow .avatar h2
+{
+    margin-top: 2%;
+    font-size: 14px;
+    margin-left: 2%;
+}
+
+.homeglobal .postshow .avatar .timespan
+{
+    position: absolute;
+    left: 74px;
+    top: 31px;
+    font-size: 14px;
+}
+
+.homeglobal .postshow .info-user
+{
+    padding: 10px;
+
+}
+
+.homeglobal .postshow .info-user .desc
+{
+    font-size: 15px;
+    margin-bottom: -10px;
+}
+
+.homeglobal .postshow .avatar .fa-ellipsis-h
+{
+    cursor: pointer;
+    color: rgb(160, 163, 177);
+    position: absolute;
+    right: 14px;
+    top: 10px;
+}
+
+.homeglobal .postshow  .lcs
+{
+    display: flex;
+    justify-content: center;
+}
+
+.homeglobal .postshow .lcs li 
+{
+    padding: 0 40px;
+    list-style: none;
+    cursor: pointer;
+    color: rgb(177, 177, 179);
+}
+
+.homeglobal .fa-plus
+{
+    padding: 5px 9px;
+    width: 30px;
+    height: 30px;
+    background: rgb(240, 240, 240);
+    font-size: 13px;
+    border-radius: 50%;
+    margin: 0% auto;
+    cursor: pointer;
+    display: block;
+}
+
+.homeglobal .messagecard
+{
+    padding: 10px;
+    width: 250px;
+    display: none;
+    background: rgba(255, 255, 255, 0.66);
+}
+
+/* BOX CHECK DATA */
+
+
+.homeglobal .checkdata 
+{
+
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    align-items: center;
+    color: rgb(220, 89, 87);
+}
+
+.homeglobal .checkdata .fa-frown-open
+{
+    font-size: 80px;
+    margin-bottom: 10px;
+    
+}
+
+.homeglobal .checkdata .op
+{
+    font-weight: 500;
+    font-size: 30px;
+}
+
+
+/* Info college personal  */
+
+
+.homeglobal .user-info-college
+{
+    position: relative;
+}
+
+.homeglobal .user-info-college .person
+{
+    display: -webkit-inline-box;
+    margin-bottom: -22px;
+}
+
+.homeglobal .user-info-college h2
+{
+    position: absolute;
+    font-size: 14px;
+}
+
+
+.homeglobal .user-info-college .avatar 
+{
+    margin-left: -10px;
+}
+
+.homeglobal .user-info-college .info 
+{
+    margin-left: -6px;
+    margin-top: 5px;
+}
+
+.homeglobal .user-info-college .Mesgcollege 
+{
+    font-size: 14px;
+    margin-top: 34px;
+    color: rgb(139, 142, 159);
+}
+
+/* PAGES============================================================================ */
+/* PAGES============================================================================ */
+/* PAGES============================================================================ */
+
+/* left */
+.pagehome .cardleft .avatar
+{
+    padding: 5px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: rgb(245, 245, 245);
+    width: 150px;
+    height: 150px;
+    margin: 21px auto;
+}
+
+.pagehome .cardleft .avatar .fa-university
+{
+    font-size: 91px;
+    color: rgb(139, 142, 159);
+    margin: 13% auto;
+    display: block;
+
+}
+
+/* info */
+
+.pagehome .info h1
+{
+    font-size: 14px;
+    margin: 15px;
+}
+.pagehome .info p
+{
+    font-size: 13px;
+    margin-top: -5px;
+    margin-left: 15px;
+}
+
+.pagehome .info hr 
+{
+    margin: 0;
+}
+
+/* links  */
+
+.pagehome .info ul
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+}
+
+.pagehome .info ul li 
+{
+    padding: 17px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    cursor: pointer;
+    transition: .5s ease;
+    font-size: 14px;
+}
+
+.pagehome .info ul li:hover
+{
+    transition: .5s ease;
+    background: #fafafa;
+}
+
+/* center */
+
+.pagehome .center .postsystem textarea
+{
+    border:1px solid gray;
+
+}
+
+.pagehome .center .postsystem .btn-primary
+{   
+    width: 80px;
+    margin-top: 15px;
+}
+
+.pagehome .center #postsuccess 
+{
+    padding: 15px;
+    width: 180px;
+    background: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    right: 10px;
+    color: rgb(0, 123, 255);
+    top: 90px;
+    box-shadow: 0 0 10px #ececec;
+}
+
+/* pagehome card create-class fa-plus tic */
+.pagehome .card .create-class .fa-plus
+{
+    width: 40px;
+    height: 40px;
+    margin-top: 15px;
+}
+
+.pagehome .card .create-class .tic
+{
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    margin: 15px;
+}
