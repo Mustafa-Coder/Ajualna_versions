@@ -3,7 +3,7 @@
         <!-- if($Userinformation['Gender'] == 'male'):echo "../layout/images/icons/011.png"; else: echo "../layout/images/icons/012.png";endif;?> -->
             <div id="brandhome"  class="brand ml-3"><?php echo lang("name_site"); ?></div>
             <ul class="menu ">
-                <li  class="link"><i class="fas fa-house-damage"></i><?php echo lang("name_home"); ?></li>
+                <li  class="link"><a href="/Ajualna/home.php"><i class="fas fa-house-damage"></i><?php echo lang("name_home"); ?></a></li>
                 <li  class="link"><i class="fas fa-question-circle"></i><?php echo lang("Ques"); ?></li>
                 <li id="ShowNotification" class="link"><i class="fas fa-bell"></i><span id="notification"></span></li>
                 <li  id="ShowMenuPerson" class="link link-img"><img class="img-fiuld text-center" <?php if(!empty($Userinformation['avatar'])): echo "src='/Ajualna/u/uploads/avatar/".$Userinformation['avatar']."'"; else: echo "src=/Ajualna/layout/images/icons/user.png";endif;?> alt="image user"></li>
@@ -47,7 +47,7 @@
         <div class="info">
             
             <div class="avatar">
-            <img src="./u/uplaods/avatar/<?php echo $rowdata['avatar']; ?>" alt="">
+            <img src="./u/uploads/avatar/<?php echo $rowdata['avatar']; ?>" alt="">
             </div>
             <div class="user">
                 <h2 class="username"> <?php echo $rowdata['username'] . " " .  $rowdata['lastname']  ?> > <a href="#"><?php echo $pagesforyou["pagename"] ?></a></h2>

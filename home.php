@@ -1,7 +1,7 @@
 <?php 
+session_cache_expire(1440); // This The Chace Time about your session and this 30 value is minute 
 session_start();
 $PAGENAME = "Home | AJUALNA "  ;
-
 include 'init.php';
 if(!isset($_SESSION['user'])):
     header("location:logout.php");
@@ -51,8 +51,8 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
                 </div>
                 <div class="info">
                     <h1><?php echo strtolower($Userinfo['username']); ?></h1>
-                    <?php $pagecollege = get_something("pages","*","WHERE pageid = ".$Userinfo['college']."","fetch"); // get page id you ?>
-                    <p><?php echo !empty($pagecollege['pagename']) ? "<i class='fas fa-university'></i> " . '<a href="pages.php?pageid='.$pagecollege['pageid'].'&page=Home_me" title="'.$pagecollege['pagename'].'">'. substr($pagecollege['pagename'],0,20) .'...</a>' : "<i class='fas fa-university'></i> No College Here !" ?></p>
+                    <?php $pagecollege = get_something("pages","*","WHERE pageid = ".$Userinfo['college']."","fetch"); // get page id you  Links($link = null,$underscor = null)?>  
+                    <p><?php echo !empty($pagecollege['pagename']) ? "<i class='fas fa-university'></i> " . '<a href="pages.php?pageid='.$pagecollege['pageid'].'&page=Home_me" title="'.$pagecollege['pagename'].'">'. substr($pagecollege['pagename'],0,15) .'...</a>' : "<i class='fas fa-university'></i> No College Here !" ?></p>
                 </div>
             </div>
             <?php if($Userinfo['admin'] == 1): ?>
@@ -126,7 +126,11 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
                                 <div class="info">
                                     <h1><?php echo strtolower($collegme['username']); ?></h1>
                                     <?php $pageme = get_something("pages","*","WHERE pageid = ".$collegme['college']."","fetch"); // get page id you ?>
-                                    <p><?php echo !empty($collegme['college']) ? "<i class='fas fa-university'></i> " . '<a href="pages.php?pageid='.$collegme['college'].'" title="'.$pageme['pagename'] .'">'. substr($pageme['pagename'] ,0,20).'...</a>' : "<i class='fas fa-university'></i> No College Here !" ?></p>
+                                    <?php if($pageme['pagename'] >= 25):  ?>
+                                    <p><?php echo !empty($collegme['college']) ? "<i class='fas fa-university'></i> " . '<a href="pages.php?pageid='.$collegme['college'].'" title="'.$pageme['pagename'] .'">'. substr($pageme['pagename'] ,0,15).'...</a>' : "<i class='fas fa-university'></i> No College Here !" ?></p>
+                                    <?php else: ?>
+                                        <p><?php echo !empty($collegme['college']) ? "<i class='fas fa-university'></i> " . '<a href="pages.php?pageid='.$collegme['college'].'" title="'.$pageme['pagename'] .'">'.$pageme['pagename'].'...</a>' : "<i class='fas fa-university'></i> No College Here !" ?></p>
+                                   <?php endif; ?>
                                 </div>
                             </div>
                              <!-- <p class="Mesgcollege"><i class='fas fa-university'></i>  There is no one in your college</p> -->

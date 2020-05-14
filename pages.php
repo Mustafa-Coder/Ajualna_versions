@@ -15,7 +15,16 @@ endif;
 <input id="userid" type="hidden" value="<?php echo $_SESSION['id']; ?>">
 <?php $userid = $_SESSION['id']; ?>
 <?php 
-include './data/get_function.php';
+
+$Userinfo = get_something("signup","*","WHERE userid = $userid ","fetch"); // get data users
+$Userinformation = get_something("signup","*","WHERE userid = $userid ","fetch"); // get data users
+$pagesinfo = get_something("pages","*","WHERE pageid = ".$Userinfo['college']." ","fetch"); 
+$college_session = $_SESSION['college']; // college sesiion 
+$pagesforyou = get_something("pages","*","WHERE pageid = ".$_GET['pageid']."","fetch"); // get page id you
+$pagesforall = get_something("pages","*","WHERE pageid = ".$Userinformation['college']."","fetchAll"); // get page id you
+$postAll = get_something("posts","*","WHERE userid = ".$userid." ORDER BY postid DESC ","fetchAll");
+$usercollege = get_something("signup","*","WHERE college = ".$Userinfo['college']."","fetchAll"); // Get users colleges
+$posts = get_something("posts","*","WHERE userid = ".$userid."","fetch");
 ?>
 <!-- START INCLUDE MENU -->
 <?php include $source . '/templates/menu.php' ?>
@@ -25,12 +34,13 @@ include './data/get_function.php';
 <?php $namepage = filter_var($_GET['page'],FILTER_SANITIZE_STRING); ?>
 <?php 
 // if var number
-if(is_numeric($numberpage) && is_string($namepage) && $namepage == $Userinformation['college']):
+if(is_numeric($numberpage) & $numberpage == $pagesinfo['pageid']):
 // START CODE SWITCH ...
-
+echo $pagesinfo['pageid'];
 switch ($namepage) {
     case 'Home_me': ?>
     <!-- // START HOME PAGE FOR YOU ==================================== -->
+        <?php if($pagesinfo['pageid'] == $numberpage){ ?>
         <div class="container pagehome homeglobal">
             <div class="row mt-5">
                 <div class="col-lg-3">
@@ -47,7 +57,7 @@ switch ($namepage) {
                         <!-- pages click -->
                         <ul>
                             <li><i class="fas fa-user-graduate"></i> University concepts</li>
-                            <li><i class="fas fa-poll"></i> Student Posts and Qus</li>
+                            <li id="student"><i class="fas fa-poll"></i> Student Posts and Qus</li>
                         </ul>
                     </div>
                     <!-- END INFORMATION ABOUT PAGE -->
@@ -55,6 +65,8 @@ switch ($namepage) {
                 <div class="col-lg-6 center">
                     <!-- START Center -->
                          <!-- START SYSTEM POST  -->
+                         <input id="namepage" type="hidden" value="<?php echo $pagesforyou['pagename']; ?>">
+                         <input id="pageid" type="hidden" value="<?php echo $pagesforyou['pageid']; ?>">
                          <?php if($Userinformation['admin'] == 1): ?>
                         <div class="card  postsystem border-0 mt-5 p-3">  
                             <textarea class="form-control"  id="description" placeholder="type.."></textarea>
@@ -92,25 +104,45 @@ switch ($namepage) {
                 </div>
             </div>
         </div>
+            <?php
+
+            }
+            ?>
     <!-- // END HOME PAGE FOR YOU  ===================================== -->
+                                        
+            <?php // endif;?>
        <?php break;
-    
-    default:
-        # code...
-        break;
+   
 }
 
-// START CODE SWITCH ...
-else:
-        // header("location:home.php");
-        // exit;
 endif;
 ?>
 <!-- End CHECK IF THE COLLEGE ECOLE COLLEGE HIM -->
 <!-- ------------------------------------------------------------------------- -->
-<?php include $source . '/templates/footer.php' ?>
+<?php // include $source . '/templates/footer.php' ?>
+<script src="/Ajualna/layout/js/all.min.js"></script>
+<script src="/Ajualna/layout/js/jquery.min.js"></script>
 <!-- DATA ALL -->
 <script>
+$(function(){
+    $(window).on("load",function(){
+        var namepage = $("#namepage").val();
+        $.ajax({
+                type:"post",
+                url:"/Ajualna/data/fetch_data.php",
+                data:{"req":"getpostspage","namepage":namepage},
+                beforeSend:function(){$("#waitingpost").show(10);},
+                success:function(data,stats){
+                    console.log(stats); 
+                    console.log(data);
+                    $("#showposts").html(data);
+                },
+                // error:function(err){
+                //     console.log(err); 
+                // }
+               
+            });
+    });
 
 // name namepage country photo
 let CreatePostPages = _ => 
@@ -173,13 +205,7 @@ let CreatePostPages = _ =>
 
             });
 
-            $.ajax({
-                type:"post",
-                url:"/Ajualna/data/fetch_data.php",
-                data:{"req":"getpostspage","namepage":namepage},
-                beforeSend:function(){$("#waitingpost").show(10);},
-                success:function(data,stats){console.log(stats); $("#showposts").html(data);$("#waitingpost").addClass("fadeIn");}
-            });
+            
 
            
 
@@ -190,9 +216,63 @@ let CreatePostPages = _ =>
 
     }
 
+        
+
+
+
+
+});
+
+// function to redirect in anypages
+let GoPages = (url) =>  {setTimeout(() => { window.location.href=""+ url +"" },500);}
+
+    // LOGIN PAGE
+    $('#login').on('click',function (){
+        GoPages("login.php");
+    });
+
+    $("#dash").on('click', function () {
+        GoPages("../../Ajualna/dashboard/dashboard.php?dash=dashboard");
+     });
+
+       $("#logout").on('click',function (){
+           
+             GoPages("../../Ajualna/logout.php");
+
+        });
+
+        // Redirect on profilepage:
+        $("#profilepage").on('click', function () {
+            var userid = $("#userid").val();
+                
+            GoPages("../../Ajualna/u/profile.php?user=profilepage&id="+ userid +"");
+         });
+
+        
     
     $("#createbtn").on("click",function(){
         CreatePostPages();
     });
 
+   //  When you click this btn show menu profile: 
+   $("#ShowMenuPerson").on('click',function (){
+        $("#moadlMenu").toggleClass('display');
+        $("#modalNotif").removeClass("display");
+
+    });
+    $("#ShowNotification").on('click',function () {
+        $("#moadlMenu").removeClass('display');
+        $("#modalNotif").toggleClass("display");
+    });
+    $(".container").on('click', function () {
+        $("#moadlMenu").removeClass('display');
+        $("#modalNotif").removeClass("display");
+     });
+     
+     // Redirect Page > EDIT PROFILE 
+    //  profiledit
+    $("#brandhome").on('click',function (){
+        GoPages("/Ajualna/home.php");
+
+   });
 </script>

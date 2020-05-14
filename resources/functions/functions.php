@@ -131,7 +131,7 @@ function get_admins($table,$colName)
 
 // Function To Get ALL PAGES in the dashboard:
 
-function get_something($table,$colName,$dosomething = null ,$namestatus)
+function get_something($table,$colName,$dosomething = null ,$namestatus)  
 {
     global $con; 
 
@@ -188,6 +188,16 @@ function likesCount($clomun,$table,$condition = null,$status)
     $pages = $getapages->$status();
     return $pages;
     
+}
+
+
+// FUNCTION LINK 
+
+function Links($link = null,$underscor = null)
+{   
+    if($link != null && $underscor != null):
+        echo $link.$underscor;
+    endif;
 }
 
 

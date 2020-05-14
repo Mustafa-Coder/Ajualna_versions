@@ -460,6 +460,12 @@ body
     color: rgb(139, 142, 159);
 }
 
+.menu-home  .menu .link  a
+{
+    color: rgb(139, 142, 159);
+    text-decoration: none;
+}
+
 .menu-home .menu .link span 
 {
     position: absolute;
@@ -486,6 +492,7 @@ body
     width: auto;
     /* overflow: hidden; */
     overflow: scroll;
+    height: 302px;
     display: none;
  }
 
@@ -933,6 +940,7 @@ body
     padding: 2px 10px;
     border-radius: 50%;
     font-size: 1.5em;
+    text-align: center;
 }
 
 .homeglobal .card .avatar img
