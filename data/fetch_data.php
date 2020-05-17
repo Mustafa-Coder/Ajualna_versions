@@ -1,17 +1,18 @@
-<?php 
+<?php
 session_start();
 include '../config/config.php';
 include '../resources/functions/functions.php';
 
 if (isset($_POST['req'])):  // if =====================================
-$req = $_POST['req']; 
-$college_session = $_SESSION['college']; // college sesiion 
-// FUNCTIONS WEBSITE:::: 
-$userid = $_SESSION['id']; // user id 
+$req = $_POST['req'];
+$college_session = $_SESSION['college']; // college sesiion
+// FUNCTIONS WEBSITE::::
+$userid = $_SESSION['id']; // user id
 $Userinfo = get_something("signup","*","WHERE userid = $userid ","fetch"); // get data users
 $pagesforall = get_something("pages","*","WHERE pageid = ".$Userinfo['college']."","fetch"); // get page id you
 $pagesforyou = get_something("pages","*","WHERE pageid = ".$Userinfo['college']."","fetch"); // get page id you
 // $pagespublic = get_something("pages","*","WHERE pageid = ".$userid."","fetch"); // get pagepublic id you
+$pagesinfo = get_something_also("pages","*","WHERE userid = $userid "); // get all pages
 
 switch($req) {
     case 'getposts': // POST PUBLIC
@@ -57,7 +58,7 @@ switch($req) {
 
                 <!-- START SHOW POST  -->
                 <?php foreach ($posts as $post) { ?>
-                    <div class="postshow card border-0"> 
+                    <div class="postshow card border-0">
                         <div class="avatar">
                             <?php echo empty($post['avatar']) ? '<img class="img-fiuld rounded-circle" src="./layout/images/icons/011.png" alt="">' : '<img class="img-fiuld rounded-circle" src="./u/uploads/avatar/'.$post['avatar'].'" alt="">' ?>
                             <h2 class="py-1"><?php echo $post['username'] ?></h2>
@@ -90,20 +91,20 @@ switch($req) {
                 <?php } ?>
                 <p class="copyright">  Ajualna &copy; <?php echo date("Y"); ?>  </p>
 
-           
-                    
-            
+
+
+
             <!-- END SHOW POST  -->
-        <?php 
-                
-               
-            
+        <?php
+
+
+
         break; // END POST PUBLIC PAGE
         // Get all data about pages
         case 'getpostspage': // POST PUBLIC
 
             $page = $_POST['namepage'];
-           
+
 
                 $stamt = "SELECT * FROM postpublic WHERE pagename = :pagename ORDER BY postid DESC ";
                 $set_Stamt = $con->prepare($stamt);
@@ -119,7 +120,7 @@ switch($req) {
                 // $getapages->bindparam(":pagename",$page);
                 // $getapages->execute();
                 // $pages = $getapages->fetch(PDO::FETCH_ASSOC);
-                
+
                 // // CHECK IF DATA = SAME DATA
                 // if($pagesforyou??['userid'] == $_SESSION['id']):
                 //     if($pagesforyou??['avatar'] != $Userinfo['avatar']):
@@ -139,7 +140,7 @@ switch($req) {
 
                 <!-- START SHOW POST  -->
                 <?php foreach ($posts as $post) { ?>
-                    <div class="postshow card border-0"> 
+                    <div class="postshow card border-0">
                         <div class="avatar">
                             <?php echo empty($post['avatar']) ? '<img class="img-fiuld rounded-circle" src="./layout/images/icons/011.png" alt="">' : '<img class="img-fiuld rounded-circle" src="./u/uploads/avatar/'.$post['avatar'].'" alt="">' ?>
                             <h2 class="py-1"><?php echo $post['titlename'] . " > " ?><?php echo substr($post['pagename'],0,40) ?>...</h2>
@@ -165,23 +166,26 @@ switch($req) {
                         <div class="alert alert-info p-2">No posts in <strong> <?php echo $page ?></strong></div>
                     <?php endif; ?>
                 <?php } ?>
-               
-                    
-               
+
+
+
 
                     <p class="copyright">  Ajualna &copy; <?php echo date("Y"); ?>  </p>
-           
-                    
-            
+
+
+
             <!-- END SHOW POST  -->
-        <?php 
-                
-               
-            
+        <?php
+
+
+
         break; // END POST PUBLIC PAGE
-    default:
-        # code...
-        break;
+        case 'getpages':
+          foreach ($pagesinfo as $pageadmin)
+          {
+            echo ' <li><a href="pages.php?pageid='.$pageadmin['pageid'].'&page=Home_me"><i class="fas fa-university"></i> '. $pageadmin['pagename'] .'</a></li>';
+          }
+          break;
 }
 
 

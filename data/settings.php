@@ -1,13 +1,13 @@
-<?php 
+<?php
 include '../config/config.php';
 
 if (isset($_POST['req'])):  // if =====================================
-  $req = $_POST['req']; 
+  $req = $_POST['req'];
 
 switch($req) {
-    case 'allowed': // PAGE EDIT 
+    case 'allowed': // PAGE EDIT
 
-           
+
             $id = $_POST['id'];
 
             $statment = "UPDATE pages SET allowed = 0 ";
@@ -20,8 +20,8 @@ switch($req) {
             }else {
                 echo 'wrong';
             }
-           
-          
+
+
         break; // END PAGE EDIT
         case 'notallowed': // PAGE EDIT NOT ALLOWED
 
@@ -38,7 +38,7 @@ switch($req) {
                 echo 'wrong';
             }
 
-        break; // PAGE EDIT NOT ALLOWED 
+        break; // PAGE EDIT NOT ALLOWED
 
         case 'delete': // PAGE EDIT DELETE PAGE
 
@@ -55,7 +55,7 @@ switch($req) {
                 echo 'wrong';
             }
 
-        break; // PAGE EDIT DELETE PAGE 
+        break; // PAGE EDIT DELETE PAGE
         case 'create': // PAGE EDIT CREATE PAGE
 
             $id = $_POST['id'];
@@ -74,10 +74,35 @@ switch($req) {
                 echo 'wrong';
             }
 
-        break; // PAGE EDIT CREATE PAGE 
-    default:
-        # code...
+        break; // PAGE EDIT CREATE PAGE
+        // Send Message Support Box 
+        case 'sendmessage':
+
+            $u = $_POST['u']; // username 
+            $e = $_POST['e']; // email 
+            $m = $_POST['m']; // message
+            $i = $_POST['i']; // user id 
+
+            // if ():
+            // endif;
+
+
+            $statment = "INSERT INTO supportbox(username,email,messages,userid)VALUES(:us,:em,:me,:id)";
+            $setValue = $con->prepare($statment);
+            $setValue->bindparam(":us",$u);
+            $setValue->bindparam(":em",$e);
+            $setValue->bindparam(":me",$m);
+            $setValue->bindparam(":id",$i);
+            $setValue->execute();
+            $count = $setValue->rowcount();
+            if ($count > 0) {
+                echo 'send';
+            }else {
+                echo 'wrong';
+            }
         break;
+        // End Send Message Support Box 
+
 }
 
 

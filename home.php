@@ -1,5 +1,5 @@
-<?php 
-session_cache_expire(1440); // This The Chace Time about your session and this 30 value is minute 
+<?php
+session_cache_expire(1440); // This The Chace Time about your session and this 30 value is minute
 session_start();
 $PAGENAME = "Home | AJUALNA "  ;
 include 'init.php';
@@ -15,7 +15,7 @@ endif;
 <?php $userid = $_SESSION['id']; ?>
 <!-- ALL FUNCTION DATA  -->
 <!-- FUNCTION GET TO USER INFORMATION -->
-<?php 
+<?php
 
 include './data/get_function.php';
 // $liker = likesCount("liker_id","liker","WHERE post_id = ". $posts['postid'] ."","fetchcolumn");
@@ -37,6 +37,7 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
 <!-- END INCLUDE MENU -->
 <!-- End CHECK IF THE COLLEGE ECOLE COLLEGE HIM -->
 <!-- START PAGE HTML -->
+<body onload="loadpage()">
 <div class="container homeglobal mt-5">
     <div class="row mt-5">
         <!-- START SLIDE LEFT  IN HOME PAGE  -->
@@ -51,7 +52,7 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
                 </div>
                 <div class="info">
                     <h1><?php echo strtolower($Userinfo['username']); ?></h1>
-                    <?php $pagecollege = get_something("pages","*","WHERE pageid = ".$Userinfo['college']."","fetch"); // get page id you  Links($link = null,$underscor = null)?>  
+                    <?php $pagecollege = get_something("pages","*","WHERE pageid = ".$Userinfo['college']."","fetch"); // get page id you  Links($link = null,$underscor = null)?>
                     <p><?php echo !empty($pagecollege['pagename']) ? "<i class='fas fa-university'></i> " . '<a href="pages.php?pageid='.$pagecollege['pageid'].'&page=Home_me" title="'.$pagecollege['pagename'].'">'. substr($pagecollege['pagename'],0,15) .'...</a>' : "<i class='fas fa-university'></i> No College Here !" ?></p>
                 </div>
             </div>
@@ -59,9 +60,11 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
                 <!-- START SHOW PAGES  -->
                 <div class="card college-pages border-0 mt-2 p-2">
                     <h2 class="py-2"><?php  echo lang("col_tar") ?></h2>
-                        <ul class="mt-5">
-                        <?php foreach ($pagesinfo as $pageadmin) { echo ' <li><a href="pages.php?pageid='.$pageadmin['pageid'].'&page=Home_me"><i class="fas fa-university"></i> '. $pageadmin['pagename'] .'</a></li>';}?>
+                        <!-- show pagename -->
+                        <ul class="mt-5" id="pages">
+
                         </ul>
+                        <!-- end -->
                 </div>
                 <!-- END SHOW PAGES  -->
             <?php endif; ?>
@@ -71,7 +74,7 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
         <!-- START SYSTEM POST  -->
         <div class="col-lg-6">
         <?php if(!empty($Userinfo['avatar'])): ?>
-            <div class="card postsystem border-0 mt-5 p-3"> 
+            <div class="card postsystem border-0 mt-5 p-3">
                 <textarea class="form-control"  id="description" placeholder="type.."></textarea>
                  <input id="name" type="hidden" value="<?php echo $Userinfo['username']; ?>">
                  <input id="college" type="hidden" value="<?php echo $Userinfo['college']; ?>">
@@ -85,9 +88,9 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
             <p class="m-1">Please Finsih From Settings </p>
         </div>
         <?php endif; ?>
-        
+
             <hr> <!-- BETWEEN POST SYSTEM AND SHOW IT  -->
-            
+
             <!-- START SHOW POSTS ALL  -->
             <div class="animated " id="waitingpost">
                 <div id="showposts"></div>
@@ -135,18 +138,42 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
                             </div>
                              <!-- <p class="Mesgcollege"><i class='fas fa-university'></i>  There is no one in your college</p> -->
                             <?php endif; ?>
-                                   
+
                         <?php endif; ?>
                     <?php  } ?>
 
-                    
+
             </div>
         </div>
     </div>
     <!-- MODALDATA -->
     <div class="animated" id="text"></div>
     <div id="messagecard" class="card border-0 messagecard">You Don't Have Any Post !</div>
+    <!-- MODAL CREATE PAGES  pagename titlepage cpage -->
+    <div id="modalpage" class="overlay-pages animated shakeX">
+      <div class="card p-3">
+        <i class="fas fa-university"></i>
+        <div class="row">
+          <div class="col-md-6">
+            <input id="pagename" class="form-control mb-3" type="text" placeholder="Name Page">
+          </div>
+          <div class="col-md-6">
+            <input id="titlepage" class="form-control mb-3" type="text" placeholder="Bio">
+          </div>
+          <div class="col-md-6">
+            <select class="form-control" id="cpage">
+              <?php include 'data/fetch_country.php'; ?>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-primary" type="button" id="buttoncreate">Create</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END MODAL CREATE PAGES -->
 </div>
 <!-- END PAGE HTML -->
-<!-- -------------------------------------------------------------------------- -->
+<!-- ######################################################################## -->
 <?php include $source . '/templates/footer.php' ?>

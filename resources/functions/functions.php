@@ -8,10 +8,13 @@ function title($type = null){
 
     if (isset($PAGENAME)):
        
-        echo $type . ' ' . $PAGENAME;
+        echo  $PAGENAME;
+    endif;
 
-    else:
-        echo 'No title in this page ';
+
+    if (!empty($type) && $type != null):
+
+        echo $type;
 
     endif;
 

@@ -1,226 +1,6 @@
 $(function () {
-//     // Dashboard
-//     //  When you click this btn  show a menu: 
-//     $("#menuShow").on('click',function (){
-//         // $("#menu").toggleClass("display");
-//         $("#menu").show(500);
-
-//     });
-//      //  When you click this btn Hide a menu: 
-//     $("#menuHide").on('click',function (){
-//         $("#menu").fadeOut(900);
-//         // $("#menu").removeClass("display");
-
-//     });
-   
-
-// //   ------------------ Home Page ------------------------------
-//     $("#showProfile").on('click', function () {
-//         $("#overlay").show(500);
-//     });
-//     $("#overlay").on('click', function () {
-//         $(this).hide(500);
-//     });
-
-//     // Replace Pages
-    
-//     $("#home").on('click', function () {
-//         setTimeout(() => {window.location.href="home.html"}, 100);
-//      });
-
-
-
-//      // When CLick this btn go to this page: publicposte
-//      $("#publicposte").on("click",function () {
-//          var userid = $("#userid").val();
-//         setTimeout(() => { window.location.href="dashboard.php?dash=postpub&id="+ userid +""},500);
-//     });
-
-//       // When CLick this btn go back in this page: Dashboard
-//       $("#backDash").on("click",function () {
-//         setTimeout(() => { window.location.href="Dashboard.html" },500);
-//       });
-//       // Pages
-//       $("#pages").on("click",function () {
-//         var userid = $("#userid").val();
-//         setTimeout(() => { window.location.href="dashboard.php?dash=pages&id="+ userid +""},500);
-//       });  
-
-//       // Messages Pages
-
-//       $("#message").on("click",function () {
-//         setTimeout(() => { window.location.href="messages.html" },500);
-//       });  
-
-//       // logout page dashboard
-//       $("#logout").on("click",function () {
-//         setTimeout(() => { window.location.href="logout.php" },500);
-//       }); 
-// // Index file 
-
-//     $("#signup").on('click',function (){
-//         $(this).hide(300);
-//         $(this).text('lading...');
-//         setTimeout(() => {window.location.href="home.html"}, 2000);
-//     });
-//     // When click this btn refresh page to sign page :
-//     $("#signuppage").on('click',function (){
-//         setTimeout(() => {window.location.href="signup.html"}, 200);
-//     });
-//     // When click this btn refresh page to login page :
-//     $("#login").on('click',function (){
-//         setTimeout(() => {window.location.href="login.html"}, 200);
-//     });
-
-// // public page 
-// // hide notes 
-
-
-//           document.querySelectorAll("overlay-page").forEach(item => {
-
-//             item.on('click', function () {
-//                 item.hide(1000);
-//             });
-              
-//           });
-
-
-//     //Pages: Hidden
-//     $("#ShowElementHide").on('click',function (){
-//         $("#overlay-pages").show(250);
-//     });
-//     // HidePages
-//     $("#HidePages").on('click',function (){
-//         $("#overlay-pages").hide(250);
-//         $("#elements").css({'opacity':'.5'});
-//         // $(this).append('<button id="Showpage" class="btn btn-primary  mr-2">اظهار</button>');
-
-//         // $("#ShowElementHide").text('اظهار');
-//         // $("#elements").appendTo('');
-//     });
-
-    
-//     // Pages: Delete
-//     $("#ShowElementDelete").on('click',function (){
-//         $("#overlay-pages-delete").show(250);
-    
-//     });
-
-//     // page show 
-//     $("#Showpage").on('click',function (){
-
-//         $("#overlay-pages-show").show(250);
-//         // $(this).append('<button id="ShowElementHide" class="btn btn-primary  mr-2">اخفاء</button>');
-
-    
-//     });
-
-    
-//     // ShowElement
-//     $("#ShowElement").on('click',function (){
-//         $("#overlay-pages-show").hide(250);
-//     });
-
-//     // Add-Page
-//     $("#Add-Page").on("click",function (){
-//         $("#overlay-pages-add").show(250);
-//     });
-
-      
-    
-
-//     // Poste public page =====================================================
-//         // function CreatePostPublic
-//         let CreatePostPublic = _ => 
-//         {
-//             // Get Data
-//             const title = $("#titlepost").val(),
-//                 description = $("#descp").val(),
-//                 userid = $("#userid").val();
-//                 //   console.log(title + description + userid);
-                
-//             // Ajax Send Data.....
-//             $.ajax({
-//                 method:"POST",
-//                 url:'/Ajualna/dashboard/data/post.php',
-//                 data:{'req':'post','title':title,'descp':description,'userid':userid},
-//                 success:function(data,stats){
-//                 if (data == 'Create') {$("#showresualt").html("You Create Post now");}
-//                 if (data == 'Wrong') {$("#showresualt").html('Please Check from your information');}
-
-//                     //  console.log(data);
-//                 },
-//                 error:function(err){
-//                     console.log(err);
-//                 }
-//             });
-
-//             // test
-
-            
-
-//         }
-
-//         // When Click this btnpost do this:
-//         $("#btnpost").on("click",function(){CreatePostPublic()});
-
-
-
-
-//     // Hide PAGES IN SETTINGS PAGE 
-//     // HidePages
-//     let PageSettings = (id,namepage,status,other = null) => 
-//     {
-//         const address = id; // this is id pages for hide and delete and show
-//         // console.log(address + namepage + status);
-
-//         $.ajax({
-
-//             method:'POST',
-//             url:'/Ajualna/dashboard/data/' + namepage + '.php',
-//             data:{'req':''+status+'','id':address,'namepage':other},
-//             success:function(data,stats){
-//                 console.log(data);
-//                 console.log(stats);
-//             }
-
-//         });
-              
-//     }
-
-//      // When Click this HidePages do this:
-//      $("#HidePages").on("click",function(){
-//             var idpage = $("#pageid").text();
-//             PageSettings(idpage,"settings","allowed");
-//         });
-//     // When Click this Show page and do this: ShowElement
-//     $("#ShowElement").on("click",function(){
-//         var idpage = $("#pageid").text();
-//         $("#elements").css({'opacity':'1'});
-//         PageSettings(idpage,"settings","notallowed");
-//     });
-//     // When Click this DelPages do this:
-//     $("#DelPages").on('click',function (){
-//         $("#overlay-pages-delete").hide(250);
-//         $("#elements").fadeOut(350);
-//         var idpage = $("#pageid").text();
-//         PageSettings(idpage,"settings","delete");
-//     });
-//     // When Click this btn do this:
-//     // Pages: Create page
-
-//     $("#create").on('click',function (){
-//         $("#overlay-pages-add").hide(250);
-//         var idpage = $("#userid").val(),
-//            namepage = $("#namepage").val();
-//         PageSettings(idpage,"settings","create",namepage);
-//     });
-
-// LAMDING PAGE 
-// 
-
     // function to redirect in anypages
-    let GoPages = (url) =>  {setTimeout(() => { window.location.href=""+ url +"" },500);}
+    let GoPages = (url,number = 500) =>  {setTimeout(() => { window.location.href=""+ url +"" }, number);}
 
     // LOGIN PAGE
     $('#login').on('click',function (){
@@ -232,7 +12,7 @@ $(function () {
      });
 
        $("#logout").on('click',function (){
-           
+
              GoPages("../../Ajualna/logout.php");
 
         });
@@ -243,9 +23,42 @@ $(function () {
             GoPages("../../Ajualna/u/profile.php?user=profilepage&id="+ userid +"");
          });
 
-    // SETTINGS NOTIFICATION BAR 
-    
-     //  When you click this btn show menu profile: 
+         // Redirect on logout when your delete account:
+        //  deleteUser
+        let DeleteUser = _ =>
+        {
+            var id = $("#userid").val(),
+                text = $("#textDeleteMesg");
+
+            $.ajax({
+
+
+                method:"POST",
+                url:"/Ajualna/data/sign_login_update_delete_user.php",
+                data:{"req":"DeleteUser","id":id},
+                success:function(data,stats){
+                    if(data == 'Delete')
+                    {
+                        text.html("<div class='alert alert-primary p-2 mt-2'>Your Delete Your Acount no you will redirect login Welcome again... 10s</div>");
+                        $("#deleteUser").hide(100);
+                    }else
+                    {
+                        console.log(data);
+                        console.log(stats);
+                    }
+                }
+
+            });
+        }
+
+        $("#deleteUser").on('click', function () {
+            setTimeout(() => { window.location.href="/Ajualna/logout.php" }, 10000);
+            DeleteUser();
+         });
+
+    // SETTINGS NOTIFICATION BAR
+
+     //  When you click this btn show menu profile:
      $("#ShowMenuPerson").on('click',function (){
         $("#moadlMenu").toggleClass('display');
         $("#modalNotif").removeClass("display");
@@ -259,16 +72,16 @@ $(function () {
         $("#moadlMenu").removeClass('display');
         $("#modalNotif").removeClass("display");
      });
-     
-     // Redirect Page > EDIT PROFILE 
+
+     // Redirect Page > EDIT PROFILE
     //  profiledit
     $("#brandhome").on('click',function (){
         GoPages("../../Ajualna/home.php");
 
    });
 
- 
-    
+
+
 //    console.log($("#oldcollege").val());
 
 
@@ -278,7 +91,7 @@ $(function () {
 let male = $("#male").val(),
    famale = $("#famale").val();
     // console.log(male + famale);
-    let editUserInfo = _ => 
+    let editUserInfo = _ =>
     {
         let oldcollege = $("#oldcollege").val(),
               newcollege = $("#newcollege").val(),
@@ -299,10 +112,10 @@ let male = $("#male").val(),
               collegeid = $("#collegeid").val();
 
 
-            $.ajax({     
+            $.ajax({
 
                 method:"POST",
-                url:"/Ajualna/data/sign_login_update_delete_user.php",  
+                url:"/Ajualna/data/sign_login_update_delete_user.php",
                 data:{
                     "req":"update",
                     "user":userN,
@@ -333,7 +146,7 @@ let male = $("#male").val(),
 
 
 
-              
+
 
     }
 
@@ -348,12 +161,12 @@ let male = $("#male").val(),
         $("#fileToUpload").click();
     });
 
-    // console.log($("#fileToUpload"));
+
 
     // SYSTEM SEND POST DATA IN DATABASE:::::::::::
     // userid name college photo postbtn
 
-    let CreatePost = _ => 
+    let CreatePost = _ =>
     {
         var id = $("#userid").val(),
               name = $("#name").val(),
@@ -363,10 +176,10 @@ let male = $("#male").val(),
               college = $("#college").val();
 
 
-            $.ajax({     
+            $.ajax({
 
                 method:"POST",
-                url:"/Ajualna/data/post.php",  
+                url:"/Ajualna/data/post.php",
                 data:{
                     "req":"createpost",
                     "id":id,
@@ -392,8 +205,8 @@ let male = $("#male").val(),
                         $("#postmusicnotif")[0].play();
 
 
-                        
-                     }else 
+
+                     }else
                      {
                          console.log(data);
                          console.log(stats);
@@ -410,7 +223,7 @@ let male = $("#male").val(),
 
             });
 
-            // get all data about posts 
+            // get all data about posts
 
             $.ajax({
                 type:"post",
@@ -421,16 +234,25 @@ let male = $("#male").val(),
             });
 
 
-            
 
 
-            
 
-              
+
+
+
 
     }
 
-    // Create Post in database  
+    // Create Post in database
+    // When Message is empty : 
+    $("#description").on("mousemove",function (){
+        console.log();
+        if($("#description").val().length === 0){
+            $("#postbtn").attr("disabled",true);
+        }else {
+            $("#postbtn").attr("disabled",false);
+        }
+    });
 
     $("#postbtn").on("click",function(){
         CreatePost();
@@ -450,7 +272,7 @@ let male = $("#male").val(),
     $("#notification").on("click",function(){
         $(this).hide(200);
 
-        // send data to notification column 
+        // send data to notification column
             // postnotif
 
             // $.ajax({
@@ -471,11 +293,11 @@ let male = $("#male").val(),
 
     //        like.addEventListener("click",_ => {
     //            like.style.color="rgb(67, 154, 246)";
-            
+
     //        });
 
     //     });
-        
+
     // console.log($(".like").length);
 
     // for (let i = 0; i < $(".like").length; i++) {
@@ -500,25 +322,25 @@ let male = $("#male").val(),
     //                 if(data == 'wrong'){
     //                     console.log(data);
     //                 }
-                    
-                    
-    //             }
-            
-            
-    //             });
-             
 
-                
+
+    //             }
+
+
+    //             });
+
+
+
 
     //     });
 
-        
-    
-        
+
+
+
     // }
 
-    
- 
+
+
          // AJAX TO GET POSTS DATA WHEN YOU ADD NEW POST
          $.ajax({
             type:"post",
@@ -527,28 +349,6 @@ let male = $("#male").val(),
             beforeSend:function(){$("#waitingpost").show(10);},
             success:function(data,stats){console.log(stats); $("#showposts").html(data);$("#waitingpost").addClass("fadeIn");}
         });
-    // Ajax Function Like system:
-    // for (let i = 0; i < $(".postid").length; i++) {
-
-    //     // var id post: 
-    //     var id = $(".postid")[i].value;
-
-    //     // Ajax Like function =======================
-    //     $.ajax({
-
-    //         method:"post",
-    //         url:"/Ajualna/data/post.php",
-    //         data:{"req":"addlike","id":id},
-    //         success:function(data,stats){
-    //             console.log(data);
-    //             console.log(stats);
-    //         }
-
-
-    //     });
-        
-        
-    // }
 
 
 
@@ -560,17 +360,166 @@ let male = $("#male").val(),
 
 
 
-    $.ajax({
-        type:"post",
-        url:"/Ajualna/data/fetch_data.php",
-        data:{"req":"getpostspage","namepage":namepage},
-        // beforeSend:function(){$("#waitingpost").show(10);},
-        success:function(data,stats){/*console.log(stats);*/ $("#showposts").html(data);}
+    // $.ajax({
+    //     type:"post",
+    //     url:"/Ajualna/data/fetch_data.php",
+    //     data:{"req":"getpostspage","namepage":namepage},
+    //     // beforeSend:function(){$("#waitingpost").show(10);},
+    //     success:function(data,stats){/*console.log(stats);*/ $("#showposts").html(data);}
+    // });
+
+
+
+    // Create PAGES in database  ============================================================================
+
+
+    let Cpages = _ =>
+    {
+        var id = $("#userid").val(),
+              pagename	 = $("#pagename").val(),
+              pagetitle = $("#titlepage").val(),
+              country = $("#cpage").val();
+
+
+            $.ajax({
+
+                method:"POST",
+                url:"/Ajualna/data/pages.php",
+                data:{"req":"createpages","id":id,"pn":pagename,"c":country,"t":pagetitle},
+                success:function(data,stats){
+                    if(data == 'Done'){
+                        $("#text").html('<div class="animated flash slow" id="postsuccess"><i class="fas fa-university"></i> Your Create Page  </div>');
+                        $("#text").hide(10000);
+                        $("#postmusic")[0].play();
+
+                     }else
+                     {
+                         console.log(data);
+                         console.log(stats);
+                     }
+
+                    // if(data){
+                    //     console.log(data);
+                    //     console.log(stats);
+                    //
+                    // }
+                },
+                error:function(err){
+                    console.log(err);
+                }
+
+            });
+
+
+            // get all data about posts
+
+            $.ajax({
+                type:"post",
+                url:"/Ajualna/data/fetch_data.php",
+                data:{"req":"getpages"},
+                success:function(data,stats){console.log(stats); $("#pages").html(data);}
+            });
+
+
+
+
+
+
+
+
+
+    }
+
+    // get all data about posts load page
+
+
+      $.ajax({
+          type:"post",
+          url:"/Ajualna/data/fetch_data.php",
+          data:{"req":"getpages"},
+          success:function(data,stats){console.log(stats); $("#pages").html(data);}
+      });
+    
+
+    // Show The Modal Create Page:
+    $("#createpages").on("click",function (){
+        $("#modalpage").show(100);
+    });
+
+    //  Create Page:
+    $("#buttoncreate").on("click",function (){
+        $("#modalpage").fadeOut(300);
+        Cpages();
     });
 
 
 
-    // Create Post in database  
+
+
+
+
+//  ====================== [Support Box ] ========================== //
+
+// username	email	messages	userid send 
+
+let SendMessageSupport = _ =>
+{ // start fun 
+
+    // get information 
+    var user = $("#username").val(),
+        email = $("#email").val(),
+        message = $("#message").val(),
+        userid = $("#userid").val();
+
+    // Send information in data 
+    $.ajax({
+
+        method:"POST", 
+        url:"/Ajualna/data/settings.php",
+        data:{"req":'sendmessage',"u":user,"e":email,"m":message,"i":userid},
+        success:function(data,st){
+            if(data == 'send'){
+                $(".mesgrequest").html('<div class="alert alert-primary p-2 mt-3">We will review your message soon Thank you <i class="fas fa-smile-beam"></i> </div>');
+            }
+            if(data == 'wrong'){
+                $(".mesgrequest").html('<div class="alert alert-danager p-2 mt-3">Check from Your data Before Send <i class="fab fa-tired"></i> !!</div>');
+            }
+            console.log(data);
+        }
+
+    });
+
+} // end fun 
+
+
+    // if(){
+
+    // }
+    // When Message is empty : 
+    $("#message").on("mousemove",function (){
+        console.log();
+        if($(this).val().length === 0){
+            $("#send").attr("disabled",true);
+        }else {
+            $("#send").attr("disabled",false);
+        }
+    });
+
+    // When Click Send Message 
+    $("#send").on("click",function (){
+        SendMessageSupport();
+        $("#sbm")[0].play();
+
+    });
+
+
+
+
+
+
+
+
+
 
 
 });

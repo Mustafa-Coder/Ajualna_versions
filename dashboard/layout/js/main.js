@@ -66,7 +66,8 @@ $(function () {
       // Messages Pages
 
       $("#message").on("click",function () {
-        setTimeout(() => { window.location.href="messages.html" },500);
+        var userid = $("#userid").val();
+        setTimeout(() => { window.location.href="dashboard.php?dash=message&id="+userid+"" },500);
       });  
 
       // logout page dashboard

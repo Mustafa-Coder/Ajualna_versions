@@ -4,14 +4,26 @@ body
     padding:0;
     background-color: rgb(244, 244, 247);
     font-family: 'Work Sans', sans-serif;
-    
-    
+
+
 
 }
 
 /* GLOBAL DESIGN */
 
-.name 
+.rtl 
+{direction: rtl}
+
+.ltr {direction: ltr;}
+
+.icons 
+{
+    position: absolute;
+    left: 16px;
+    margin-top:2px;
+}
+
+.name
 {
     margin: 15px auto;
     background: rgba(0, 123, 255, 0.5490196078431373);
@@ -37,7 +49,7 @@ body
     opacity: .5 ;
 }
 
-.addLikeBlue 
+.addLikeBlue
 {
     color:blue !important;
 }
@@ -92,7 +104,7 @@ body
     transform: translateY(175px);
 }
 
-.loginPages .card .overlay p 
+.loginPages .card .overlay p
 {
     width: 550px;
 }
@@ -105,10 +117,10 @@ body
 .loginPages .card .form-group
 {
     transform: translateY(6em);
-   
+
 }
 
-.loginPages .card .login_name 
+.loginPages .card .login_name
 {
     font-size: 16px;
     text-align: center;
@@ -128,7 +140,7 @@ body
     border-radius: 3px;
 }
 
-.loginPages .loading 
+.loginPages .loading
 {
     border-radius: 50px;
     width: 10px;
@@ -182,7 +194,7 @@ body
     transform: translateY(175px);
 }
 
-.Signuppage .card .overlay p 
+.Signuppage .card .overlay p
 {
     width: 550px;
 }
@@ -194,7 +206,7 @@ body
 
 
 
-.Signuppage .card .signname 
+.Signuppage .card .signname
 {
     font-size: 30px;
     text-align: left;
@@ -203,7 +215,7 @@ body
 }
 
 
-.Signuppage .card .title_sign 
+.Signuppage .card .title_sign
 {
     margin-left: 26px;
     width: 454px;
@@ -223,7 +235,7 @@ body
     border-radius: 3px;
 }
 
-.Signuppage .loading 
+.Signuppage .loading
 {
     border-radius: 50px;
     width: 10px;
@@ -285,10 +297,10 @@ body
 
 /* Home  page */
 
-.home-page 
+.home-page
 {
     margin-top: 25px;
-} 
+}
 
 .home-page .title-sign
 {
@@ -341,7 +353,7 @@ body
     padding: 0;
 }
 
-.Signup .helper li 
+.Signup .helper li
 {
     padding: 0 15px;
 }
@@ -391,7 +403,7 @@ body
     padding: 0;
 }
 
-.login .helper li 
+.login .helper li
 {
     padding: 15px 15px;
     margin: 0% auto;
@@ -406,7 +418,7 @@ body
 
 /* menu  Navbar */
 
-.menu-home 
+.menu-home
 {
     width: 100%;
     background: white;
@@ -416,15 +428,16 @@ body
     height: 56px;
     z-index: 2;
     line-height: 3;
+    direction: ltr;
 }
 
-.menu-home .brand 
+.menu-home .brand
 {
     font-weight: bold;
     cursor: pointer;
 }
 
-.menu-home  .menu 
+.menu-home  .menu
 {
     margin: 0;
     padding: 0;
@@ -440,8 +453,7 @@ body
     height: 40px;
     background: rgb(234, 234, 234);
     border-radius: 50%;
-    padding: 5px;
-    
+
 }
 
 .menu-home  .menu .linkMenu
@@ -450,7 +462,7 @@ body
     left: 8px;
 }
 
-.menu-home  .menu .link 
+.menu-home  .menu .link
 {
     padding: 4px 15px;
     list-style: none;
@@ -466,7 +478,7 @@ body
     text-decoration: none;
 }
 
-.menu-home .menu .link span 
+.menu-home .menu .link span
 {
     position: absolute;
     background: rgb(255, 0, 0);
@@ -482,7 +494,7 @@ body
 
  /* Modal notification */
 
- .modalNotif 
+ .modalNotif
  {
     position: fixed;
     top: 48px;
@@ -521,12 +533,12 @@ body
     padding-top: 15px;
  }
 
- .modalNotif .info .user 
+ .modalNotif .info .user
  {
     margin-right: 118px;
  }
 
- 
+
  .modalNotif .info img
  {
     width: 40px;
@@ -571,7 +583,7 @@ body
     top: 8px;
 }
 
-.modalNotif .end 
+.modalNotif .end
 {
     background-color: #79c1ffcc;
     padding: 5px;
@@ -602,7 +614,7 @@ body
    box-shadow: 0 0 14px #2c2b2b42;
 }
 
-.modal-menu ul 
+.modal-menu ul
 {
    margin: 0;
    list-style: none;
@@ -623,15 +635,16 @@ body
 
 }
 
-.modal-menu ul li a 
+.modal-menu ul li a
 {
     color: rgb(139, 142, 159) ;
     text-decoration: none;
-    
+
 
 }
 
-.modal-menu ul li a > .fa-cog,.fa-power-off,.fa-user-alt,.fa-tachometer-alt
+/* .modal-menu ul li a > .fa-cog,.fa-power-off,.fa-user-alt,.fa-tachometer-alt,.fa-plus */
+.modal-menu ul li a  > .icons 
 {
     position: absolute;
     left: 16px;
@@ -656,7 +669,7 @@ body
     margin-top: 5em;
 }
 
-.titlepra 
+.titlepra
 {
     text-align: center;
     font-size: 15px;
@@ -670,8 +683,8 @@ body
     border-radius: .5px;
     box-shadow: 0 0px 1px #ddd;
     transition:.5s ease;
-    
-    
+
+
 }
 
 .home .card:hover
@@ -710,7 +723,7 @@ body
 
 }
 
-@keyframes danager 
+@keyframes danager
 {
     0%{transform:translateY(0)}
     20%{transform:translateY(5px)}
@@ -734,7 +747,7 @@ body
     margin-bottom: 13px;
 }
 
-.home .infor .btn-primary a 
+.home .infor .btn-primary a
 {
     text-decoration:none;
     color:white;
@@ -751,7 +764,7 @@ body
 .settings .avatar-box
 {
     box-shadow: 0px 0px 18px rgba(63, 81, 181, 0.16);
-
+    height: 80vh;
 }
 
 .settings .avatar-box .display-4
@@ -778,7 +791,7 @@ body
 
 .settings .set-box .form-control
 {
-    
+
 
     margin-bottom: 15px;
     border: 0;
@@ -788,7 +801,7 @@ body
 
 }
 
-.settings .menu-settings 
+.settings .menu-settings
 {
     position: fixed;
     width: 274px;
@@ -799,7 +812,7 @@ body
 }
 
 
-.settings .menu-settings .profile-info img 
+.settings .menu-settings .profile-info img
 {
     margin: 17px auto;
     display: block;
@@ -824,7 +837,7 @@ body
     list-style: none;
 }
 
-.settings .menu-settings .pages .nav-item 
+.settings .menu-settings .pages .nav-item
 {
     padding: 5px;
     margin-top: 5px;
@@ -932,7 +945,7 @@ body
 
 .homeglobal .card .avatar .name
 {
-    
+
     margin: 24px;
     background: rgba(0, 123, 255, 0.5490196078431373);
     width: 40px;
@@ -945,7 +958,7 @@ body
 
 .homeglobal .card .avatar img
 {
-    
+
     margin: 24px;
     width: 40px;
     height: 40px;
@@ -966,9 +979,9 @@ body
     margin-top: -3px;
 }
 
-.homeglobal .college-pages 
+.homeglobal .college-pages
 {
-    
+
     position: relative;
 }
 .homeglobal .college-pages h2
@@ -985,7 +998,7 @@ body
 .homeglobal .college-pages ul li
 {
     list-style: decimal-leading-zero;
-} 
+}
 
 
 
@@ -996,12 +1009,12 @@ body
 }
 
 .homeglobal .postsystem .btn-primary
-{   
+{
     width: 80px;
     margin-top: 15px;
 }
 
-.homeglobal #postsuccess 
+.homeglobal #postsuccess
 {
     padding: 15px;
     width: 180px;
@@ -1025,7 +1038,7 @@ body
 
 .homeglobal .postshow .avatar img
 {
-      
+
     margin: 12px;
     width: 40px;
     height: 40px;
@@ -1079,7 +1092,7 @@ body
     justify-content: center;
 }
 
-.homeglobal .postshow .lcs li 
+.homeglobal .postshow .lcs li
 {
     padding: 0 40px;
     list-style: none;
@@ -1111,7 +1124,7 @@ body
 /* BOX CHECK DATA */
 
 
-.homeglobal .checkdata 
+.homeglobal .checkdata
 {
 
     position: absolute;
@@ -1125,7 +1138,7 @@ body
 {
     font-size: 80px;
     margin-bottom: 10px;
-    
+
 }
 
 .homeglobal .checkdata .op
@@ -1156,22 +1169,52 @@ body
 }
 
 
-.homeglobal .user-info-college .avatar 
+.homeglobal .user-info-college .avatar
 {
     margin-left: -10px;
 }
 
-.homeglobal .user-info-college .info 
+.homeglobal .user-info-college .info
 {
     margin-left: -6px;
     margin-top: 5px;
 }
 
-.homeglobal .user-info-college .Mesgcollege 
+.homeglobal .user-info-college .Mesgcollege
 {
     font-size: 14px;
     margin-top: 34px;
     color: rgb(139, 142, 159);
+}
+
+/* MODAL CREATE PAGE */
+
+.homeglobal .overlay-pages
+{
+  position: fixed;
+  background: rgba(250, 250, 252, 0.53);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: none;
+}
+
+
+.homeglobal .overlay-pages .card
+{
+  width: 550px;
+  margin: 10% auto;
+}
+
+.homeglobal .overlay-pages .fa-university
+{
+  font-size: 150px;
+  margin: 6px auto;
+  color: rgb(90, 94, 111);
 }
 
 /* PAGES============================================================================ */
@@ -1213,7 +1256,7 @@ body
     margin-left: 15px;
 }
 
-.pagehome .info hr 
+.pagehome .info hr
 {
     margin: 0;
 }
@@ -1228,7 +1271,7 @@ body
 
 }
 
-.pagehome .info ul li 
+.pagehome .info ul li
 {
     padding: 17px;
     border-bottom: 1px solid rgb(238, 238, 238);
@@ -1252,12 +1295,12 @@ body
 }
 
 .pagehome .center .postsystem .btn-primary
-{   
+{
     width: 80px;
     margin-top: 15px;
 }
 
-.pagehome .center #postsuccess 
+.pagehome .center #postsuccess
 {
     padding: 15px;
     width: 180px;
@@ -1283,4 +1326,67 @@ body
     font-weight: 600;
     text-align: center;
     margin: 15px;
+}
+
+/* supportbox */
+
+.supportbox .mesg
+{
+    /* background-image: linear-gradient(152deg,rgba(167, 210, 255, 0.59),rgb(3, 169, 244)); */
+    background-color: rgb(245, 250, 255);
+}
+
+.supportbox .mesg span  .icons-mesg
+{
+    position: absolute;
+    top: 24px;
+    font-size: 50px;
+    color: rgba(125, 205, 250, 0.74);
+    right: 29px;
+}
+
+.supportbox .mesg span  .icons-mesg2
+{
+    position: absolute;
+    right: 112px;
+    font-size: 50px;
+    color: rgba(125, 205, 250, 0.74);
+    bottom: 13px;
+}
+
+.supportbox .mesg h1 
+{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.supportbox .mesg p
+{
+    font-size: 14px; 
+}
+
+.supportbox .mesg ul li 
+{
+    color: rgb(96, 115, 144);
+    font-size: 13px;
+}
+
+.supportbox .mesg-2 .group h2 
+{
+    font-size: 14px;
+    color: rgb(57, 71, 85);
+}
+
+.supportbox .htitle 
+{
+    margin-top: 2em;
+    font-size: 15px;
+    color: rgb(107, 116, 124);  
+}
+
+.supportbox .link-page li 
+{
+    font-size: 13px;
+    margin-top: 15px;
+    color: rgb(96, 115, 144);
 }

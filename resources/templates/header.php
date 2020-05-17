@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+<?php if (isset($_SESSION['id'])):?>
+<html lang="en" <?php echo $Userinfor['languages'] == 'ar' ? "dir='rtl'" : "dir='ltr'" ?>>
+<?php else:?>
 <html lang="en">
+<?php endif;?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

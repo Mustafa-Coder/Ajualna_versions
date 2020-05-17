@@ -6,7 +6,7 @@ if (!isset($_SESSION['user'])) {
 }
 if(isset($_SESSION['user']) && $_SESSION['admin'] == 1 ): // START PAGE
 // ----------------------------------------------------------------
-$PAGENAME = "لوحة التحكم";
+$PAGENAME = "Dashboard";
 include './init.php';
 include $source . '/templates/navbar.php'; // nativigation bar
 if (isset($_GET['dash'])) {
@@ -28,42 +28,42 @@ switch ($dash) {
                     <!-- ===================================================== -->
                     </div>
                     <div class="col-lg-8 mt-5 home-page ">
-                        <h1 class="py-3 title-name">لوحة القيادة</h1>
+                        <h1 class="py-3 title-name"><?php echo lang("Dash") ?></h1>
                         <div class="row mt-4">
                             <div class="col-md-4">
                                 <div class="card border-0 studient counter">
-                                    <h2 class="name">الطلاب</h2>
+                                    <h2 class="name"><?php echo lang("ad") ?></h2>
                                     <p id="number"><?php echo Counter('signup','username'); ?></p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="card border-0 pages counter">
-                                    <h2 class="name">الصفحات</h2>
+                                    <h2 class="name"><?php echo lang("pg"); ?></h2>
                                     <p><?php echo Counter_All('pages','pagename'); ?></p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="card border-0 posts counter">
-                                    <h2 class="name">المنشورات</h2>
-                                    <p>10,562</p>
+                                    <h2 class="name"><?php echo lang("po") ?></h2>
+                                    <p><?php echo Counter_All('posts','postid'); ?></p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card border-0 posts counter">
+                                    <h2 class="name"><?php echo lang("noti") ?></h2>
+                                    <p><?php echo Counter_All('notifications','id'); ?></p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="card border-0 male counter">
-                                    <h2 class="name">شباب</h2>
-                                    <p><?php echo Get_People('signup','Gender','1'); ?></p>
+                                    <h2 class="name"><?php echo lang("yo") ?></h2>
+                                    <p><?php echo Get_People("signup","*",""); ?></p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="card border-0 famale counter">
-                                    <h2 class="name">بنات</h2>
-                                    <p><?php echo Get_People('signup','Gender','1'); ?></p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card border-0 famale counter">
-                                    <h2 class="name">منشور الادارة</h2>
-                                    <p><?php echo Counter_All("postpublic","titlename"); ?></p>
+                                    <h2 class="name"><?php echo lang("box") ?></h2>
+                                    <p><?php echo Counter_All("supportbox","id"); ?></p>
                                 </div>
                             </div>
                         </div>
@@ -73,10 +73,10 @@ switch ($dash) {
                                         <thead>
                                             <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Cover</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">student</th>
-                                            <th scope="col">Posts</th>
+                                            <th scope="col"><?php echo lang("co") ?></th>     
+                                            <th scope="col"><?php echo lang("na") ?></th>
+                                            <th scope="col"><?php echo lang("stu") ?></th>
+                                            <th scope="col"><?php echo lang("po") ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -219,19 +219,19 @@ switch ($dash) {
                                         </thead>
                                         <tbody>
                                             <?php 
-                                            $pages = get_something('pages','*');
+                                            $pages = get_something("pages","*");
                                             foreach ($pages as $page) {
-                                            ?>
-                                                <?php echo $page['allowed'] == 0 ? '<tr id="elements" class="hide">' : '<tr id="elements" class="show" >' ?>
-                                                    <th id="pageid" scope="row"><?php echo $page['pageid']; ?></th>
-                                                    <td><?php echo $page['pagename']; ?></td>
-                                                    <td>4564</td>
+                                             ?>
+                                             <?php echo $page['allowed'] == 0 ? '<tr id="elements" class="hide">' : '<tr id="elements" class="show" >' ?>
+                                                 <th id="pageid" scope="row"><?php echo $page['pageid']; ?></th>
+                                                     <td><?php echo $page['pagename']; ?></td>
+                                                 <td>4564</td>
                                                     <td>5642</td>
                                                     <td> <?php echo $page['allowed'] == 1 ? '<button id="ShowElementHide" class="btn btn-primary  mr-2">اخفاء</button>' : '<button id="Showpage" class="btn btn-primary  mr-2">اظهار</button>' ?> 
-                                                    <button id="ShowElementDelete" class="btn btn-danger ">حذف</button> 
+                                                     <button id="ShowElementDelete" class="btn btn-danger ">حذف</button> 
                                                     </td>
-                                                    </tr>
-                                            <?php }?>
+                                                     </tr> 
+                                             <?php  }?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -281,9 +281,47 @@ switch ($dash) {
             <?php endif; // END PAGE
         break;
         // END PAGES  ===================================================================== -->
-    default:
-        # code...
-        break;
+        // Mail User 
+        case 'message': ?>
+            <div class="container-fiuld mr-3 ml-3">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <!-- ========================[INCLUDE MENU]=============== -->
+                                    <?php include  $source . '/templates/menu.php'; ?>
+                                    <!-- ===================================================== -->  
+                                </div>
+                                <div class="col-lg-8 mt-5">
+                                    <table class="table table-sm mt-5 ">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Message</th>
+                                            <th scope="col">control</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="moadlMenu" class="modal-menu card ">
+                                <ul>
+                                    <li>رؤية الصفحة</li>
+                                    <li>تعديل الصفحة</li>
+                                    <li id="logout">تسجيل الخروج</li>
+                                </ul>
+                            </div>
+                    </div>
+        <?php break;
 }
 ?>
 <!-- ===================================================================== -->

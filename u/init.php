@@ -13,8 +13,10 @@ $source = "../resources/";
 // INCLUDES
 
 include $source . '/functions/functions.php';
-if($_SESSION['lang'] == 'en'):
-    include $source . '/langs/en.php';
-else:
-    include $source . '/langs/ar.php';
+if(isset($_SESSION['user'])):
+    if($_SESSION['lang'] == 'ar'):
+        include $source . '/langs/ar.php';
+    else:
+        include $source . '/langs/en.php';
+    endif;
 endif;

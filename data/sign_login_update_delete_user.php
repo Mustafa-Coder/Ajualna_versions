@@ -88,10 +88,8 @@ switch($req) {
                 $count = $setupdate->rowcount();
                 $rowQuery = $setupdate->fetch();
                  // INFORMATION::
-                   
+                if ($count == 1) {include './session_users.php';  }
                 if ($count > 0) {
-                    
-                    include './session_users.php';  
                     echo 'Done';
                 }else {
                     echo 'Wrong';
@@ -146,10 +144,37 @@ switch($req) {
 
                 
         break;
-    default:
-            
-
-        break;
+        case 'DeleteUser':
+                    if(is_numeric($_POST['id'])):
+    
+                        $userid = $_POST['id'];
+                        // SIGNUP USER
+                        $deleted_user = "DELETE FROM signup WHERE userid = ? ";
+                        $set_del = $con->prepare($deleted_user);
+                        $set_del->execute(array($userid));
+                        // PAGES USER
+                        $deleted_user = "DELETE FROM pages WHERE userid = ? ";
+                        $set_del = $con->prepare($deleted_user);
+                        $set_del->execute(array($userid));
+                        // POSTS  USER
+                        $deleted_user = "DELETE FROM posts WHERE userid = ? ";
+                        $set_del = $con->prepare($deleted_user);
+                        $set_del->execute(array($userid));
+                        // NOTIFICATION USER
+                        $deleted_user = "DELETE FROM notifications WHERE u_id = ? ";
+                        $set_del = $con->prepare($deleted_user);
+                        $set_del->execute(array($userid));
+                        
+                        // NOTIFICATION USER
+                        $deleted_user = "DELETE FROM postpublic WHERE userid = ? ";
+                        $set_del = $con->prepare($deleted_user);
+                        $set_del->execute(array($userid));
+                        $logout = $set_del->rowcount();
+    
+                        echo 'Delete';
+    
+                    endif;
+          break;
 }
 
 

@@ -7,8 +7,9 @@
                         <ul class="pages">
                             <li class="nav-item"><a class="nav-link" href="#">Edit Details</a></li>
                             <li class="nav-item"><a class="nav-link" href="/Ajualna/u/profile.php?user=profileavatar&id=<?php echo $_SESSION['id']; ?>">Picture profile</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Delete Profile</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/Ajualna/u/profile.php?user=DeleteUserall&id=<?php echo $_SESSION['id']; ?>">Delete Profile</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Send Box</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Details profile</a></li>
                         </ul>
                     </div>
+                   

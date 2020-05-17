@@ -87,11 +87,11 @@ function Counter_All($table,$colName)
 // function to give you number men or women in website
 
 
-function Get_People($table,$colName,$num)
+function Get_People($table,$colName,$dosomething = null)
 {
     global $con; 
 
-    $select = "SELECT COUNT($colName) FROM $table WHERE $colName = $num";
+    $select = "SELECT COUNT($colName) FROM $table $dosomething";
     $getCount = $con->prepare($select);
     $getCount->execute();
     $counter = $getCount->fetchcolumn();
@@ -126,5 +126,18 @@ function get_something($table,$colName)
     $getapages = $con->prepare($select);
     $getapages->execute();
     $pages = $getapages->fetchAll();
+    return $pages;
+}
+
+
+
+function information($table,$colName,$dosomething = null ,$namestatus)  
+{
+    global $con; 
+
+    $select = "SELECT $colName FROM $table  $dosomething ";
+    $getapages = $con->prepare($select);
+    $getapages->execute();
+    $pages = $getapages->$namestatus();
     return $pages;
 }

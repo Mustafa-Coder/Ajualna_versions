@@ -1,20 +1,20 @@
-<?php 
+<?php
 
 
 function lang($translate)
 {
     static $lang  = array(
 
-        // Navbar: 
+        // Navbar:
         "name_site" => "Ajualna",
         "name_home" => " Home",
         "Ques" =>  " Questions ",
-        "pf" => "Profile",   
+        "pf" => "Profile",
         "set" => "Settings",
         "log" => "logout ",
         "dash" => "Dashboard",
-        "" => "",
-        "" => "",
+        "add" => "Create Page",
+        "sup" => "Support Box",
         "" => "",
         "" => "",
         "" => "",

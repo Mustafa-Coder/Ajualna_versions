@@ -13,30 +13,34 @@
  <!-- Modal Users -->
  <div id="moadlMenu" class="modal-menu card ">
     <ul>
-        <li id="profilepage"><a href="../../Ajualna/u/profile.php?user=profilepage&id=<?php echo $_SESSION['id']; ?>"><i class="fas fa-user-alt"></i><?php echo lang("pf"); ?></a> </li>        <?php if($_SESSION['admin'] == 1 ): echo '<li id="dash"><i class="fas fa-tachometer-alt"></i>'. lang("dash").'</li>'; endif; ?>
-        <li ><a href="../../Ajualna/u/profile.php?user=profiledit&id=<?php echo $_SESSION['id']; ?>"><i class="fas fa-cog"></i> <?php echo lang("set"); ?></a> </li>
-        <li id="logout"><i class="fas fa-power-off"></i> <?php echo lang("log"); ?></li>
+        <li id="profilepage"><a href="../../Ajualna/u/profile.php?user=profilepage&id=<?php echo $_SESSION['id']; ?>"><i class="fas fa-user-alt icons"></i><?php echo lang("pf"); ?></a> </li>        <?php if($_SESSION['admin'] == 1 ): echo '<li id="dash"><i class="fas fa-tachometer-alt icons"></i>'. lang("dash").'</li>'; endif; ?>
+        <li ><a href="../../Ajualna/u/profile.php?user=profiledit&id=<?php echo $_SESSION['id']; ?>"><i class="fas fa-cog icons"></i> <?php echo lang("set"); ?></a> </li>
+        <?php if ($Userinformation['work'] == 'teacher'): ?>
+          <li id="createpages" ><a><i  class="fas fa-plus icons"></i> <?php echo lang("add"); ?></a> </li>
+        <?php endif; ?>
+        <li><i class="fas fa-box-open icons"></i><a href="../../Ajualna/u/profile.php?user=supportbox&id=<?php echo $_SESSION['id']; ?>"><?php echo lang("sup"); ?></a> </li>
+        <li id="logout"><i class="fas fa-power-off icons"></i> <?php echo lang("log"); ?></li>
     </ul>
   </div>
 <!-- Notification -->
 <div id="modalNotif" class="modalNotif card">
-<?php 
+<?php
 
 // Functions data: ;
     $get_notification = get_something("notifications","*","WHERE pagesname = ".$college_session." AND seen = 1 ORDER BY id DESC ","fetchAll"); // get data users
     $get_notification_id = get_something("notifications","u_id","WHERE u_id = ".$userid."","fetch"); // get data users
 
 
-?>  
+?>
             <h1 class="notif">Notification</h1>
 
         <!-- <?php if($get_notification_id??['u_id'] == $_SESSION['id']): ?> -->
 
        <?php  foreach ($get_notification as $value) { ?>
 
-            
-            
-            
+
+
+
             <?php
                 $select = "SELECT *  FROM signup WHERE userid = :userid ";
                 $notif = $con->prepare($select);
@@ -45,7 +49,7 @@
                 $rowdata = $notif->fetch();
             ?>
         <div class="info">
-            
+
             <div class="avatar">
             <img src="./u/uploads/avatar/<?php echo $rowdata['avatar']; ?>" alt="">
             </div>
@@ -57,9 +61,9 @@
                 </p>
             </div>
         </div>
-            
+
         <?php  }  ?>
-                    
+
        <!-- <?php endif; ?> -->
-       
-  </div>    
+
+  </div>

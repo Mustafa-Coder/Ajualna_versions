@@ -1,31 +1,22 @@
 <?php 
 session_start();
-$PAGENAME = "Profile | " . strtoupper($_SESSION['user']);
 include 'init.php';
 if(!isset($_SESSION['user'])):
-    header("location:./logout.php");
+    header("location:/Ajualna/logout.php");
     exit;
 endif;
-$userid = $_SESSION['id']; // user id 
-// all information about user in edit 
-$Userinformation = get_something("signup","*","WHERE userid = $userid ","fetch"); // get data users
-$pagesinfo = get_something_also("pages","*"); // get all pages
-$college_session = $_SESSION['college']; // college sesiion 
-$pagesforyou = get_something("pages","*","WHERE pageid = ".$Userinformation['college']."","fetch"); // get page id you
+if(isset($_SESSION['user'])):
+    $userid = $_SESSION['id']; // user id 
+    // all information about user in edit 
+    $Userinformation = get_something("signup","*","WHERE userid = $userid ","fetch"); // get data users
+    $pagesinfo = get_something_also("pages","*"); // get all pages
+    $college_session = $_SESSION['college']; // college sesiion 
+    $pagesforyou = get_something("pages","*","WHERE pageid = ".$Userinformation['college']."","fetch"); // get page id you
+endif;
+
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../layout/images/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="../layout/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../layout/css/main.css">
-    <title><?php title() ?></title>
-</head>
-<body>
-<?php include "../../Ajualna/resources/templates/menu.php" ?>
+
 <!-- -------------------------------------------------------------------------- -->
 <?php 
 if(isset($_GET['user'])): ///////////////////////////////////////////..
@@ -37,6 +28,18 @@ switch($req) {
     // =====================[START SHOW PROFILE] ====================== //
     case'profilepage': ?>
         <!-- First Information  -->
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="shortcut icon" href="../layout/images/logo.png" type="image/x-icon">
+            <link rel="stylesheet" href="../layout/css/bootstrap.min.css">
+            <link rel="stylesheet" href="../layout/css/main.css">
+            <title><?php title("Profile | ".$Userinformation['username']." ") ?></title>
+        </head>
+        <body>
+        <?php include "../../Ajualna/resources/templates/menu.php" ?>
         <div class="container profile-page">
             <div class="row mt-5"> 
                 <div class="col-lg-12">
@@ -115,7 +118,19 @@ switch($req) {
     if (isset($_GET['user']) && $_GET['user'] == 'profiledit' && $_GET['id'] == $userid ) { // start edit profile 
      
      ?> 
-
+    <!-- First Information  -->
+    <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="shortcut icon" href="../layout/images/logo.png" type="image/x-icon">
+            <link rel="stylesheet" href="../layout/css/bootstrap.min.css">
+            <link rel="stylesheet" href="../layout/css/main.css">
+            <title><?php title("Profile Edit | ".$Userinformation['username']." ") ?></title>
+        </head>
+        <body>
+        <?php include "../../Ajualna/resources/templates/menu.php" ?>
     <div class="container settings  mt-5">
             <div class="row">
                 <div class="col-lg-3">
@@ -219,6 +234,21 @@ switch($req) {
     // =====================[END PROFILE EDITING] ====================== //
    // =====================[START PROFILE PICTURE AVATAR] ====================== //
    case 'profileavatar':
+    ?>
+    <!-- First Information  -->
+    <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="shortcut icon" href="../layout/images/logo.png" type="image/x-icon">
+            <link rel="stylesheet" href="../layout/css/bootstrap.min.css">
+            <link rel="stylesheet" href="../layout/css/main.css">
+            <title><?php title("Profile Picture | ".$Userinformation['username']." ") ?></title>
+        </head>
+        <body>
+        <?php include "../../Ajualna/resources/templates/menu.php" ?>
+    <?php 
     if (isset($_GET['user']) && $_GET['user'] == 'profileavatar' && $_GET['id'] == $userid ) { // start PICTURE profile 
         // Script Uploade file on database use request no Ajax:
         if($_SERVER['REQUEST_METHOD'] == 'POST'):
@@ -236,7 +266,7 @@ switch($req) {
             // Check if end var == array:
                 if(in_array($end,$array)): // start if 
 
-                    $newnameavatar = rand(0,10000000000) . '__.' . $end;
+                    $newnameavatar = rand(0,10000000000) . '__'.$_SESSION['user'].'_62315.' . $end;
                     move_uploaded_file($avatartmp,".\uploads\avatar\\" . $newnameavatar);
 
                     // Uploade file on data:
@@ -262,7 +292,7 @@ switch($req) {
                         <h2 class="display-4">Change Your Avatar About Your Profile..</h2>
                         <div class="avatar">
                             <?php if(!empty($Userinformation['avatar'])): ?>
-                            <img id="openfile" class="img-fiuld rounded" src="./uplaods/avatar/<?php echo $Userinformation['avatar'] ?>" alt="">
+                            <img id="openfile" class="img-fiuld rounded" src="./uploads/avatar/<?php echo $Userinformation['avatar'] ?>" alt="">
                             <?php else: ?>
                             <img id="openfile" class="img-fiuld rounded" src="../layout/images/icons/011.png" alt="">
                             <?php  endif; ?>
@@ -284,13 +314,123 @@ switch($req) {
         
     break;
     // =====================[END PROFILE  PICTURE AVATAR] ====================== //
-    default:
-        # code...
+    // =====================[START PROFILE  DELETE] ====================== //
+    case 'DeleteUserall':
+        
+    ?>
+    <!-- First Information  -->
+    <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="shortcut icon" href="../layout/images/logo.png" type="image/x-icon">
+            <link rel="stylesheet" href="../layout/css/bootstrap.min.css">
+            <link rel="stylesheet" href="../layout/css/main.css">
+            <title><?php title("Delete Acount | ".$Userinformation['username']." ") ?></title>
+        </head>
+        <body>
+        <?php include "../../Ajualna/resources/templates/menu.php" ?>
+    <div class="container settings  mt-5">
+                <div class="row">
+                    <div class="col-lg-3">
+                    <?php include '../resources/templates/menu-set.php'; // Menu Settings ?>
+                    </div>
+                    <div class="col-lg-9 mt-5">
+                        <!--  START Messages for update info -->
+                        <div id="html"></div>
+                        <!-- END Messages for update info -->
+                        <div class="card p-3  avatar-box">
+                            <h2 class="display-4">
+                            This page is about deleting your account completely.
+                            </h2>
+                            <p>
+                            When you delete your account, 
+                            <strong class="text-danger">you will lose all your information on the site,</strong>
+                             your photos, and everything posted about you
+                            </p>
+                                <input id="userid" type="hidden" value="<?php echo $_SESSION['id']; ?>">
+                                <div id="textDeleteMesg"></div>
+                                <button id="deleteUser" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+        </div> 
+    <?php
     break;
+    // =====================[END PROFILE  DELETE] ====================== //
+    // =====================[START SUPPORT BOX PAGE PROFILE ] ====================== //
+    case 'supportbox': ?>
+    <!-- First Information  -->
+    <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="shortcut icon" href="../layout/images/logo.png" type="image/x-icon">
+            <link rel="stylesheet" href="../layout/css/bootstrap.min.css">
+            <link rel="stylesheet" href="../layout/css/main.css">
+            <title><?php title("Community Supports | ".$Userinformation['username']." ") ?></title>
+        </head>
+        <body>
+        <?php include "../../Ajualna/resources/templates/menu.php" ?>
+       <div class="container mt-5 supportbox">
+           <div class="row mt-5">
+               <div class="col-lg-12">
+                   <div class="card border-0 mesg mt-5 p-3">
+                       <h1>Welcome, <?php echo $Userinformation['username']  ?>!</h1>
+                       <p>The Support Inbox is your place to:</p>
+                       <ul>
+                           <li>1.   Get updates about things you've reported</li>
+                           <li>2.	Check and reply to messages from the Help Team.</li>
+                           <li>3.	See important messages about your account.</li>
+                       </ul>
+                       <span><i class="fas fa-heart icons-mesg"></i></span>
+                       <span><i class="fas fa-grin-hearts icons-mesg2"></i></span>
+                   </div>
+               </div>
+               <div class="col-lg-12 ">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="card mesg-2 mt-4 p-3">
+                              <div class="group">
+                                  <h2><i class="fas fa-box"></i> We Call You After Revision Your message </h2>
+                                  <hr>
+                                  <!-- -->
+                                  <input id="username" type="hidden" value="<?php echo $Userinformation['username'] ?>">
+                                  <input id="email" type="hidden" value="<?php echo $Userinformation['email'] ?>">
+                                  <input id="userid" type="hidden" value="<?php echo $Userinformation['userid'] ?>">
+                                  <textarea id="message" class="form-control"  id="messagebox" cols="30" rows="10"></textarea>
+                                  <audio id="sbm" src="../resources/media/smb.mp3" type="audio/mp3"></audio>
+                                  <button id="send" class="btn btn-primary mt-2" >Send message</button>
+                              </div>
+                          </div>
+                          <div class="mesgrequest"></div>
+                      </div>
+                      <div class="col-md-6">
+                            <h4 class="htitle">Help Center</h4>
+                            <ul class="link-page">
+                                <li><a href="#">Police private</a> <br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, alias.</li>
+                                <li><a href="#">Police private</a> <br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, alias.</li>
+                                <li><a href="#">Police private</a> <br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, alias.</li>
+                                <li><a href="#">Police private</a> <br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, alias.</li>
+                                <li><a href="#">Police private</a> <br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, alias.</li>
+                            </ul>
+                            <hr>
+                            <div class="pages">
+                                <!-- ... -->
+                            </div>
+                      </div>
+                  </div>
+               </div>
+           </div>
+       </div>
+    <?php break;
+    // =====================[END SUPPORT BOX PAGE PROFILE ] ====================== //
 }
 
 else: //////////////////////////////////////////////////
-header("location:logout.php");
+header("location:/Ajualna/logout.php");
 exit;
 endif;
 ?>
