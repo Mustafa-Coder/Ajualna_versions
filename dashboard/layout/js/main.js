@@ -234,3 +234,35 @@ $(function () {
         PageSettings(idpage,"settings","create",namepage);
     });
 });
+
+// REPLACE SEND DATA ON SUPPORT BOX 
+
+// replacemessages => page 
+
+
+let SendReplaceMessage = _ => 
+{
+    // Get Data From Variables 
+    var useridbox = $("#useridbox").val(),
+        replacemessage = $("#replacemessage").val();
+
+    // Start Send Data to Settings page 
+    $.ajax({
+        method:'POST',
+        url:'/Ajualna/dashboard/data/settings.php',
+        data:{"req":"replacemessages","id":useridbox,"replace":replacemessage},
+        success:function(d,s){
+
+            if(d == "Send"){
+                
+                $("#textmessage").html('<p class="alert alert-primary p-2">Your Send Replace...</p>');
+            }
+        
+        }
+    });
+}
+
+
+$("#sendreplace").on("click",function(){
+    SendReplaceMessage();
+});

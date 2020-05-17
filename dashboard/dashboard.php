@@ -11,6 +11,7 @@ include './init.php';
 include $source . '/templates/navbar.php'; // nativigation bar
 if (isset($_GET['dash'])) {
     $dash = $_GET['dash'];
+    ?><input id="userid" type="hidden" value="<?php echo $_SESSION['id'] ?>"><?php
 }else {
 
     header("location:logout.php");
@@ -283,7 +284,7 @@ switch ($dash) {
         // END PAGES  ===================================================================== -->
         // Mail User 
         case 'message': ?>
-            <div class="container-fiuld mr-3 ml-3">
+            <div class="container-fiuld mr-3 ml-3 messagesbox">
                             <div class="row">
                                 <div class="col-lg-4">
                                     <!-- ========================[INCLUDE MENU]=============== -->
@@ -293,24 +294,94 @@ switch ($dash) {
                                 <div class="col-lg-8 mt-5">
                                     <table class="table table-sm mt-5 ">
                                         <thead>
-                                            <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Message</th>
-                                            <th scope="col">control</th>
+                                            <tr class="titles">
+                                                <th scope="col"><i class="fas fa-user"></i></th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Message</th>
+                                                <th scope="col">control</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                            <td>@mdo</td>
+                                            <?php $suportbox = get_something("supportbox","*"); ?> 
+                                            
+                                            <?php foreach($suportbox as $boxs): ?>
+                                                <?php if(empty($boxs['r_replace'])): ?>
+                                             <tr class="infomessage">
+                                             <?php $userinfo = information("signup","*","WHERE userid = ".$boxs['userid']."","fetch");   ?>
+                                            <th scope="row"><?php echo !empty($userinfo['avatar']) ? '<img class="img-fiuld rounded" src="../u/uploads/avatar/'.$userinfo['avatar'].'" alt="profile" />' : '<img class="img-fiuld rounded" src="./layout/images/icons/011.png" alt="profile" />' ?> </th>
+                                            <td><a href="../u/profile.php?user=profilepage&id=<?php echo $boxs['userid']; ?>" class="nav-link"><?php echo $userinfo['username']; ?></a></td>
+                                            <td><?php echo $userinfo['email']; ?></td>
+                                            <td><?php echo substr($boxs['messages'],0,50); ?>...</td>
+                                            <td><a href="dashboard.php?dash=rboxmessage&id=<?php echo $boxs['userid'] ?>" class="btn btn-primary"><i class="fas fa-reply"></i></a></td>
                                             </tr>
+                                                <?php endif; ?>
+    
+                                            <?php endforeach; ?>
+                                            <?php if(!empty($boxs['r_replace'])): ?>
+                                                <tr>
+                                                    <th>
+                                                        <td><p style="font-size:14px;color: rgb(75, 110, 134);" class="p-2 mt-2"><i class="fas fa-paper-plane"></i> No Replace Message Now </p></td>
+                                                    </th>
+                                                </tr>
+                                            <?php endif; ?>
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                            <div id="moadlMenu" class="modal-menu card ">
+                                <ul>
+                                    <li>رؤية الصفحة</li>
+                                    <li>تعديل الصفحة</li>
+                                    <li id="logout">تسجيل الخروج</li>
+                                </ul>
+                            </div>
+                    </div>
+        <?php break; ?> 
+        <?php  
+        // END  Mail User 
+        // Start Replace On the Message box 
+        case 'rboxmessage': ?>
+            <div class="container-fiuld mr-3 ml-3 messagesbox">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <!-- ========================[INCLUDE MENU]=============== -->
+                                    <?php include  $source . '/templates/menu.php'; ?>
+                                    <!-- ===================================================== -->  
+                                </div>
+                                <div class="col-lg-8 mt-5">
+                                    <div class="card rmessage border-0 mt-5 pt-3 pb-1 pl-3" >
+                                        <div class="row">
+                                                
+                                            <div class="col-md-6">
+                                                
+                                            <?php $userinfo = information("signup","*","WHERE userid = ".$_GET['id']."","fetch");   ?>
+                                            <?php $box = information("supportbox","*","WHERE userid = ".$_GET['id']."","fetchAll");   ?>
+                                                <h1><i class="fas fa-paper-plane"></i> Welcome <?php echo $_SESSION['user'] ?> !</h1>
+                                                <p>Send Replace To <?php echo $userinfo['username'] ?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card crmessage border-0 mt-3 p-3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="info">
+                                                    <?php echo !empty($userinfo['avatar']) ? '<img class="img-fiuld rounded-circle" src="../u/uploads/avatar/'.$userinfo['avatar'].'" alt="profile" />' : '<img class="img-fiuld rounded-circle" src="./layout/images/icons/011.png" alt="profile" />' ?> 
+                                                    <h4><a class="nav-link" href=""><?php echo $userinfo['username'] ?></a></h4>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <?php foreach($box as $mes): ?><div  class="rmesg mt-3 mb-2 ml-5"><p><?php echo $mes['messages'] ?></p><input type="hidden" id="useridbox" value="<?php echo $mes['userid'] ?>"></div> <?php endforeach; ?>
+                                                <!-- Message update -->
+                                                <div id="textmessage">
+                                                    
+                                                </div>
+                                                <input id="replacemessage" class="form-control" type="text" placeholder="replace">
+                                                <br> 
+                                                <button id="sendreplace" class="btn btn-primary btn-sm">Send</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div id="moadlMenu" class="modal-menu card ">

@@ -75,9 +75,25 @@ switch($req) {
             }
 
         break; // PAGE EDIT CREATE PAGE 
-    default:
-        # code...
-        break;
+        case 'replacemessages': // PAGE REPLACE MESSAGES
+
+            $id = $_POST['id'];
+            $re = filter_var($_POST['replace']);
+
+            $statment = "UPDATE supportbox SET r_replace = :re WHERE userid = :id ";
+            $setValue = $con->prepare($statment);
+            $setValue->bindparam(":re",$re);
+            $setValue->bindparam(":id",$id);
+            $setValue->execute();
+            $count = $setValue->rowcount();
+            if ($count > 0) {
+                echo 'Send';
+            }else {
+                echo 'wrong';
+            }
+
+        break;  // END PAGE REPLACE MESSAGES
+   
 }
 
 
