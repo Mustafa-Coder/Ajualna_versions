@@ -1,13 +1,13 @@
-<?php 
+<?php
 include '../config/config.php';
 
 if (isset($_POST['req'])):  // if =====================================
-  $req = $_POST['req']; 
+  $req = $_POST['req'];
 
 switch($req) {
-    case 'allowed': // PAGE EDIT 
+    case 'allowed': // PAGE EDIT
 
-           
+
             $id = $_POST['id'];
 
             $statment = "UPDATE pages SET allowed = 0 ";
@@ -20,8 +20,8 @@ switch($req) {
             }else {
                 echo 'wrong';
             }
-           
-          
+
+
         break; // END PAGE EDIT
         case 'notallowed': // PAGE EDIT NOT ALLOWED
 
@@ -38,7 +38,7 @@ switch($req) {
                 echo 'wrong';
             }
 
-        break; // PAGE EDIT NOT ALLOWED 
+        break; // PAGE EDIT NOT ALLOWED
 
         case 'delete': // PAGE EDIT DELETE PAGE
 
@@ -55,7 +55,7 @@ switch($req) {
                 echo 'wrong';
             }
 
-        break; // PAGE EDIT DELETE PAGE 
+        break; // PAGE EDIT DELETE PAGE
         case 'create': // PAGE EDIT CREATE PAGE
 
             $id = $_POST['id'];
@@ -74,15 +74,17 @@ switch($req) {
                 echo 'wrong';
             }
 
-        break; // PAGE EDIT CREATE PAGE 
+        break; // PAGE EDIT CREATE PAGE
         case 'replacemessages': // PAGE REPLACE MESSAGES
 
             $id = $_POST['id'];
+            $idbox = $_POST['idbox'];
             $re = filter_var($_POST['replace']);
 
-            $statment = "UPDATE supportbox SET r_replace = :re WHERE userid = :id ";
+            $statment = "UPDATE supportbox SET r_replace = :re WHERE userid = :id AND id = :idbox ";
             $setValue = $con->prepare($statment);
             $setValue->bindparam(":re",$re);
+            $setValue->bindparam(":idbox",$idbox);
             $setValue->bindparam(":id",$id);
             $setValue->execute();
             $count = $setValue->rowcount();
@@ -93,7 +95,7 @@ switch($req) {
             }
 
         break;  // END PAGE REPLACE MESSAGES
-   
+
 }
 
 

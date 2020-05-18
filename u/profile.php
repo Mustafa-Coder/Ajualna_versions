@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 include 'init.php';
 if(!isset($_SESSION['user'])):
@@ -6,25 +6,26 @@ if(!isset($_SESSION['user'])):
     exit;
 endif;
 if(isset($_SESSION['user'])):
-    $userid = $_SESSION['id']; // user id 
-    // all information about user in edit 
+    $userid = $_SESSION['id']; // user id
+    // all information about user in edit
     $Userinformation = get_something("signup","*","WHERE userid = $userid ","fetch"); // get data users
     $pagesinfo = get_something_also("pages","*"); // get all pages
-    $college_session = $_SESSION['college']; // college sesiion 
+    $college_session = $_SESSION['college']; // college sesiion
     $pagesforyou = get_something("pages","*","WHERE pageid = ".$Userinformation['college']."","fetch"); // get page id you
+    $supportboxdata = get_something("supportbox","*","WHERE userid = ".$_SESSION['id']."","fetchAll"); // get message re of you
 endif;
 
 
 ?>
 
-<!-- -------------------------------------------------------------------------- -->
-<?php 
+<!-- ########################################################################## -->
+<?php
 if(isset($_GET['user'])): ///////////////////////////////////////////..
 $req = $_GET['user'];
 
 switch($req) {
 
-    
+
     // =====================[START SHOW PROFILE] ====================== //
     case'profilepage': ?>
         <!-- First Information  -->
@@ -41,7 +42,7 @@ switch($req) {
         <body>
         <?php include "../../Ajualna/resources/templates/menu.php" ?>
         <div class="container profile-page">
-            <div class="row mt-5"> 
+            <div class="row mt-5">
                 <div class="col-lg-12">
                     <div class="card border-0 mt-5 p-4">
                         <div class="row">
@@ -60,11 +61,12 @@ switch($req) {
                                 <ul class="linke">
                                     <li><span> <i class="fas fa-venus-mars"></i> </span><?php echo $Userinformation['Gender']; ?></li>
                                     <li><span><i class="fas fa-university"></i></span><?php echo !empty($pagesforyou['pagename']) ?  $pagesforyou['pagename'] : " No College Here !" ?></li>
+                                    <li> <?php echo  Get_People("posts","*","userid = ".$userid." ") ?></li>
                                 </ul>
                             </div>
                         </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -74,8 +76,8 @@ switch($req) {
             <div class="row">
                 <div class="col-lg-3">
                    <ul class="link-set">
-                       <li><a href="#">Settings</a></li>
-                       <li><a href="#"><?php echo !empty($pagesforyou['pagename']) ?  $pagesforyou['pagename'] : " No College Here !" ?></a></li>
+                       <li><a href="profile.php?user=profiledit&id=<?php echo $_SESSION['id'] ?>">Settings</a></li>
+                       <li><a href="#"> <?php echo !empty($pagesforyou['pagename']) ?  $pagesforyou['pagename'] : " No College Here !" ?></a></li>
                        <li><a href="#">Piblic Question</a></li>
                        <li><a href="#">Help</a></li>
                    </ul>
@@ -106,18 +108,18 @@ switch($req) {
                      </ul>
                     <!-- End Information about website  -->
                 </div>
-                
+
             </div>
-            
+
         </div>
     <?php break;
     // =====================[END SHOW PROFILE] ====================== //
 
     // =====================[START PROFILE EDITING] ====================== //
     case 'profiledit':
-    if (isset($_GET['user']) && $_GET['user'] == 'profiledit' && $_GET['id'] == $userid ) { // start edit profile 
-     
-     ?> 
+    if (isset($_GET['user']) && $_GET['user'] == 'profiledit' && $_GET['id'] == $userid ) { // start edit profile
+
+     ?>
     <!-- First Information  -->
     <!DOCTYPE html>
         <html lang="en">
@@ -141,7 +143,7 @@ switch($req) {
                      <div id="html"></div>
                     <!-- END Messages for update info -->
                     <div class="card p-3 set-box">
-                   
+
                     <div class="row py-5">
                         <div class="col-md-6 mb-4">
                         <!-- INFORMATION HIDDEN -->
@@ -165,19 +167,19 @@ switch($req) {
                         </div>
                         <div class="col-md-6 mb-4">
                             <label for="user">College</label>
-                            <select class="form-control" id="collegeid"><?php 
-                                if ($Userinformation['college'] == 0): // When User the college is  ecoal zero 
+                            <select class="form-control" id="collegeid"><?php
+                                if ($Userinformation['college'] == 0): // When User the college is  ecoal zero
                                     echo '<option value="0">Chosse Your College</option>';
                                     foreach($pagesinfo as $page){ ?>
                                         <option id="newcollege" value="<?php echo $page['pageid'] ?>"><?php echo $page['pagename']; ?></option>
                                    <?php }
-                                endif; // When User the college is not ecoal zero 
+                                endif; // When User the college is not ecoal zero
                                 if($Userinformation['college'] > 0):
-                                 ?> <option id="oldcollege" value="<?php echo $pagesforyou['pageid'] ?>"><?php echo $pagesforyou['pagename'] ?? $pagesforyou['pagename'] ?></option> <?php 
+                                 ?> <option id="oldcollege" value="<?php echo $pagesforyou['pageid'] ?>"><?php echo $pagesforyou['pagename'] ?? $pagesforyou['pagename'] ?></option> <?php
                                  foreach($pagesinfo as $page){ ?>
                                         <option id="newcollege" value="<?php echo $page['pageid'] ?>"><?php echo $page['pagename']; ?></option>
                                    <?php }
-                                endif; 
+                                endif;
                             ?> </select>
                         </div>
                         <div class="col-md-6">
@@ -199,7 +201,7 @@ switch($req) {
                             <?php else: ?>
                                 <input class="form-control" type="text" id="numberphone" placeholder="Enter Phone">
                             <?php endif; ?>
-                            
+
                         </div>
                         <div class="col-md-6">
                             <label for="user">Languages</label>
@@ -222,14 +224,14 @@ switch($req) {
                     </div>
                 </div>
             </div>
-      </div> 
+      </div>
     <?php }else {
 
         header("location:../../../Ajualna/home.php");
         exit;
 
     } // end edit profile
-        
+
     break;
     // =====================[END PROFILE EDITING] ====================== //
    // =====================[START PROFILE PICTURE AVATAR] ====================== //
@@ -248,8 +250,8 @@ switch($req) {
         </head>
         <body>
         <?php include "../../Ajualna/resources/templates/menu.php" ?>
-    <?php 
-    if (isset($_GET['user']) && $_GET['user'] == 'profileavatar' && $_GET['id'] == $userid ) { // start PICTURE profile 
+    <?php
+    if (isset($_GET['user']) && $_GET['user'] == 'profileavatar' && $_GET['id'] == $userid ) { // start PICTURE profile
         // Script Uploade file on database use request no Ajax:
         if($_SERVER['REQUEST_METHOD'] == 'POST'):
             $id = $_SESSION['id'];
@@ -264,7 +266,7 @@ switch($req) {
             $end = end($expload);
 
             // Check if end var == array:
-                if(in_array($end,$array)): // start if 
+                if(in_array($end,$array)): // start if
 
                     $newnameavatar = rand(0,10000000000) . '__'.$_SESSION['user'].'_62315.' . $end;
                     move_uploaded_file($avatartmp,".\uploads\avatar\\" . $newnameavatar);
@@ -272,12 +274,12 @@ switch($req) {
                     // Uploade file on data:
                     update("signup","avatar","userid",$newnameavatar,$userid);
 
-                   
+
                 endif; // end if
 
-            
+
         endif;
-     ?> 
+     ?>
 
     <div class="container settings  mt-5">
             <div class="row">
@@ -304,19 +306,19 @@ switch($req) {
                     </div>
                 </div>
             </div>
-      </div> 
+      </div>
     <?php }else {
 
         header("location:../../../Ajualna/home.php");
         exit;
 
-    } // end  PICTURE AVATAR 
-        
+    } // end  PICTURE AVATAR
+
     break;
     // =====================[END PROFILE  PICTURE AVATAR] ====================== //
     // =====================[START PROFILE  DELETE] ====================== //
     case 'DeleteUserall':
-        
+
     ?>
     <!-- First Information  -->
     <!DOCTYPE html>
@@ -345,7 +347,7 @@ switch($req) {
                             This page is about deleting your account completely.
                             </h2>
                             <p>
-                            When you delete your account, 
+                            When you delete your account,
                             <strong class="text-danger">you will lose all your information on the site,</strong>
                              your photos, and everything posted about you
                             </p>
@@ -355,7 +357,7 @@ switch($req) {
                         </div>
                     </div>
                 </div>
-        </div> 
+        </div>
     <?php
     break;
     // =====================[END PROFILE  DELETE] ====================== //
@@ -406,6 +408,7 @@ switch($req) {
                               </div>
                           </div>
                           <div class="mesgrequest"></div>
+
                       </div>
                       <div class="col-md-6">
                             <h4 class="htitle">Help Center</h4>
@@ -417,9 +420,42 @@ switch($req) {
                                 <li><a href="#">Police private</a> <br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, alias.</li>
                             </ul>
                             <hr>
-                            <div class="pages">
-                                <!-- ... -->
+                            <?php if($_SERVER['REQUEST_METHOD'] == 'POST'):
+
+                                  $idbox = $_POST['id'];
+                                  $userid = $_SESSION['id'];
+
+                                  $deleted_report = "DELETE FROM supportbox WHERE id = ? AND userid = ? ";
+                                  $set_del = $con->prepare($deleted_report);
+                                  $set_del->execute(array($idbox,$userid));
+
+
+
+                           endif; ?>
+                            <?php foreach($supportboxdata as $report): ?>
+                            <!-- Your Message Report  -->
+                            <div class="messagereportshow card p-3 mt-3">
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <div class="mes">
+                                          <div class="style">
+                                              <?php echo  empty($report['r_replace']) ? '<img src="../layout/images/icons/report.png" alt="">' : '<i class="fas fa-flag"></i>' ?>
+                                          </div>
+                                          <div class="infomessage">
+                                            <?php echo empty($report['r_replace']) ?  $report['messages'] :  $report['r_replace'] ?>
+                                          </div>
+                                          <div class="control">
+                                            <form  action="profile.php?user=supportbox&id=<?php echo $_SESSION['id'] ?>" method="post">
+                                                <input  type="submit" class="btn btn-outline-danger btn-sm" value="Delete" />
+                                                <input type="hidden" name="id" value="<?php echo $report['id'] ?>">
+                                            </form>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
                             </div>
+                            <!-- end  -->
+                          <?php endforeach; ?>
                       </div>
                   </div>
                </div>

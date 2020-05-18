@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['user']))  {
     header("location:index.php");
     exit;
 }
@@ -74,14 +74,14 @@ switch ($dash) {
                                         <thead>
                                             <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col"><?php echo lang("co") ?></th>     
+                                            <th scope="col"><?php echo lang("co") ?></th>
                                             <th scope="col"><?php echo lang("na") ?></th>
                                             <th scope="col"><?php echo lang("stu") ?></th>
                                             <th scope="col"><?php echo lang("po") ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php 
+                                            <?php
                                             $pages = get_something('pages','*');
                                             foreach ($pages as $page) {
                                             ?>
@@ -107,7 +107,7 @@ switch ($dash) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
+                                        <?php
                                         $admins = get_admins('signup','*');
                                         foreach ($admins as $admin) {
                                         ?>
@@ -136,7 +136,7 @@ switch ($dash) {
             </div>
         <!-- END DASHBOARD =====================================================================  -->
         <!-- ===================================================================== -->
-        <?php 
+        <?php
         break;
         // START POST PAGE ===================================================================== -->
         case 'postpub':
@@ -147,7 +147,7 @@ switch ($dash) {
                             <div class="col-lg-4">
                                 <!-- ========================[INCLUDE MENU]=============== -->
                                 <?php include  $source . '/templates/menu.php'; ?>
-                                <!-- ===================================================== -->  
+                                <!-- ===================================================== -->
                               </div>
                                 <div class="col-lg-8 mt-5 home-page ">
                                     <h1 class="py-3 title-name">منشور عام</h1>
@@ -188,7 +188,7 @@ switch ($dash) {
                             </ul>
                         </div>
                 </div>
-                                    
+
            <?php  endif; // END PAGE
         break;
         // END POST PAGE ===================================================================== -->
@@ -202,7 +202,7 @@ switch ($dash) {
                                     <!-- -------------------------------------------------------------------------- -->
                                         <!-- ========================[INCLUDE MENU]=============== -->
                                         <?php include  $source . '/templates/menu.php'; ?>
-                                    <!-- ===================================================== -->  
+                                    <!-- ===================================================== -->
                                     <!-- End Slide Menu -->
                                     <!-- -------------------------------------------------------------------------- -->
                                 </div>
@@ -219,7 +219,7 @@ switch ($dash) {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <?php 
+                                            <?php
                                             $pages = get_something("pages","*");
                                             foreach ($pages as $page) {
                                              ?>
@@ -228,10 +228,10 @@ switch ($dash) {
                                                      <td><?php echo $page['pagename']; ?></td>
                                                  <td>4564</td>
                                                     <td>5642</td>
-                                                    <td> <?php echo $page['allowed'] == 1 ? '<button id="ShowElementHide" class="btn btn-primary  mr-2">اخفاء</button>' : '<button id="Showpage" class="btn btn-primary  mr-2">اظهار</button>' ?> 
-                                                     <button id="ShowElementDelete" class="btn btn-danger ">حذف</button> 
+                                                    <td> <?php echo $page['allowed'] == 1 ? '<button id="ShowElementHide" class="btn btn-primary  mr-2">اخفاء</button>' : '<button id="Showpage" class="btn btn-primary  mr-2">اظهار</button>' ?>
+                                                     <button id="ShowElementDelete" class="btn btn-danger ">حذف</button>
                                                     </td>
-                                                     </tr> 
+                                                     </tr>
                                              <?php  }?>
                                         </tbody>
                                     </table>
@@ -275,21 +275,21 @@ switch ($dash) {
                                 <input id="userid" type="hidden" value="<?php echo $_SESSION['id']; ?>">
                                 <button id="create" class="btn btn-primary">انشاء</button>
                                 <div class="alert alert-info">لا يمكنك اضافة اى شئ غير اسم الصفحة وذلك لان الشخص القائم على الصفحة هو الوحيد الذى يستطيع نشر والتعديل الكامل على الصفحة</div>
-                            
+
                             </div>
                         </div>
                     </div>
             <?php endif; // END PAGE
         break;
         // END PAGES  ===================================================================== -->
-        // Mail User 
+        // Mail User
         case 'message': ?>
             <div class="container-fiuld mr-3 ml-3 messagesbox">
                             <div class="row">
                                 <div class="col-lg-4">
                                     <!-- ========================[INCLUDE MENU]=============== -->
                                     <?php include  $source . '/templates/menu.php'; ?>
-                                    <!-- ===================================================== -->  
+                                    <!-- ===================================================== -->
                                 </div>
                                 <div class="col-lg-8 mt-5">
                                     <table class="table table-sm mt-5 ">
@@ -303,8 +303,8 @@ switch ($dash) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php $suportbox = get_something("supportbox","*"); ?> 
-                                            
+                                            <?php $suportbox = get_something("supportbox","*"); ?>
+
                                             <?php foreach($suportbox as $boxs): ?>
                                                 <?php if(empty($boxs['r_replace'])): ?>
                                              <tr class="infomessage">
@@ -313,10 +313,10 @@ switch ($dash) {
                                             <td><a href="../u/profile.php?user=profilepage&id=<?php echo $boxs['userid']; ?>" class="nav-link"><?php echo $userinfo['username']; ?></a></td>
                                             <td><?php echo $userinfo['email']; ?></td>
                                             <td><?php echo substr($boxs['messages'],0,50); ?>...</td>
-                                            <td><a href="dashboard.php?dash=rboxmessage&id=<?php echo $boxs['userid'] ?>" class="btn btn-primary"><i class="fas fa-reply"></i></a></td>
+                                            <td><a href="dashboard.php?dash=rboxmessage&userid=<?php echo $boxs['userid'] ?>&id=<?php echo $boxs['id']; ?>" class="btn btn-primary"><i class="fas fa-reply"></i></a></td>
                                             </tr>
                                                 <?php endif; ?>
-    
+
                                             <?php endforeach; ?>
                                             <?php if(!empty($boxs['r_replace'])): ?>
                                                 <tr>
@@ -337,26 +337,26 @@ switch ($dash) {
                                 </ul>
                             </div>
                     </div>
-        <?php break; ?> 
-        <?php  
-        // END  Mail User 
-        // Start Replace On the Message box 
+        <?php break; ?>
+        <?php
+        // END  Mail User
+        // Start Replace On the Message box
         case 'rboxmessage': ?>
             <div class="container-fiuld mr-3 ml-3 messagesbox">
                             <div class="row">
                                 <div class="col-lg-4">
                                     <!-- ========================[INCLUDE MENU]=============== -->
                                     <?php include  $source . '/templates/menu.php'; ?>
-                                    <!-- ===================================================== -->  
+                                    <!-- ===================================================== -->
                                 </div>
                                 <div class="col-lg-8 mt-5">
                                     <div class="card rmessage border-0 mt-5 pt-3 pb-1 pl-3" >
                                         <div class="row">
-                                                
+
                                             <div class="col-md-6">
-                                                
-                                            <?php $userinfo = information("signup","*","WHERE userid = ".$_GET['id']."","fetch");   ?>
-                                            <?php $box = information("supportbox","*","WHERE userid = ".$_GET['id']."","fetchAll");   ?>
+
+                                            <?php $userinfo = information("signup","*","WHERE userid = ".$_GET['userid']."","fetch");   ?>
+                                            <?php $box = information("supportbox","*","WHERE userid = ".$_GET['userid']." and id = ".$_GET['id']." ","fetchAll");   ?>
                                                 <h1><i class="fas fa-paper-plane"></i> Welcome <?php echo $_SESSION['user'] ?> !</h1>
                                                 <p>Send Replace To <?php echo $userinfo['username'] ?></p>
                                             </div>
@@ -366,18 +366,19 @@ switch ($dash) {
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="info">
-                                                    <?php echo !empty($userinfo['avatar']) ? '<img class="img-fiuld rounded-circle" src="../u/uploads/avatar/'.$userinfo['avatar'].'" alt="profile" />' : '<img class="img-fiuld rounded-circle" src="./layout/images/icons/011.png" alt="profile" />' ?> 
+                                                    <?php echo !empty($userinfo['avatar']) ? '<img class="img-fiuld rounded-circle" src="../u/uploads/avatar/'.$userinfo['avatar'].'" alt="profile" />' : '<img class="img-fiuld rounded-circle" src="./layout/images/icons/011.png" alt="profile" />' ?>
                                                     <h4><a class="nav-link" href=""><?php echo $userinfo['username'] ?></a></h4>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
-                                                <?php foreach($box as $mes): ?><div  class="rmesg mt-3 mb-2 ml-5"><p><?php echo $mes['messages'] ?></p><input type="hidden" id="useridbox" value="<?php echo $mes['userid'] ?>"></div> <?php endforeach; ?>
+                                                <?php foreach($box as $mes): ?><div  class="rmesg mt-3 mb-2 ml-5"><p><?php echo $mes['messages'] ?></p><input type="hidden" id="useridbox" value="<?php echo $mes['userid'] ?>"> </div> <?php endforeach; ?>
                                                 <!-- Message update -->
                                                 <div id="textmessage">
-                                                    
+
                                                 </div>
                                                 <input id="replacemessage" class="form-control" type="text" placeholder="replace">
-                                                <br> 
+                                                <input id="idbox" type="hidden" value="<?php echo $_GET['id'] ?>">
+                                                <br>
                                                 <button id="sendreplace" class="btn btn-primary btn-sm">Send</button>
                                             </div>
                                         </div>
@@ -398,9 +399,9 @@ switch ($dash) {
 <!-- ===================================================================== -->
 <?php
 // ----------------------------------------------------------------
-// INCLUDE JAVASCRIPT FILES 
+// INCLUDE JAVASCRIPT FILES
 include $source . '/templates/footer.php';
-else : // Refresh to out 
+else : // Refresh to out
     header('location:index.php');
     exit;
 endif; // END PAGE

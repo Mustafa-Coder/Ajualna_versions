@@ -1,19 +1,19 @@
 $(function () {
     // Dashboard
-    //  When you click this btn  show a menu: 
+    //  When you click this btn  show a menu:
     $("#menuShow").on('click',function (){
         // $("#menu").toggleClass("display");
         $("#menu").show(500);
 
     });
-     //  When you click this btn Hide a menu: 
+     //  When you click this btn Hide a menu:
     $("#menuHide").on('click',function (){
         $("#menu").fadeOut(900);
         // $("#menu").removeClass("display");
 
     });
-   
-     //  When you click this btn show menu profile: 
+
+     //  When you click this btn show menu profile:
      $("#ShowMenuPerson").on('click',function (){
         $("#moadlMenu").toggleClass('display');
         $("#modalNotif").removeClass("display");
@@ -61,20 +61,20 @@ $(function () {
       $("#pages").on("click",function () {
         var userid = $("#userid").val();
         setTimeout(() => { window.location.href="dashboard.php?dash=pages&id="+ userid +""},500);
-      });  
+      });
 
       // Messages Pages
 
       $("#message").on("click",function () {
         var userid = $("#userid").val();
         setTimeout(() => { window.location.href="dashboard.php?dash=message&id="+userid+"" },500);
-      });  
+      });
 
       // logout page dashboard
       $("#logout").on("click",function () {
         setTimeout(() => { window.location.href="logout.php" },500);
-      }); 
-// Index file 
+      });
+// Index file
 
     $("#signup").on('click',function (){
         $(this).hide(300);
@@ -90,8 +90,8 @@ $(function () {
         setTimeout(() => {window.location.href="login.html"}, 200);
     });
 
-// public page 
-// hide notes 
+// public page
+// hide notes
 
 
           document.querySelectorAll("overlay-page").forEach(item => {
@@ -99,7 +99,7 @@ $(function () {
             item.on('click', function () {
                 item.hide(1000);
             });
-              
+
           });
 
 
@@ -117,23 +117,23 @@ $(function () {
         // $("#elements").appendTo('');
     });
 
-    
+
     // Pages: Delete
     $("#ShowElementDelete").on('click',function (){
         $("#overlay-pages-delete").show(250);
-    
+
     });
 
-    // page show 
+    // page show
     $("#Showpage").on('click',function (){
 
         $("#overlay-pages-show").show(250);
         // $(this).append('<button id="ShowElementHide" class="btn btn-primary  mr-2">اخفاء</button>');
 
-    
+
     });
 
-    
+
     // ShowElement
     $("#ShowElement").on('click',function (){
         $("#overlay-pages-show").hide(250);
@@ -144,19 +144,19 @@ $(function () {
         $("#overlay-pages-add").show(250);
     });
 
-      
-    
+
+
 
     // Poste public page =====================================================
         // function CreatePostPublic
-        let CreatePostPublic = _ => 
+        let CreatePostPublic = _ =>
         {
             // Get Data
             const title = $("#titlepost").val(),
                 description = $("#descp").val(),
                 userid = $("#userid").val();
                 //   console.log(title + description + userid);
-                
+
             // Ajax Send Data.....
             $.ajax({
                 method:"POST",
@@ -175,7 +175,7 @@ $(function () {
 
             // test
 
-            
+
 
         }
 
@@ -185,9 +185,9 @@ $(function () {
 
 
 
-    // Hide PAGES IN SETTINGS PAGE 
+    // Hide PAGES IN SETTINGS PAGE
     // HidePages
-    let PageSettings = (id,namepage,status,other = null) => 
+    let PageSettings = (id,namepage,status,other = null) =>
     {
         const address = id; // this is id pages for hide and delete and show
         // console.log(address + namepage + status);
@@ -203,7 +203,7 @@ $(function () {
             }
 
         });
-              
+
     }
 
      // When Click this HidePages do this:
@@ -235,29 +235,32 @@ $(function () {
     });
 });
 
-// REPLACE SEND DATA ON SUPPORT BOX 
+// REPLACE SEND DATA ON SUPPORT BOX
 
-// replacemessages => page 
+// replacemessages => page
 
 
-let SendReplaceMessage = _ => 
+let SendReplaceMessage = _ =>
 {
-    // Get Data From Variables 
+    // Get Data From Variables
     var useridbox = $("#useridbox").val(),
+        idbox = $("#idbox").val(),
         replacemessage = $("#replacemessage").val();
 
-    // Start Send Data to Settings page 
+    // Start Send Data to Settings page
     $.ajax({
         method:'POST',
         url:'/Ajualna/dashboard/data/settings.php',
-        data:{"req":"replacemessages","id":useridbox,"replace":replacemessage},
+        data:{"req":"replacemessages","id":useridbox,"replace":replacemessage,"idbox":idbox},
         success:function(d,s){
 
             if(d == "Send"){
-                
+
                 $("#textmessage").html('<p class="alert alert-primary p-2">Your Send Replace...</p>');
             }
-        
+
+          
+
         }
     });
 }
