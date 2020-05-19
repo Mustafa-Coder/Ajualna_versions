@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-<?php if (isset($_SESSION['id'])):?>
-<html lang="en" <?php echo $Userinfor['languages'] == 'ar' ? "dir='rtl'" : "dir='ltr'" ?>>
-<?php else:?>
+
 <html lang="en">
-<?php endif;?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,5 +12,6 @@
     <link rel="stylesheet" href="./layout/css/animate.css">
     <title><?php title() ?></title>
 </head>
-<body>
+
+
  

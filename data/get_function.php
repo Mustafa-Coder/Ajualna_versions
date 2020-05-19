@@ -1,5 +1,6 @@
 <?php 
 
+$Users = get_something("signup","*"," ","fetchAll"); // get data users
 $Userinfo = get_something("signup","*","WHERE userid = $userid ","fetch"); // get data users
 $Userinformation = get_something("signup","*","WHERE userid = $userid ","fetch"); // get data users
 $pagesinfo = get_something_also("pages","*","WHERE userid = $userid "); // get all pages

@@ -18,7 +18,6 @@ function lang($translate)
         "" => "",
         "" => "",
         "" => "",
-        "" => "",
         // home page:
         "col_tar" => "جميع الكليات",
         "stu_tra" => "طلاب جامعتك",

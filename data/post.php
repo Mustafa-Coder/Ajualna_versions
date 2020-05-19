@@ -152,9 +152,12 @@ switch($req) {
                 }
         break;
         // END CREATE NEW POST FOR USER ====================================
-    default:
-        # code...
+        // START EDIT  POST FOR USER ====================================
+        case 'sendcomment':
+            echo $_GET['com'];
         break;
+        // END EDIT  POST FOR USER ====================================
+        
 }
 
 

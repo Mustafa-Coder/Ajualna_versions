@@ -88,6 +88,7 @@ $(function () {
    // oldcollege newcollege  saxuser old-pass new-pass
 //    SETTING
 
+// USER SYSTEM EDIT DELETE  ============================================================
 let male = $("#male").val(),
    famale = $("#famale").val();
     // console.log(male + famale);
@@ -161,6 +162,51 @@ let male = $("#male").val(),
         $("#fileToUpload").click();
     });
 
+    // DARKMODE 
+
+        // When push btn dark do this :
+        $("#darkmode").on("click",function(){
+            let dark = $("#darkmode").val(),
+                id = $("#id").val();
+
+            $.ajax({
+                type:"post",
+                url:"/Ajualna/data/settings.php",
+                data:{"req":"darkmode","modes":dark,"id":id},
+                success:function(data,stats){
+                    if(data == 'Done'){
+                        $("#modes").html('<div class="alert alert-dark alert-sm p-3 w-50 m-auto"><i class="fas fa-cloud-showers-heavy"></i> Dark Mode</div>');
+                    }
+                    console.log(data);
+
+                }
+            });
+
+        });
+
+        // When push btn light do this :
+        $("#lightmode").on("click",function(){
+            let dark = $("#lightmode").val(),
+                id = $("#id").val();
+
+            $.ajax({
+                type:"post",
+                url:"/Ajualna/data/settings.php",
+                data:{"req":"darkmode","modes":dark,"id":id},
+                success:function(data,stats){
+                    if(data == 'Done'){
+                        $("#modes").html('<div class="alert alert-primary alert-sm p-3 w-50 m-auto"><i class="fas fa-sun"></i> Light Mode</div>');
+                    }
+
+                    console.log(data);
+                }
+            });
+
+        });
+
+// END USER SYSTEM EDIT DELETE  ============================================================
+
+//  POST SYSTEM EDIT DELETE  ============================================================
 
 
     // SYSTEM SEND POST DATA IN DATABASE:::::::::::
@@ -272,77 +318,24 @@ let male = $("#male").val(),
     $("#notification").on("click",function(){
         $(this).hide(200);
 
-        // send data to notification column
-            // postnotif
-
-            // $.ajax({
-            //     type:"post",
-            //     url:"/Ajualna/data/notifi_fun.php",
-            //     data:{"req":"postnotif"},
-            //     success:function(data,stats){
-            //         console.log(data);
-            //         console.log(stats);
-            //     }
-
-            // });
+        
     });
 
-    // Like System :::
-    // const likes = document.querySelectorAll(".like");
-    //     likes.forEach(like => {
+   
+    // Edit post
+   
+  
 
-    //        like.addEventListener("click",_ => {
-    //            like.style.color="rgb(67, 154, 246)";
+        // console.log($("#btneditpost").length);
 
-    //        });
-
-    //     });
-
-    // console.log($(".like").length);
-
-    // for (let i = 0; i < $(".like").length; i++) {
-
-    //     // console.log($(".like")[i]);
-
-    //     $(".like")[i].addEventListener("click", function (){
-    //         $(this).css({"color":"rgb(67, 154, 246)"});
-
-    //         // Get A value post::
-    //          var id = $(".like")[i].value;
-    //          $.ajax({
-
-    //             method:"post",
-    //             url:"/Ajualna/data/post.php",
-    //             data:{"req":"addlike","id":id},
-    //             success:function(data,stats){
-    //                 if(data == 'Done'){
-    //                     console.log(data);
-    //                 }
-
-    //                 if(data == 'wrong'){
-    //                     console.log(data);
-    //                 }
-
-
-    //             }
-
-
-    //             });
-
-
-
-
-    //     });
-
-
-
-
-    // }
-
-
+        // for (let i = 0; i < $("#btneditpost").length; i++) {
+           
+        //    console.log($("#btneditpost")[i]);
+            
+        // }
 
          // AJAX TO GET POSTS DATA WHEN YOU ADD NEW POST
-         $.ajax({
+         $.ajax({   
             type:"post",
             url:"/Ajualna/data/fetch_data.php",
             data:{"req":"getposts"},
@@ -350,8 +343,18 @@ let male = $("#male").val(),
             success:function(data,stats){console.log(stats); $("#showposts").html(data);$("#waitingpost").addClass("fadeIn");}
         });
 
+        
+            
+
+           
+        
+
+    
 
 
+
+
+// END POST SYSTEM EDIT DELETE  ============================================================
 
 
 
@@ -437,7 +440,7 @@ let male = $("#male").val(),
           type:"post",
           url:"/Ajualna/data/fetch_data.php",
           data:{"req":"getpages"},
-          success:function(data,stats){console.log(stats); $("#pages").html(data);}
+          success:function(data,stats){/*console.log(stats);*/ $("#pages").html(data);}
       });
     
 
@@ -521,5 +524,11 @@ let SendMessageSupport = _ =>
 
 
 
-
 });
+
+
+
+            
+
+
+        

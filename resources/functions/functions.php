@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // TITLE PAGE version one
 
@@ -7,7 +7,7 @@ function title($type = null){
     global $PAGENAME;
 
     if (isset($PAGENAME)):
-       
+
         echo  $PAGENAME;
     endif;
 
@@ -44,9 +44,9 @@ function sourcepage($PATHNAME)
 }
 
 
-// Get Users all 
-// ColOne : this is colum one for  username 
-// ColTwo : this is colum two for  password 
+// Get Users all
+// ColOne : this is colum one for  username
+// ColTwo : this is colum two for  password
 
 function users($table,$col1,$col2,$var1,$var2){
 
@@ -75,7 +75,7 @@ function users($table,$col1,$col2,$var1,$var2){
 
 function Counter($table,$colName)
 {
-    global $con; 
+    global $con;
 
     $select = "SELECT COUNT($colName) FROM $table WHERE `admin` != 1 ";
     $getCount = $con->prepare($select);
@@ -89,7 +89,7 @@ function Counter($table,$colName)
 
 function Counter_All($table,$colName)
 {
-    global $con; 
+    global $con;
 
     $select = "SELECT COUNT($colName) FROM $table ";
     $getCount = $con->prepare($select);
@@ -103,11 +103,11 @@ function Counter_All($table,$colName)
 // function to give you number men or women in website
 
 
-function Get_People($table,$colName,$num)
+function Get_People($table,$colName,$codition)
 {
-    global $con; 
+    global $con;
 
-    $select = "SELECT COUNT($colName) FROM $table WHERE $colName = $num";
+    $select = "SELECT COUNT($colName) FROM $table WHERE $codition ";
     $getCount = $con->prepare($select);
     $getCount->execute();
     $counter = $getCount->fetchcolumn();
@@ -121,7 +121,7 @@ function Get_People($table,$colName,$num)
 
 function get_admins($table,$colName)
 {
-    global $con; 
+    global $con;
 
     $select = "SELECT $colName FROM $table WHERE `admin` = 1 ";
     $getadmin = $con->prepare($select);
@@ -134,9 +134,9 @@ function get_admins($table,$colName)
 
 // Function To Get ALL PAGES in the dashboard:
 
-function get_something($table,$colName,$dosomething = null ,$namestatus)  
+function get_something($table,$colName,$dosomething = null ,$namestatus)
 {
-    global $con; 
+    global $con;
 
     $select = "SELECT $colName FROM $table  $dosomething ";
     $getapages = $con->prepare($select);
@@ -145,12 +145,12 @@ function get_something($table,$colName,$dosomething = null ,$namestatus)
     return $pages;
 }
 
-// function also 
+// function also
 
 
 function get_something_also($table,$colName,$dosomething = null)
 {
-    global $con; 
+    global $con;
     global $countsomething;
 
     $select = "SELECT $colName FROM $table $dosomething";
@@ -164,18 +164,18 @@ function get_something_also($table,$colName,$dosomething = null)
 }
 
 
-// Function Updateing 
+// Function Updateing
 
 function update($table,$namecol1,$namecolid2,$dataupload,$userid)
 {
-    global $con; 
+    global $con;
 
     $update = "UPDATE $table SET $namecol1 = :avatar WHERE $namecolid2 = :id ";
     $setUpdate = $con->prepare($update);
     $setUpdate->bindparam(":avatar",$dataupload);
     $setUpdate->bindparam(":id",$userid);
     $setUpdate->execute();
-    
+
 
 }
 
@@ -190,14 +190,14 @@ function likesCount($clomun,$table,$condition = null,$status)
     $getapages->execute();
     $pages = $getapages->$status();
     return $pages;
-    
+
 }
 
 
-// FUNCTION LINK 
+// FUNCTION LINK
 
 function Links($link = null,$underscor = null)
-{   
+{
     if($link != null && $underscor != null):
         echo $link.$underscor;
     endif;
@@ -209,15 +209,15 @@ function Links($link = null,$underscor = null)
 /*
     $table => Table name for database
     # PARAMETERS.......
-    $one => is defualt 
-    $two => is defualt 
+    $one => is defualt
+    $two => is defualt
     $three => Equel null
     $four => Equel null
     $five => Equel null
     $six => Equel null
     # VALUES........
-    $vone => is defualt 
-    $vtwo => is defualt 
+    $vone => is defualt
+    $vtwo => is defualt
     $vthree => Equel null
     $vfour => Equel null
     $vfive => Equel null
@@ -225,8 +225,8 @@ function Links($link = null,$underscor = null)
     # DATA..........
     $dataone => is defualt
     $datatwo => is defualt
-    $datathree =>  null 
-    $datafour =>  null 
+    $datathree =>  null
+    $datafour =>  null
     $datafive =>  null
     $datasix =>  null
 */
@@ -256,7 +256,7 @@ function Links($link = null,$underscor = null)
 //         // ));
 //         $statntment->bindparam("$vone,$vtwo,$vthree,$vfour,$vfive,$vsix",$dataone,$datatwo,$datathree,$datafour,$datafive,$datasix);
 //         // $statntment->bindparam("$vtwo",$datatwo);
-//         // $statntment->bindparam("$vthree",$datathree); 
+//         // $statntment->bindparam("$vthree",$datathree);
 //         // $statntment->bindparam("$vfour",$datafour);
 //         // $statntment->bindparam("$vfive",$datafive);
 //         // $statntment->bindparam("$vsix",$datasix);
@@ -267,7 +267,7 @@ function Links($link = null,$underscor = null)
 // }
 
 
-// UPDATE DATA USERS 
+// UPDATE DATA USERS
 
 
 function updatedata($table,$columnname,$something_data,$condition = null)
@@ -278,5 +278,5 @@ function updatedata($table,$columnname,$something_data,$condition = null)
             $SET_UP = $con->prepare($UP);
             $SET_UP->bindparam(":something",$something_data);
             $SET_UP->execute();
-           
+
 }

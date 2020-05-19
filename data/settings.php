@@ -102,7 +102,28 @@ switch($req) {
             }
         break;
         // End Send Message Support Box 
+        // Dark mode
+        case 'darkmode':
 
+            $mode = $_POST['modes']; // username 
+            $id = $_POST['id'];
+
+            // if ():
+            // endif;
+
+            $statment = "UPDATE signup SET modes = :mode WHERE userid = :id ";
+            $setValue = $con->prepare($statment);
+            $setValue->bindparam(":id",$id);
+            $setValue->bindparam(":mode",$mode);
+            $setValue->execute();
+            $count = $setValue->rowcount();
+            if ($count > 0) {
+                echo 'Done';
+            }else {
+                echo 'wrong';
+            }
+
+        break;
 }
 
 

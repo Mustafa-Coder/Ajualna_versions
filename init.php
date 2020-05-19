@@ -20,7 +20,7 @@ $Userinfor = get_something("signup","*","WHERE userid = $useridtow ","fetch"); /
 endif;
 include $source . '/templates/header.php';
 if(isset($_SESSION['user'])):
-    if($_SESSION['lang'] == 'ar'):
+    if($Userinfor['languages'] == 'ar'):
         include $source . '/langs/ar.php';
     else:
         include $source . '/langs/en.php';

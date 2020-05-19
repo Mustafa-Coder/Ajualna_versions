@@ -30,6 +30,31 @@ updatedata("signup","languages","".$langs."","WHERE userid = ".$userid.""); // u
 updatedata("posts","college_group","".$college."","WHERE userid = ".$userid.""); // update college in posts
 updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); // update country in posts
 
+
+// Sen comment to data 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    # comment userid postid
+
+    $po  = $_POST['postid'];
+    $us = $_POST['userid'];
+    $na = $_POST['names'];
+    $ava = $_POST['avatar'];
+    $com = $_POST['comment'];
+    if(!empty($po) && !empty($us) && !empty($com)):
+    // i_post	i_user	mesg	
+    $in = "INSERT INTO comment(i_post,i_user,names,avatar,mesg)VALUES(:po,:us,:na,:av,:com)";
+    $set = $con->prepare($in);
+    $set->bindparam(":po",$po);
+    $set->bindparam(":us",$us);
+    $set->bindparam(":na",$na);
+    $set->bindparam(":av",$ava);
+    $set->bindparam(":com",$com);
+    $set->execute();
+    endif;
+   
+}
+
+
 // $postOne = get_something_also("posts","userid");
 ?>
 <!-- START INCLUDE MENU -->
@@ -37,16 +62,20 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
 <!-- END INCLUDE MENU -->
 <!-- End CHECK IF THE COLLEGE ECOLE COLLEGE HIM -->
 <!-- START PAGE HTML -->
-<body onload="loadpage()">
+<body class="<?php echo $Userinformation['modes'] == 'dark'  ? "top" : " " ?>">
+
 <div class="container homeglobal mt-5">
     <div class="row mt-5">
         <!-- START SLIDE LEFT  IN HOME PAGE  -->
         <div class="col-lg-3">
-            <div class="card user-info border-0 mt-5">
+            <div class="card user-info border-0 mt-5 <?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?> ">
                 <div class="avatar">
                     <?php if(empty($Userinfo['avatar'])): ?>
                         <div class="name"><?php echo strtoupper(substr($Userinfo['username'],0,1)); ?></div>
                     <?php else: ?>
+                        <?php if($Userinformation['active'] == 1): ?>
+                            <span></span>
+                            <?php endif; ?>
                         <img src="./u/uploads/avatar/<?php echo $Userinfo['avatar']; ?>" alt="">
                     <?php endif; ?>
                 </div>
@@ -58,7 +87,7 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
             </div>
             <?php if($Userinfo['admin'] == 1): ?>
                 <!-- START SHOW PAGES  -->
-                <div class="card college-pages border-0 mt-2 p-2">
+                <div class="card college-pages border-0 mt-2 p-2  <?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?>">
                     <h2 class="py-2"><?php  echo lang("col_tar") ?></h2>
                         <!-- show pagename -->
                         <ul class="mt-5" id="pages">
@@ -74,8 +103,8 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
         <!-- START SYSTEM POST  -->
         <div class="col-lg-6">
         <?php if(!empty($Userinfo['avatar'])): ?>
-            <div class="card postsystem border-0 mt-5 p-3">
-                <textarea class="form-control"  id="description" placeholder="type.."></textarea>
+            <div class="card postsystem border-0 mt-5 p-3 <?php echo $Userinfo['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?>">
+                <textarea class="form-control <?php echo $Userinfo['modes'] == 'dark'  ? "input-text" : " " ?>"  id="description" placeholder="type.."></textarea>
                  <input id="name" type="hidden" value="<?php echo $Userinfo['username']; ?>">
                  <input id="college" type="hidden" value="<?php echo $Userinfo['college']; ?>">
                  <input id="country" type="hidden" value="<?php echo $Userinfo['country']; ?>">
@@ -93,7 +122,8 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
 
             <!-- START SHOW POSTS ALL  -->
             <div class="animated " id="waitingpost">
-                <div id="showposts"></div>
+                <div id="showposts">
+                </div>
             </div>
             <!-- END SHOW POSTS ALL  -->
             <!-- START ACCESS DATA  -->
@@ -112,7 +142,7 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
         <!-- END SYSYTEM POST -->
         <div class="col-lg-3">
         <!-- SHECK IF THE USERNAME COLLEGE EQUEL SAME COLLEGE -->
-            <div class="card user-info border-0 mt-5 user-info-college p-3 ">
+            <div class="card user-info border-0 mt-5 user-info-college p-3  <?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?> ">
                     <h2><?php  echo lang("stu_tra") ?></h2>
                     <br>
                     <?php foreach ($usercollege as $collegme) { ?>
@@ -123,6 +153,11 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
                                     <?php if(empty($collegme['avatar'])): ?>
                                         <div class="name"><?php echo strtoupper(substr($collegme['username'],0,1)); ?></div>
                                     <?php else: ?>
+                                       <?php foreach($Users as $active):  ?>
+                                        <?php if($active['active'] == 1 && $collegme['userid'] == $active['userid']): ?>
+                                            <span></span>
+                                        <?php endif; ?>
+                                        <?php endforeach; ?>
                                         <img src="./u/uploads/avatar/<?php echo $collegme['avatar']; ?>" alt="">
                                     <?php endif; ?>
                                 </div>
@@ -177,3 +212,7 @@ updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); //
 <!-- END PAGE HTML -->
 <!-- ######################################################################## -->
 <?php include $source . '/templates/footer.php' ?>
+<script>
+
+
+</script>

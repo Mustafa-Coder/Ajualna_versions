@@ -67,7 +67,6 @@ switch ($namepage) {
                          <!-- START SYSTEM POST  -->
                          <input id="namepage" type="hidden" value="<?php echo $pagesforyou['pagename']; ?>">
                          <input id="pageid" type="hidden" value="<?php echo $pagesforyou['pageid']; ?>">
-                         <?php if($Userinformation['admin'] == 1): ?>
                         <div class="card  postsystem border-0 mt-5 p-3">  
                             <textarea class="form-control"  id="description" placeholder="type.."></textarea>
                             <input id="name" type="hidden" value="<?php echo $Userinformation['username']; ?>">
@@ -77,7 +76,6 @@ switch ($namepage) {
                             <button id="createbtn" class="btn btn-primary">Create</button>
                             <audio id="postmusic" src="./resources/media/post.mp3" type="audio/mp3"></audio>
                         </div>
-                         <?php endif; ?>
                         <hr> 
                         <!-- SHOW POSTS ALL  -->
                         <div id="showposts"> 
@@ -218,10 +216,11 @@ let CreatePostPages = _ =>
 
         
 
+    $("#createbtn").on("click",function(){
+        CreatePostPages();
+    });
 
 
-
-});
 
 // function to redirect in anypages
 let GoPages = (url) =>  {setTimeout(() => { window.location.href=""+ url +"" },500);}
@@ -250,9 +249,7 @@ let GoPages = (url) =>  {setTimeout(() => { window.location.href=""+ url +"" },5
 
         
     
-    $("#createbtn").on("click",function(){
-        CreatePostPages();
-    });
+   
 
    //  When you click this btn show menu profile: 
    $("#ShowMenuPerson").on('click',function (){
@@ -275,4 +272,18 @@ let GoPages = (url) =>  {setTimeout(() => { window.location.href=""+ url +"" },5
         GoPages("/Ajualna/home.php");
 
    });
+
+   // Check post input is not empty 
+
+  
+   $("#description").on("mouseleave",function(){
+        if($("#description").val().length == 0){
+            $("#createbtn").attr("disabled",true);
+        }else {
+            $("#createbtn").attr("disabled",false);
+        }
+   });
+
+});
+
 </script>

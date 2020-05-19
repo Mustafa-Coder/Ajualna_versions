@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 include '../config/config.php';
 include '../resources/functions/functions.php';
 
@@ -8,14 +9,19 @@ $req = $_POST['req'];
 $college_session = $_SESSION['college']; // college sesiion
 // FUNCTIONS WEBSITE::::
 $userid = $_SESSION['id']; // user id
+$Users = get_something("signup","*"," ","fetchAll"); // get data users
+
 $Userinfo = get_something("signup","*","WHERE userid = $userid ","fetch"); // get data users
 $pagesforall = get_something("pages","*","WHERE pageid = ".$Userinfo['college']."","fetch"); // get page id you
 $pagesforyou = get_something("pages","*","WHERE pageid = ".$Userinfo['college']."","fetch"); // get page id you
 // $pagespublic = get_something("pages","*","WHERE pageid = ".$userid."","fetch"); // get pagepublic id you
 $pagesinfo = get_something_also("pages","*","WHERE userid = $userid "); // get all pages
+$comment = get_something_also("comment","*"); // get all comments 
 
 switch($req) {
     case 'getposts': // POST PUBLIC
+
+       
 
             $collegeuserid = $Userinfo['college'];
             $country = $Userinfo['country'];
@@ -58,21 +64,29 @@ switch($req) {
 
                 <!-- START SHOW POST  -->
                 <?php foreach ($posts as $post) { ?>
-                    <div class="postshow card border-0">
+                    <div class="postshow card border-0  <?php echo $Userinfo['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?>">
                         <div class="avatar">
+                        <?php foreach($Users as $user):  ?>
+                                <?php if($user['active'] == 1 && $post['userid'] == $user['userid']): ?>
+                                    <span class="active2"></span>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                             <?php echo empty($post['avatar']) ? '<img class="img-fiuld rounded-circle" src="./layout/images/icons/011.png" alt="">' : '<img class="img-fiuld rounded-circle" src="./u/uploads/avatar/'.$post['avatar'].'" alt="">' ?>
                             <h2 class="py-1"><?php echo $post['username'] ?></h2>
                             <span class="timespan"><?php echo $post['datetime'] ?></span>
                             <!-- <input class="postid" type="hidden" value=""> -->
                             <i class="fas fa-ellipsis-h"></i>
                         </div>
+                         <!-- Set modal Edit post -->
+                       
+                            <!-- end  -->
                         <div class="info-user">
                             <p class="desc">
                             <?php echo $post['description'] ?>
                             <?php if ($post['college_group'] == $Userinfo['college']) {
                                 ?>
                                 <?php
-                                if ($post['college_group'] != 0) { ?>
+                                if ($post['college_group'] != 0 && !empty($post['college_group'])) { ?>
                                     <a href="../pages.php?pageid=<?php echo $pagesforall['pageid']  ; ?>">#<?php echo $pagesforall['pagename']; ?></a>
                                 <?php }
                                 ?>
@@ -82,13 +96,68 @@ switch($req) {
                         </div>
                         <hr>
                         <!-- LIKE COMMUNT SHARE SYSTEM -->
-                        <ul class="lcs">
-                            <li  class="like" value="<?php echo $post['postid'] ?>"><i class="fas fa-thumbs-up"></i> <?php // echo $liker; ?> Like</li>
-                            <li><i class="fas fa-comment"></i> Comment</li>
-                            <li><i class="fas fa-share-alt"></i> Share</li>
+                        <ul class="lcs ">
+                            <li  class="like" value="<?php echo $post['postid'] ?>"><i class="fas fa-thumbs-up <?php echo $Userinfo['modes'] == 'dark'  ? "icons-co" : " " ?>"></i> <?php // echo $liker; ?> </li>
+                            <li ><i class="fas fa-comment commentpost <?php echo $Userinfo['modes'] == 'dark'  ? "icons-co" : " " ?>"></i>  <?php echo Counter_All("comment WHERE i_post = ".$post['postid']." ","*"); ?></li>
+                            <li><i class="fas fa-share-alt <?php echo $Userinfo['modes'] == 'dark'  ? "icons-co" : " " ?>"></i> </li>
                         </ul>
+                        <?php foreach($comment as $com): ?>
+                        <?php if($com['i_post'] == $post['postid']): ?>
+                        <!-- comment style -->
+                        <div id="commentuser" class="commetnbook <?php echo $Userinfo['modes'] == 'dark'  ? "border-s" : " " ?>"> 
+                          <!-- User information  -->
+                         <div class="inforuser">
+                            <div class="avatar">
+                            <?php foreach($Users as $user):  ?>
+                                <?php if($user['active'] == 1 && $com['i_user'] == $user['userid']): ?>
+                                    <span class="active"></span>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                                <img class="rounded-cricle" src="./u/uploads/avatar/<?php echo $com['avatar'] ?>" alt="<?php echo $com['names'] ?>">
+                            </div>
+                            <div class="infor">
+                                <h2><?php echo $com['names']; ?></h2>
+                            </div>
+                         </div>
+                          <!-- end  --> 
+                          <div class="inputs  <?php echo $Userinfo['modes'] == 'dark'  ? "input-loop" : " " ?>">  
+                            <p  class="form-control ucomments <?php echo $Userinfo['modes'] == 'dark'  ? "input-loop" : " " ?> "><?php echo $com['mesg'] ?></p>
+                          </div>
+                        </div>
+                          <?php endif; ?>
+                        <?php endforeach; ?>
+                        <!-- comment style -->
+                        <div id="commentuser" class="commetnbook <?php echo $Userinfo['modes'] == 'dark'  ? "border-s" : " " ?>"> 
+                          <!-- User information  -->
+                         <div class="inforuser">
+                            <div class="avatar">
+                            <?php if($Userinfo['active'] == 1): ?>
+                            <span class="active"></span>
+                            <?php endif; ?>
+                                <img class="rounded-cricle" src="./u/uploads/avatar/<?php echo $Userinfo['avatar'] ?>" alt="<?php echo $Userinfo['username'] ?>">
+                            </div>
+                            <div class="infor">
+                                <h2><?php echo $Userinfo['username'] ?></h2>
+                            </div>
+                         </div>
+                          <!-- end  --> 
+                          <div class="inputs">  
+                          <form method="post" action="http://localhost/Ajualna/home.php">
+                            <input name="comment" class="form-control ucomment <?php echo $Userinfo['modes'] == 'dark'  ? "input-user " : " " ?>" type="text" placeholder="comment..<?php echo $Userinfo['username']; ?>">
+                            <input name="names" type="hidden" value="<?php echo $Userinfo['username'] ?>">
+                            <input name="avatar" type="hidden" value="<?php echo $Userinfo['avatar'] ?>">
+                            <input name="userid" type="hidden" value="<?php echo $Userinfo['userid'] ?>">
+                            <input name="postid" type="hidden" value="<?php echo $post['postid'] ?>">
+                            <input id="submit" type="submit" hidden >
+                            <button name="btnsendcomment" class="btn btn-light btn-sm btnsendcomment <?php echo $Userinfo['modes'] == 'dark'  ? "btn-dark-color " : " " ?>"><i class="fas fa-paper-plane"></i></button>
+                          </form>
+                          </div>
+                        </div>
+                        
                     </div>
                 <?php } ?>
+                <!-- end  -->
+                
                 <p class="copyright">  Ajualna &copy; <?php echo date("Y"); ?>  </p>
 
 
@@ -96,14 +165,18 @@ switch($req) {
 
             <!-- END SHOW POST  -->
         <?php
-
-
-
+        ?>
+        
+        
+        
+        <?php                 
         break; // END POST PUBLIC PAGE
         // Get all data about pages
         case 'getpostspage': // POST PUBLIC
 
+
             $page = $_POST['namepage'];
+
 
 
                 $stamt = "SELECT * FROM postpublic WHERE pagename = :pagename ORDER BY postid DESC ";
@@ -112,6 +185,7 @@ switch($req) {
                 $set_Stamt->execute();
                 $posts = array() ;
                 while ($query = $set_Stamt->fetch()) {
+
                     array_push($posts,$query);
                 }
 
@@ -140,6 +214,7 @@ switch($req) {
 
                 <!-- START SHOW POST  -->
                 <?php foreach ($posts as $post) { ?>
+
                     <div class="postshow card border-0">
                         <div class="avatar">
                             <?php echo empty($post['avatar']) ? '<img class="img-fiuld rounded-circle" src="./layout/images/icons/011.png" alt="">' : '<img class="img-fiuld rounded-circle" src="./u/uploads/avatar/'.$post['avatar'].'" alt="">' ?>
@@ -170,6 +245,7 @@ switch($req) {
 
 
 
+
                     <p class="copyright">  Ajualna &copy; <?php echo date("Y"); ?>  </p>
 
 
@@ -190,3 +266,12 @@ switch($req) {
 
 
 endif; // end =====================================
+?>
+<script>
+    var com = document.getElementById("btnsendcomment"),
+        sub = document.getElementById("submit");
+    com.onclick = function () {
+
+        sub.click();
+    }
+</script>

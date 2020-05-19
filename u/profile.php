@@ -39,12 +39,13 @@ switch($req) {
             <link rel="stylesheet" href="../layout/css/main.css">
             <title><?php title("Profile | ".$Userinformation['username']." ") ?></title>
         </head>
-        <body>
+<body class="<?php echo $Userinformation['modes'] == 'dark'  ? "top" : " " ?>">
+    
         <?php include "../../Ajualna/resources/templates/menu.php" ?>
         <div class="container profile-page">
             <div class="row mt-5">
                 <div class="col-lg-12">
-                    <div class="card border-0 mt-5 p-4">
+                    <div class="card border-0 mt-5 p-4 <?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark " : " " ?>">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="avatar">
@@ -55,9 +56,10 @@ switch($req) {
                                      <?php endif; ?>
                                 </div>
                             </div>
+
                             <div class="col-md-9">
                             <div class="info">
-                                <h1 class="username"><?php echo $Userinformation['username'] . ' ' . $Userinformation['lastname'] ?></h1>
+                                <h1 class="username "><?php echo $Userinformation['username'] . ' ' . $Userinformation['lastname'] ?></h1>
                                 <ul class="linke">
                                     <li><span> <i class="fas fa-venus-mars"></i> </span><?php echo $Userinformation['Gender']; ?></li>
                                     <li><span><i class="fas fa-university"></i></span><?php echo !empty($pagesforyou['pagename']) ?  $pagesforyou['pagename'] : " No College Here !" ?></li>
@@ -75,15 +77,15 @@ switch($req) {
         <div class="container profile-page-about">
             <div class="row">
                 <div class="col-lg-3">
-                   <ul class="link-set">
-                       <li><a href="profile.php?user=profiledit&id=<?php echo $_SESSION['id'] ?>">Settings</a></li>
-                       <li><a href="#"> <?php echo !empty($pagesforyou['pagename']) ?  $pagesforyou['pagename'] : " No College Here !" ?></a></li>
-                       <li><a href="#">Piblic Question</a></li>
-                       <li><a href="#">Help</a></li>
+                   <ul class="link-set  <?php echo $Userinformation['modes'] == 'dark'  ? "input-text " : " " ?>">
+                       <li><a  href="profile.php?user=profiledit&id=<?php echo $_SESSION['id'] ?>">Settings</a></li>
+                       <li><a  href="#"> <?php echo !empty($pagesforyou['pagename']) ?  $pagesforyou['pagename'] : " No College Here !" ?></a></li>
+                       <li><a  href="#">Piblic Question</a></li>
+                       <li><a  href="#">Help</a></li>
                    </ul>
                 </div>
                 <div class="col-lg-9">
-                   <div class="card mt-3 border-0 p-3">
+                   <div class="card mt-3 border-0 p-3   <?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark " : " " ?>">
                         <h2 class="mt-2 ml-2">About</h2>
                         <hr>
                     <div class="row">
@@ -97,7 +99,7 @@ switch($req) {
                    </div>
                    <!-- Information about website  -->
                     <ul class="infoweb">
-                        <li><p>Ajualna &copy; 2020</p></li>
+                        <li><p class=" <?php echo $Userinformation['modes'] == 'dark'  ? "text-light" : " " ?>" >Ajualna &copy; 2020</p></li>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Support</a></li>
                         <li><a href="#">About</a></li>
@@ -131,7 +133,8 @@ switch($req) {
             <link rel="stylesheet" href="../layout/css/main.css">
             <title><?php title("Profile Edit | ".$Userinformation['username']." ") ?></title>
         </head>
-        <body>
+<body class="<?php echo $Userinformation['modes'] == 'dark'  ? "top" : " " ?>">
+    
         <?php include "../../Ajualna/resources/templates/menu.php" ?>
     <div class="container settings  mt-5">
             <div class="row">
@@ -142,32 +145,32 @@ switch($req) {
                      <!--  START Messages for update info -->
                      <div id="html"></div>
                     <!-- END Messages for update info -->
-                    <div class="card p-3 set-box">
+                    <div class="card p-3 set-box  <?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark  " : " " ?>">
 
                     <div class="row py-5">
                         <div class="col-md-6 mb-4">
                         <!-- INFORMATION HIDDEN -->
-                        <input id="userID" class="form-control" type="hidden" value="<?php echo $_SESSION['id'] ?>">
-                        <input id="mycollege" class="form-control" type="hidden" value="<?php echo $_SESSION['college'] ?>">
+                        <input id="userID"  type="hidden" value="<?php echo $_SESSION['id'] ?>">
+                        <input id="mycollege" type="hidden" value="<?php echo $_SESSION['college'] ?>">
 
                             <label for="user">Username</label>
-                            <input id="user" class="form-control" type="text" value="<?php echo $Userinformation['username'] ?>">
+                            <input id="user" class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> " type="text" value="<?php echo $Userinformation['username'] ?>">
                         </div>
                         <div class="col-md-6">
                             <label for="user">lastname</label>
-                            <input id="last" class="form-control" type="text" value="<?php echo $Userinformation['lastname'] ?>">
+                            <input id="last" class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> " type="text" value="<?php echo $Userinformation['lastname'] ?>">
                         </div>
                         <div class="col-md-6 mb-4">
                             <label for="user">email</label>
-                            <input id="email" class="form-control" type="email" value="<?php echo $Userinformation['email'] ?>">
+                            <input id="email" class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> " type="email" value="<?php echo $Userinformation['email'] ?>">
                         </div>
                         <div class="col-md-6">
                             <label for="user">Ntional Number</label>
-                            <input id="nationalnum" class="form-control" type="text" value="<?php echo $Userinformation['nationalNum'] ?>">
+                            <input id="nationalnum" class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> " type="text" value="<?php echo $Userinformation['nationalNum'] ?>">
                         </div>
                         <div class="col-md-6 mb-4">
                             <label for="user">College</label>
-                            <select class="form-control" id="collegeid"><?php
+                            <select class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> " id="collegeid"><?php
                                 if ($Userinformation['college'] == 0): // When User the college is  ecoal zero
                                     echo '<option value="0">Chosse Your College</option>';
                                     foreach($pagesinfo as $page){ ?>
@@ -184,7 +187,7 @@ switch($req) {
                         </div>
                         <div class="col-md-6">
                             <label for="user">Your</label>
-                            <select class="form-control" id="Gender">
+                            <select class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> " id="Gender">
                                     <option <?php  echo $_SESSION['sax'] == "male" ? "selected"  : "" ; ?>  value="male">Male</option>
                                     <option <?php  echo $_SESSION['sax'] == "famale" ? "selected"  : "" ; ?>   value="famale">Famale</option>
                             </select>
@@ -192,20 +195,20 @@ switch($req) {
                         <div class="col-md-6">
                             <label for="user">New password</label>
                             <input id="old-pass"  type="hidden" value="<?php echo $Userinformation['password']; ?>">
-                            <input id="new-pass" class="form-control" type="password">
+                            <input id="new-pass" class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> " type="password">
                         </div>
                         <div class="col-md-6">
                             <label for="user">Number Phone</label>
                             <?php if(!empty($Userinformation['numberphone'])): ?>
-                                <input class="form-control" type="text" id="numberphone" value="<?php echo $Userinformation['numberphone']; ?>">
+                                <input class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> " type="text" id="numberphone" value="<?php echo $Userinformation['numberphone']; ?>">
                             <?php else: ?>
-                                <input class="form-control" type="text" id="numberphone" placeholder="Enter Phone">
+                                <input class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> " type="text" id="numberphone" placeholder="Enter Phone">
                             <?php endif; ?>
 
                         </div>
                         <div class="col-md-6">
                             <label for="user">Languages</label>
-                            <select class="form-control" id="langs">
+                            <select class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> " id="langs">
                                     <option <?php  echo $Userinformation['languages'] == "ar" ? "selected"  : "" ; ?>  value="ar">Arabic</option>
                                     <option <?php  echo $Userinformation['languages'] == "en" ? "selected"  : "" ; ?>   value="en">English</option>
                             </select>
@@ -213,7 +216,7 @@ switch($req) {
                         <div class="col-md-6">
                             <label for="user">Country</label>
 
-                            <select id="country" name="country" class="form-control">
+                            <select id="country" name="country" class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> ">
                              <?php include '../data/fetch_country.php' ?>
                             </select>
                         </div>
@@ -248,7 +251,8 @@ switch($req) {
             <link rel="stylesheet" href="../layout/css/main.css">
             <title><?php title("Profile Picture | ".$Userinformation['username']." ") ?></title>
         </head>
-        <body>
+<body class="<?php echo $Userinformation['modes'] == 'dark'  ? "top" : " " ?>">
+    
         <?php include "../../Ajualna/resources/templates/menu.php" ?>
     <?php
     if (isset($_GET['user']) && $_GET['user'] == 'profileavatar' && $_GET['id'] == $userid ) { // start PICTURE profile
@@ -290,7 +294,7 @@ switch($req) {
                      <!--  START Messages for update info -->
                      <div id="html"></div>
                     <!-- END Messages for update info -->
-                    <div class="card p-3  avatar-box">
+                    <div class="card p-3  avatar-box <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?>">
                         <h2 class="display-4">Change Your Avatar About Your Profile..</h2>
                         <div class="avatar">
                             <?php if(!empty($Userinformation['avatar'])): ?>
@@ -331,7 +335,8 @@ switch($req) {
             <link rel="stylesheet" href="../layout/css/main.css">
             <title><?php title("Delete Acount | ".$Userinformation['username']." ") ?></title>
         </head>
-        <body>
+<body class="<?php echo $Userinformation['modes'] == 'dark'  ? "top" : " " ?>">
+    
         <?php include "../../Ajualna/resources/templates/menu.php" ?>
     <div class="container settings  mt-5">
                 <div class="row">
@@ -342,7 +347,7 @@ switch($req) {
                         <!--  START Messages for update info -->
                         <div id="html"></div>
                         <!-- END Messages for update info -->
-                        <div class="card p-3  avatar-box">
+                        <div class="card p-3  avatar-box <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?>">
                             <h2 class="display-4">
                             This page is about deleting your account completely.
                             </h2>
@@ -374,12 +379,13 @@ switch($req) {
             <link rel="stylesheet" href="../layout/css/main.css">
             <title><?php title("Community Supports | ".$Userinformation['username']." ") ?></title>
         </head>
-        <body>
+<body class="<?php echo $Userinformation['modes'] == 'dark'  ? "top" : " " ?>">
+    
         <?php include "../../Ajualna/resources/templates/menu.php" ?>
-       <div class="container mt-5 supportbox">
+       <div class="container mt-5 supportbox ">
            <div class="row mt-5">
                <div class="col-lg-12">
-                   <div class="card border-0 mesg mt-5 p-3">
+                   <div class="card border-0 mesg mt-5 p-3 <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark text-light ' :' ' ?> ">
                        <h1>Welcome, <?php echo $Userinformation['username']  ?>!</h1>
                        <p>The Support Inbox is your place to:</p>
                        <ul>
@@ -394,7 +400,7 @@ switch($req) {
                <div class="col-lg-12 ">
                   <div class="row">
                       <div class="col-md-6">
-                          <div class="card mesg-2 mt-4 p-3">
+                          <div class="card mesg-2 mt-4 p-3 <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark text-light ' :' ' ?>">
                               <div class="group">
                                   <h2><i class="fas fa-box"></i> We Call You After Revision Your message </h2>
                                   <hr>
@@ -402,7 +408,7 @@ switch($req) {
                                   <input id="username" type="hidden" value="<?php echo $Userinformation['username'] ?>">
                                   <input id="email" type="hidden" value="<?php echo $Userinformation['email'] ?>">
                                   <input id="userid" type="hidden" value="<?php echo $Userinformation['userid'] ?>">
-                                  <textarea id="message" class="form-control"  id="messagebox" cols="30" rows="10"></textarea>
+                                  <textarea id="message" class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'input-text ' :' ' ?> "  id="messagebox" cols="30" rows="10"></textarea>
                                   <audio id="sbm" src="../resources/media/smb.mp3" type="audio/mp3"></audio>
                                   <button id="send" class="btn btn-primary mt-2" >Send message</button>
                               </div>
@@ -434,7 +440,7 @@ switch($req) {
                            endif; ?>
                             <?php foreach($supportboxdata as $report): ?>
                             <!-- Your Message Report  -->
-                            <div class="messagereportshow card p-3 mt-3">
+                            <div class="messagereportshow card p-3 mt-3 <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?>">
                               <div class="row">
                                   <div class="col-md-12">
                                       <div class="mes">
@@ -463,6 +469,54 @@ switch($req) {
        </div>
     <?php break;
     // =====================[END SUPPORT BOX PAGE PROFILE ] ====================== //
+     // =====================[START PROFILE  DELETE] ====================== //
+     case 'Modeforyou':
+
+        ?>
+        <!-- First Information  -->
+        <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link rel="shortcut icon" href="../layout/images/logo.png" type="image/x-icon">
+                <link rel="stylesheet" href="../layout/css/bootstrap.min.css">
+                <link rel="stylesheet" href="../layout/css/main.css">
+                <title><?php title("Delete Acount | ".$Userinformation['username']." ") ?></title>
+            </head>
+            <body class="<?php echo $Userinformation['modes'] == 'dark'  ? "top" : " " ?>">
+
+            <?php include "../../Ajualna/resources/templates/menu.php" ?>
+        <div class="container settings  mt-5">
+                    <div class="row">
+                        <div class="col-lg-3">
+                        <?php include '../resources/templates/menu-set.php'; // Menu Settings ?>
+                        </div>
+                        <div class="col-lg-9 mt-5">
+                            <!--  START Messages for update info -->
+                            <div id="html"></div>
+                            <!-- END Messages for update info -->
+                            <div class="card p-3  darkmodeset <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?>">
+                                <h2 class="moondark"><i class="fas fa-moon"></i></h2>
+                                <p class="text-center">You Can Change Style Website</p>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="darkmode" value="dark">
+                                    <label class="form-check-label" for="darkmode">Dark mode</label>
+                                    <input type="checkbox" class="form-check-input" id="lightmode" value="light">
+                                    <label class="form-check-label" for="lightmode">Light Mode</label>
+                                    <input id="id" type="hidden" value="<?php echo $Userinformation['userid'] ?>">
+                                </div>
+                                <div id="modes">
+
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        <?php
+        break;
+        // =====================[END PROFILE  DELETE] ====================== //
 }
 
 else: //////////////////////////////////////////////////

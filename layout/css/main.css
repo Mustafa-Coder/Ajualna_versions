@@ -11,12 +11,12 @@ body
 
 /* GLOBAL DESIGN */
 
-.rtl 
+.rtl
 {direction: rtl}
 
 .ltr {direction: ltr;}
 
-.icons 
+.icons
 {
     position: absolute;
     left: 16px;
@@ -644,7 +644,7 @@ body
 }
 
 /* .modal-menu ul li a > .fa-cog,.fa-power-off,.fa-user-alt,.fa-tachometer-alt,.fa-plus */
-.modal-menu ul li a  > .icons 
+.modal-menu ul li a  > .icons
 {
     position: absolute;
     left: 16px;
@@ -756,6 +756,7 @@ body
 
 /* SETTINGS */
 
+
 .settings  .set-box {
     box-shadow: 0px 0px 18px rgba(63, 81, 181, 0.16);
 
@@ -853,8 +854,34 @@ body
 .settings .menu-settings .pages .nav-item .nav-link
 {
     color: rgb(51, 51, 51);
+    font-size: 14px;
 }
 
+.settings .darkmodeset 
+    {height: 80vh;}
+
+.settings .darkmodeset h2 
+{
+    font-size: 5em;
+    margin: 5% auto;
+    padding: 21px;
+    color: rgb(238, 238, 238);
+}
+
+.settings .darkmodeset .form-check
+{
+    margin: 4% auto;
+}
+.settings .darkmodeset .form-check label
+{
+    margin-right: 25px;
+}
+
+.settings .darkmodeset .alert 
+{
+    border-radius: 50px;
+    width: 218px !important;
+}
 /* PROFILE DESIGN GLOBAL  */
 
 .profile-page .card .avatar img
@@ -941,6 +968,21 @@ body
 {
     display: -webkit-box;
     overflow: hidden;
+}
+
+.homeglobal .user-info .avatar 
+{
+    position: relative;
+}
+.homeglobal .user-info .avatar span 
+{
+    position: absolute;
+    top: 49px;
+    left: 56px;
+    background: rgb(148, 253, 148);
+    border-radius: 50px;
+    width: 10px;
+    height: 10px;
 }
 
 .homeglobal .card .avatar .name
@@ -1036,6 +1078,38 @@ body
     margin-bottom: 10px;
 }
 
+.homeglobal .postshow .avatar 
+{
+    position: relative;
+}
+
+.homeglobal .postshow .avatar .active
+{
+    position: absolute;
+    top: 37px;
+    left: 41px;
+    background: rgb(148, 253, 148);
+    border-radius: 50px;
+    width: 10px;
+    border: 2px solid rgb(255, 255, 255);
+    height: 10px;
+
+}
+
+
+.homeglobal .postshow .avatar .active2
+{
+    position: absolute;
+    top: 39px;
+    left: 43px;
+    background: rgb(148, 253, 148);
+    border-radius: 50px;
+    width: 10px;
+    border: 2px solid rgb(255, 255, 255);
+    height: 10px;
+
+}
+
 .homeglobal .postshow .avatar img
 {
 
@@ -1048,7 +1122,9 @@ body
 .homeglobal .postshow .avatar
 {
     display: flex;
+    position: relative;
 }
+
 
 .homeglobal .postshow .avatar h2
 {
@@ -1089,12 +1165,12 @@ body
 .homeglobal .postshow  .lcs
 {
     display: flex;
-    justify-content: center;
+    width: 100%;
 }
 
 .homeglobal .postshow .lcs li
 {
-    padding: 0 40px;
+    padding: 0 67px;
     list-style: none;
     cursor: pointer;
     color: rgb(177, 177, 179);
@@ -1119,6 +1195,93 @@ body
     width: 250px;
     display: none;
     background: rgba(255, 255, 255, 0.66);
+}
+
+/* Modal edit post  */
+
+.homeglobal .postshow .editpost
+{
+    position: absolute;
+    right: 25px;
+}
+
+.homeglobal .postshow .editpost ul li
+{
+
+    cursor: pointer;
+}
+
+/* COMMENTS POST  commetnbook inforuser avatar infor , inputs  */
+
+.homeglobal .postshow .commetnbook
+{
+    border-top: 1px solid rgb(238, 238, 238);
+    display:flex;
+
+}
+
+.homeglobal .postshow .commetnbook .inforuser
+{
+    display: flex;
+    margin-right: 14px;
+}
+.homeglobal .postshow .commetnbook .inforuser .avatar 
+{
+    position: relative;
+}
+
+.homeglobal .postshow .commetnbook .inforuser .avatar span 
+{
+    position: absolute;
+    top: 37px;
+    left: 41px;
+    background: rgb(148, 253, 148);
+    border-radius: 50px;
+    width: 10px;
+    border: 2px solid rgb(255, 255, 255);
+    height: 10px;
+}
+
+.homeglobal .postshow .commetnbook .inforuser .avatar .rounded-cricle
+{
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+}
+
+.homeglobal .postshow .commetnbook .inforuser .infor h2
+{
+
+    font-size: 14px;
+    margin-top: 22px;
+}
+
+.homeglobal .postshow .commetnbook .inputs
+{
+    margin-top: 11px;
+    display: flex;
+    position: relative;
+    width: 72%;
+}
+
+.homeglobal  .postshow .commetnbook .inputs .form-control
+{
+    border-radius: 50px;
+    margin-right: 10px;
+    width: 361px;
+}
+
+.homeglobal  .postshow .commetnbook .inputs .ucomments
+{
+    background: rgba(162, 165, 183, 0.24);
+    border: 0;
+}
+
+.homeglobal .postshow .commetnbook .inputs .btn-light
+{
+    position: absolute;
+    right: -10px;
+    top: 3px;
 }
 
 /* BOX CHECK DATA */
@@ -1173,6 +1336,7 @@ body
 {
     margin-left: -10px;
 }
+
 
 .homeglobal .user-info-college .info
 {
@@ -1354,7 +1518,7 @@ body
     bottom: 13px;
 }
 
-.supportbox .mesg h1 
+.supportbox .mesg h1
 {
     font-size: 18px;
     font-weight: 600;
@@ -1362,31 +1526,134 @@ body
 
 .supportbox .mesg p
 {
-    font-size: 14px; 
+    font-size: 14px;
 }
 
-.supportbox .mesg ul li 
+.supportbox .mesg ul li
 {
     color: rgb(96, 115, 144);
     font-size: 13px;
 }
 
-.supportbox .mesg-2 .group h2 
+.supportbox .mesg-2 .group h2
 {
     font-size: 14px;
     color: rgb(57, 71, 85);
 }
 
-.supportbox .htitle 
+.supportbox .htitle
 {
     margin-top: 2em;
     font-size: 15px;
-    color: rgb(107, 116, 124);  
+    color: rgb(107, 116, 124);
 }
 
-.supportbox .link-page li 
+.supportbox .link-page li
 {
     font-size: 13px;
     margin-top: 15px;
     color: rgb(96, 115, 144);
+}
+
+
+/*  Show message report  messagereportshow infomessage control */
+
+
+
+.supportbox .messagereportshow .mes
+{
+
+  display: flex;
+  position: relative;
+}
+
+.supportbox .messagereportshow
+{  transition:.6s ease; filter: }
+/* .supportbox .messagereportshow:hover
+{
+  transition:.6s ease;
+  filter: blur(0px);
+} */
+
+.supportbox .messagereportshow .mes .style img,
+.supportbox .messagereportshow .mes .style .fa-flag
+{
+  width:59px  ;
+  margin: 6px;
+  font-size: 59px;
+  color: rgba(57, 71, 85, 0.61);
+}
+
+.supportbox .messagereportshow .mes .infomessage
+{
+      margin-top: 28px;
+      margin-left: 14px;
+      font-size: 12px;
+      width: 337px;
+}
+.supportbox .messagereportshow .mes .control {
+  position: absolute;
+  right: 11px;
+  top: 22px;
+}
+
+/* ===================================[DARKMODE ------------------------------------------- */
+
+.top
+{
+    background-color: rgb(20, 21, 24) !important;
+} 
+
+
+.bg-dark
+{
+    background: rgb(31, 32, 37) !important;
+    box-shadow:  0 0 20px black;
+}
+
+.bg-bor-col-dark 
+{
+    background: rgb(31, 32, 37) !important;
+    border-radius: 14px !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+.input-loop 
+{
+    border: 0;
+    color: rgb(128, 128, 128) !important;
+}
+
+.input-user
+{
+    background: rgb(50, 52, 55) !important;
+    border: 0;
+    color: rgb(128, 128, 128) !important;
+}
+
+.btn-dark-color 
+{
+    background: rgb(33, 150, 243) !important;
+    border: 0;
+}
+
+.input-text
+{
+    background: rgb(31, 32, 37) !important;
+    border-radius: 14px;
+}
+
+.icons-co 
+{
+    color: rgb(75, 78, 93) !important;
+}
+
+.border-s 
+{
+    border-top: 1px solid rgba(238, 238, 238, 0.14) !important;
+}
+
+.text-color-grow
+{
+    color: white !important;
 }

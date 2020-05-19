@@ -11,3 +11,4 @@ $_SESSION['num'] = $rowQuery['numberphone'];
 $_SESSION['avatar'] = $rowQuery['avatar'];
 $_SESSION['lang'] = $rowQuery['languages'];
 $_SESSION['country'] = $rowQuery['country'];
+$_SESSION['online'] = $rowQuery['active'];

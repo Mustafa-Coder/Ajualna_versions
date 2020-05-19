@@ -1,5 +1,5 @@
 <section id="nav">
-        <nav class="menu-home">
+        <nav class="menu-home <?php echo $Userinformation['modes'] == 'dark'  ? "bg-dark" : " " ?> ">
         <!-- if($Userinformation['Gender'] == 'male'):echo "../layout/images/icons/011.png"; else: echo "../layout/images/icons/012.png";endif;?> -->
             <div id="brandhome"  class="brand ml-3"><?php echo lang("name_site"); ?></div>
             <ul class="menu ">
@@ -13,7 +13,7 @@
  <!-- Modal Users -->
  <div id="moadlMenu" class="modal-menu card ">
     <ul>
-        <li id="profilepage"><a href="../../Ajualna/u/profile.php?user=profilepage&id=<?php echo $_SESSION['id']; ?>"><i class="fas fa-user-alt icons"></i><?php echo lang("pf"); ?></a> </li>        <?php if($_SESSION['admin'] == 1 ): echo '<li id="dash"><i class="fas fa-tachometer-alt icons"></i>'. lang("dash").'</li>'; endif; ?>
+        <li id="profilepage"><a href="../../Ajualna/u/profile.php?user=profilepage&id=<?php echo $_SESSION['id']; ?>"><i class="fas fa-user-alt icons"></i><?php echo lang("pf"); ?></a> </li>        <?php if($Userinformation['admin'] == 1 ): echo '<li id="dash"><i class="fas fa-tachometer-alt icons"></i>'. lang("dash").'</li>'; endif; ?>
         <li ><a href="../../Ajualna/u/profile.php?user=profiledit&id=<?php echo $_SESSION['id']; ?>"><i class="fas fa-cog icons"></i> <?php echo lang("set"); ?></a> </li>
         <?php if ($Userinformation['work'] == 'teacher'): ?>
           <li id="createpages" ><a><i  class="fas fa-plus icons"></i> <?php echo lang("add"); ?></a> </li>

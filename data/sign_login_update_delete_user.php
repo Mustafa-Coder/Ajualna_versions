@@ -22,7 +22,12 @@ switch($req) {
             $rowQuery = $usersta->fetch();
             $count = $usersta->rowcount();
 
-
+            $staus_online = 1;
+            $id = $rowQuery['userid'];
+            $notac = "UPDATE signup SET active = 1 WHERE userid =  ? ";
+            $set = $con->prepare($notac);
+            $set->bindparam(":active",$staus_online);
+            $set->execute(array($rowQuery['userid']));
 
             if ($count > 0) {
                 echo 'welcome';
@@ -136,6 +141,14 @@ switch($req) {
                     $updateadmin = "UPDATE signup SET admin = 1 WHERE userid  = 1 ";
                     $admins = $con->prepare($updateadmin);
                     $admins->execute();
+
+                    $staus_online = 1;
+                    $id = $rowQuery['userid'];
+                    $notac = "UPDATE signup SET active = :active WHERE userid = :id ";
+                    $set = $con->prepare($notac);
+                    $set->bindparam(":active",$staus_online);
+                    $set->bindparam(":id",$id);
+                    $set->execute();
                     
 
                 else:
@@ -170,6 +183,18 @@ switch($req) {
                         $set_del = $con->prepare($deleted_user);
                         $set_del->execute(array($userid));
                         $logout = $set_del->rowcount();
+
+                         // support box USER
+                         $deleted_user = "DELETE FROM supportbox WHERE userid = ? ";
+                         $set_del = $con->prepare($deleted_user);
+                         $set_del->execute(array($userid));
+                         $logout = $set_del->rowcount();
+
+                         // Comments USER
+                         $deleted_user = "DELETE FROM comment  WHERE i_user = ? ";
+                         $set_del = $con->prepare($deleted_user);
+                         $set_del->execute(array($userid));
+                         $logout = $set_del->rowcount();
     
                         echo 'Delete';
     
