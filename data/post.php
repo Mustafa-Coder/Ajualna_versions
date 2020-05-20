@@ -42,9 +42,10 @@ switch($req) {
             $country = $Userinfo['country'];
             $college = $_POST['college'];
             $avatar = $_POST['photo'];
+            $private = $_POST['private'];
             // echo $id . $name . $descp . $college . $avatar;
             
-                $post_statment = "INSERT INTO posts(username,college_group,avatar,`description`,country,userid)VALUES(:us,:colg,:avat,:descp,:coun,:id)";
+                $post_statment = "INSERT INTO posts(username,college_group,avatar,`description`,country,userid,`private`)VALUES(:us,:colg,:avat,:descp,:coun,:id,:privates)";
                 $poststa = $con->prepare($post_statment);
                 $poststa->bindparam(":us",$name);
                 $poststa->bindparam(":colg",$college);
@@ -52,6 +53,7 @@ switch($req) {
                 $poststa->bindparam(":descp",$descp);
                 $poststa->bindparam(":coun",$country);
                 $poststa->bindparam(":id",$id);
+                $poststa->bindparam(":privates",$private);
                 // $poststa->bindparam(":userid",$id);
                 $poststa->execute();
                 $count = $poststa->rowcount();

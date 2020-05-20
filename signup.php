@@ -36,6 +36,7 @@ include 'init.php'; // include all files in resources
                         <div class="col-md-12">
                             <label >Gender:</label>
                             <select class="form-control" id="gender">
+                                <option selected>Gender</option>
                                 <option value="male">Male</option>
                                 <option value="famale">Famale</option>
                             </select>
@@ -45,7 +46,7 @@ include 'init.php'; // include all files in resources
                             <input id="pass"  type="password" class="form-control form-control-lg" placeholder='password'>
                         </div> 
                         <div class="col-md-4">
-                        <button id="btnLogin" class="btn btn-primary">Sign up</button>
+                        <button id="btnLogin" class="btn btn-primary" >Sign up</button>
                         <!--  -->
                         </div>
                         
@@ -79,11 +80,11 @@ include 'init.php'; // include all files in resources
     $(function (){
 
     
-        $('#btnLogin').on('mousedown',function (){
-            if ($("#fullname").val().length < 4 || $("#email").val() == '') {
+        $('#pass').on('mousemove',function (){
+            if ($("#fullname").val().length < 4) {
                 $("#fullname").css({"borderBottom":'2px solid red'});
-                $("#email").css({"borderBottom":'2px solid red'});
-            }else {
+                $("#text").html("<div class='alert alert-danger animated pulse'> Yor fullname smaller than 4 char</div>");
+            } else {
                 
                 $("#fullname").css({"borderBottom":'2px solid #3fa9f5'});
                 $("#email").css({"borderBottom":'2px solid #3fa9f5'});
@@ -92,13 +93,49 @@ include 'init.php'; // include all files in resources
             if ($("#pass").val().length < 4) {
 
                 $("#pass").css({"borderBottom":'2px solid red'});
-                $("#text").html("<div class='alert alert-danger animated pulse'>Welcome...</div>");
+                $("#text").html("<div class='alert alert-danger animated pulse'>Please Yor Password smaller than 4 char</div>");
 
-            }else {
+              }
+
+              if ($("#email").val().length < 4) {
+
+                $("#email").css({"borderBottom":'2px solid red'});
+                $("#text").html("<div class='alert alert-danger animated pulse'> Yor email smaller than 4 char</div>");
+
+              } 
+
+              if ($("#last").val().length < 4) {
+
+                $("#last").css({"borderBottom":'2px solid red'});
+                $("#text").html("<div class='alert alert-danger animated pulse'> Yor lastname smaller than 4 char</div>");
+
+              } 
+
+              if ($("#gender").val()  == ' ') {
+
+                $("#gender").css({"border":'2px solid red'});
+                $("#text").html("<div class='alert alert-danger animated pulse'> Check Gender </div>");
+
+              } 
+
+              if ($("#gender").val().length  == 0 || $("#last").val().length == 0 || $("#email").val().length == 0 || $("#pass").val().length == 0 || $("#fullname").val().length == 0 ) {
+
+                $("#btnLogin").attr("disabled",true);
+                $("#text").html("<div class='alert alert-danger animated pulse'> Please Check From Your Information !!</div>");
+
+
+              } else {
                 $("#fullname").css({"borderBottom":'2px solid #3fa9f5'});
+                $("#last").css({"borderBottom":'2px solid #3fa9f5'});
+                $("#email").css({"borderBottom":'2px solid #3fa9f5'});
+                $("#pass").css({"borderBottom":'2px solid #3fa9f5'});
                 $("#text").text("");
+                $("#btnLogin").attr("disabled",false);
+               
 
-                let user = $("#fullname").val(),
+                $("#btnLogin").on("click",function(){
+
+                    let user = $("#fullname").val(),
                       last = $("#last").val(),
                       email = $("#email").val(),
                       gender = $("#gender").val(),
@@ -117,13 +154,13 @@ include 'init.php'; // include all files in resources
                         console.log(stats);
                         if (data == 'Done') {
                             $("#btnLogin").hide();
-                            $("#text").html("<div class='alert alert-success animated flash'>Please Check from your information !!</div>");
+                            $("#text").html("<div class='text-dark'>Done...</div>");
                             setTimeout(() => {window.location.href="home.php"},2000); 
                         }
-                        if (data == 'wrong') {
+                        if (data) {
 
                             $("#btnLogin").show(100);
-                            $("#text").html("<div class='alert alert-danger animated pulse'>Please Check from your information !!</div>");
+                            $("#text").html(data);
 
                         }
                            
@@ -131,6 +168,10 @@ include 'init.php'; // include all files in resources
                     }
 
                 });
+
+                });
+
+               
 
             }
         });

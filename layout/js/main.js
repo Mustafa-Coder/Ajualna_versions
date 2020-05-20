@@ -219,7 +219,8 @@ let male = $("#male").val(),
               desc = $("#description").val(),
               photo = $("#photo").val(),
               country = $("#country").val(),
-              college = $("#college").val();
+              college = $("#college").val(),
+              private = $("#private").val();
 
 
             $.ajax({
@@ -233,7 +234,8 @@ let male = $("#male").val(),
                     "desc":desc,
                     "college":college,
                     "country":country,
-                    "photo":photo
+                    "photo":photo,
+                    "private":private
 
                      },
                 beforeSend:function(){

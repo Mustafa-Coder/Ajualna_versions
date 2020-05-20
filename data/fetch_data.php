@@ -34,7 +34,7 @@ switch($req) {
                 //     echagesrong';
                 // }
 
-                $stamt = "SELECT * FROM posts WHERE college_group = :usercollegeid AND country = :coun ORDER BY postid DESC ";
+                $stamt = "SELECT * FROM posts WHERE college_group = :usercollegeid AND country = :coun  ORDER BY postid DESC ";
                 $set_Stamt = $con->prepare($stamt);
                 $set_Stamt->bindparam(":usercollegeid",$collegeuserid);
                 $set_Stamt->bindparam(":coun",$country);
@@ -64,6 +64,7 @@ switch($req) {
 
                 <!-- START SHOW POST  -->
                 <?php foreach ($posts as $post) { ?>
+                    <?php if($post['private'] == 'public' && $post['private'] != 'me only' && !empty($post['private'])): ?>
                     <div class="postshow card border-0  <?php echo $Userinfo['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?>">
                         <div class="avatar">
                         <?php foreach($Users as $user):  ?>
@@ -98,7 +99,7 @@ switch($req) {
                         <!-- LIKE COMMUNT SHARE SYSTEM -->
                         <ul class="lcs ">
                             <li  class="like" value="<?php echo $post['postid'] ?>"><i class="fas fa-thumbs-up <?php echo $Userinfo['modes'] == 'dark'  ? "icons-co" : " " ?>"></i> <?php // echo $liker; ?> </li>
-                            <li ><i class="fas fa-comment commentpost <?php echo $Userinfo['modes'] == 'dark'  ? "icons-co" : " " ?>"></i>  <?php echo Counter_All("comment WHERE i_post = ".$post['postid']." ","*"); ?></li>
+                            <li id="commentspage"><i class="fas fa-comment commentpost commentspage <?php echo $Userinfo['modes'] == 'dark'  ? "icons-co" : " " ?>"></i>  <?php echo Counter_All("comment WHERE i_post = ".$post['postid']." ","*"); ?></li>
                             <li><i class="fas fa-share-alt <?php echo $Userinfo['modes'] == 'dark'  ? "icons-co" : " " ?>"></i> </li>
                         </ul>
                         <?php foreach($comment as $com): ?>
@@ -126,6 +127,7 @@ switch($req) {
                         </div>
                           <?php endif; ?>
                         <?php endforeach; ?>
+                        <?php if(!empty($Userinfo['avatar'])): ?>
                         <!-- comment style -->
                         <div id="commentuser" class="commetnbook <?php echo $Userinfo['modes'] == 'dark'  ? "border-s" : " " ?>"> 
                           <!-- User information  -->
@@ -134,7 +136,7 @@ switch($req) {
                             <?php if($Userinfo['active'] == 1): ?>
                             <span class="active"></span>
                             <?php endif; ?>
-                                <img class="rounded-cricle" src="./u/uploads/avatar/<?php echo $Userinfo['avatar'] ?>" alt="<?php echo $Userinfo['username'] ?>">
+                                <img class="rounded-cricle" src="<?php echo !empty($Userinfo['avatar']) ? "./u/uploads/avatar/".$Userinfo['avatar']."" : "./layout/images/icons/011.png" ?>"  alt="<?php echo $Userinfo['username'] ?>">
                             </div>
                             <div class="infor">
                                 <h2><?php echo $Userinfo['username'] ?></h2>
@@ -153,8 +155,11 @@ switch($req) {
                           </form>
                           </div>
                         </div>
+                          <?php endif; ?>
                         
                     </div>
+
+                          <?php endif; ?>
                 <?php } ?>
                 <!-- end  -->
                 
@@ -268,10 +273,5 @@ switch($req) {
 endif; // end =====================================
 ?>
 <script>
-    var com = document.getElementById("btnsendcomment"),
-        sub = document.getElementById("submit");
-    com.onclick = function () {
-
-        sub.click();
-    }
+    
 </script>

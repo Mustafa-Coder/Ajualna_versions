@@ -1275,6 +1275,7 @@ body
 {
     background: rgba(162, 165, 183, 0.24);
     border: 0;
+    height: auto;
 }
 
 .homeglobal .postshow .commetnbook .inputs .btn-light

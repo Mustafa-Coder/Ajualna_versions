@@ -153,7 +153,7 @@ function get_something_also($table,$colName,$dosomething = null)
     global $con;
     global $countsomething;
 
-    $select = "SELECT $colName FROM $table $dosomething";
+    $select = "SELECT $colName FROM $table $dosomething  ";
     $getapages = $con->prepare($select);
     $getapages->execute();
     $pages = $getapages->fetchAll();
@@ -204,69 +204,6 @@ function Links($link = null,$underscor = null)
 }
 
 
-// FUNCTION CREATE ::::::
-// [Documentaion]
-/*
-    $table => Table name for database
-    # PARAMETERS.......
-    $one => is defualt
-    $two => is defualt
-    $three => Equel null
-    $four => Equel null
-    $five => Equel null
-    $six => Equel null
-    # VALUES........
-    $vone => is defualt
-    $vtwo => is defualt
-    $vthree => Equel null
-    $vfour => Equel null
-    $vfive => Equel null
-    $vsix => Equel null
-    # DATA..........
-    $dataone => is defualt
-    $datatwo => is defualt
-    $datathree =>  null
-    $datafour =>  null
-    $datafive =>  null
-    $datasix =>  null
-*/
-
-// function Createall(
-//                   // TABLES AND COLUMNS NAMES
-//                    $table,$one,$two,$three  = null ,
-//                    $four  = null ,$five  = null ,$six = null,
-//                    // VALUES
-//                    $vone,$vtwo,$vthree = null,$vfour = null,$vfive = null,$vsix = null,
-//                    // DATAPOSTORGET
-//                    $dataone,$datatwo,$datathree = null , $datafour = null , $datafive = null,$datasix = null
-//                    )
-// {
-//         global $con;
-//         global $countinsert;
-
-//         $InsertStatment = "INSERT INTO $table($one,$two,$three,$four,$five,$six)VALUES($vone,$vtwo,$vthree,$vfour,$vfive,$vsix)";
-//         $statntment = $con->prepare($InsertStatment);
-//         // $statntment->execute(array(
-//         //     "$vone" => $dataone,
-//         //     "$vtwo" => $datatwo,
-//         //     "$vthree" => $datathree,
-//         //     "$vfour" =>$datafour,
-//         //     "$vfive" => $datafive,
-//         //     "$vsix" => $datasix
-//         // ));
-//         $statntment->bindparam("$vone,$vtwo,$vthree,$vfour,$vfive,$vsix",$dataone,$datatwo,$datathree,$datafour,$datafive,$datasix);
-//         // $statntment->bindparam("$vtwo",$datatwo);
-//         // $statntment->bindparam("$vthree",$datathree);
-//         // $statntment->bindparam("$vfour",$datafour);
-//         // $statntment->bindparam("$vfive",$datafive);
-//         // $statntment->bindparam("$vsix",$datasix);
-//         $statntment->execute();
-//         $countinsert = $statntment->rowcount();
-//         // $fetchQuery = $stat
-//         return $countinsert;
-// }
-
-
 // UPDATE DATA USERS
 
 
@@ -279,4 +216,20 @@ function updatedata($table,$columnname,$something_data,$condition = null)
             $SET_UP->bindparam(":something",$something_data);
             $SET_UP->execute();
 
+}
+
+
+// Check if column name is exists :
+    
+function CheckData($col,$table,$do,$something)
+{
+    global $con;
+    global $countcheck;
+
+    $sta = "SELECT $col FROM $table $do $col = :something ";
+    $setSta  = $con->prepare($sta);
+    $setSta->bindparam(":something",$something);
+    $setSta->execute();
+    $countcheck = $setSta->rowcount();    
+    return  $countcheck;
 }

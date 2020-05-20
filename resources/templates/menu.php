@@ -11,7 +11,7 @@
         </nav>
     </section>
  <!-- Modal Users -->
- <div id="moadlMenu" class="modal-menu card ">
+ <div id="moadlMenu" class="modal-menu card <?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?> ">
     <ul>
         <li id="profilepage"><a href="../../Ajualna/u/profile.php?user=profilepage&id=<?php echo $_SESSION['id']; ?>"><i class="fas fa-user-alt icons"></i><?php echo lang("pf"); ?></a> </li>        <?php if($Userinformation['admin'] == 1 ): echo '<li id="dash"><i class="fas fa-tachometer-alt icons"></i>'. lang("dash").'</li>'; endif; ?>
         <li ><a href="../../Ajualna/u/profile.php?user=profiledit&id=<?php echo $_SESSION['id']; ?>"><i class="fas fa-cog icons"></i> <?php echo lang("set"); ?></a> </li>
@@ -23,7 +23,7 @@
     </ul>
   </div>
 <!-- Notification -->
-<div id="modalNotif" class="modalNotif card">
+<div id="modalNotif" class="modalNotif card <?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?>">
 <?php
 
 // Functions data: ;

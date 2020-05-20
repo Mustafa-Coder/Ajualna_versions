@@ -1,5 +1,5 @@
 <?php
-session_cache_expire(1440); // This The Chace Time about your session and this 30 value is minute
+// session_cache_expire(1440); // This The Chace Time about your session and this 30 value is minute
 session_start();
 $PAGENAME = "Home | AJUALNA "  ;
 include 'init.php';
@@ -24,11 +24,13 @@ $avatardata = $Userinfo['avatar'];
 $countryyou = $Userinfo['country'];
 $langs = $Userinfo['languages'];
 $college = $Userinfo['college'];
+$avatar = $Userinfo['avatar'];
 // UPDATE ALL YOUR INFORMATION IN PAGES :::::
 updatedata("signup","country","".$countryyou."","WHERE userid = ".$userid.""); // update country in user
 updatedata("signup","languages","".$langs."","WHERE userid = ".$userid.""); // update lang in user
 updatedata("posts","college_group","".$college."","WHERE userid = ".$userid.""); // update college in posts
 updatedata("posts","country","".$countryyou."","WHERE userid = ".$userid.""); // update country in posts
+updatedata("comment","avatar","".$avatar."","WHERE i_user = ".$userid.""); // update avatar in comment
 
 
 // Sen comment to data 
@@ -109,7 +111,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                  <input id="college" type="hidden" value="<?php echo $Userinfo['college']; ?>">
                  <input id="country" type="hidden" value="<?php echo $Userinfo['country']; ?>">
                  <input id="photo" type="hidden" value="<?php echo $Userinfo['avatar']; ?>">
-                <button id="postbtn" class="btn btn-primary">Post</button>
+                 <div class="control d-flex" style="position:relative">
+                    <button id="postbtn" class="btn btn-primary">Post</button>
+                    <select class="form-control form-control-sm <?php echo $Userinfo['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?>" style="width:150px;position: absolute;right: 10px;top: 18px;" id="private">
+                        <option selected>Post Private</option>
+                        <option value="public"> Public</option>
+                        <option value="me only">Me only</option>
+                    </select>
+                 </div>
+               
                 <audio id="postmusic" src="./resources/media/post.mp3" type="audio/mp3"></audio>
             </div>
         <?php else: ?>

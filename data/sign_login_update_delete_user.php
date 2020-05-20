@@ -11,8 +11,8 @@ $req = $_POST['req'];
 switch($req) {
     case 'login': // LOGIN PAGE
 
-            $username = filter_var($_POST['user']);
-            $password = filter_var($_POST['pass']);
+            $username = filter_var($_POST['user'],FILTER_SANITIZE_STRING);
+            $password = filter_var($_POST['pass'],FILTER_SANITIZE_STRING);
             $hasdpass = md5($password);
 
             // STATMENT
@@ -106,12 +106,22 @@ switch($req) {
         // SIGNUP USER SYSTEM 
         case "signup" :
 
-                $username = filter_var($_POST['full']);
-                $last = filter_var($_POST['last']);
-                $pass = filter_var($_POST['pass']);
+                $username = filter_var($_POST['full'],FILTER_SANITIZE_STRING);
+                $last = filter_var($_POST['last'],FILTER_SANITIZE_STRING);
+                $pass = filter_var($_POST['pass'],FILTER_SANITIZE_STRING);
                 $hash = md5($pass);
-                $email =  filter_var($_POST['email']);
-                $sax = filter_var($_POST['gender']);
+                $email =  filter_var($_POST['email'],FILTER_SANITIZE_STRING);
+                $sax = filter_var($_POST['gender'],FILTER_SANITIZE_STRING);
+
+
+               
+            
+                
+                CheckData("username","signup","WHERE",$username);
+
+                if($countcheck == 0):
+
+                
 
                 $insertdata = 
                 "INSERT INTO 
@@ -155,6 +165,9 @@ switch($req) {
                     echo "wrong";
                 endif;
 
+            else:
+                echo "Username is exist !!";
+            endif;
                 
         break;
         case 'DeleteUser':

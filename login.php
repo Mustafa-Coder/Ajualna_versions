@@ -61,22 +61,36 @@ include 'init.php'; // include all files in resources
     $(function (){
 
     
-        $('#btnLogin').on('click',function (){
+        $('#pass').on('mousemove',function (){
             if ($("#user").val().length < 4) {
+
                 $("#user").css({"borderBottom":'2px solid red'});
-            }else {
-                
-                $("#user").css({"borderBottom":'2px solid #3fa9f5'});
+                $("#text").text(" Your username smaller than 4 char ");
+
             }
 
             if ($("#pass").val().length < 4) {
+                
                 $("#pass").css({"borderBottom":'2px solid red'});
-                $("#text").text("تأكد من اسمك او كلمة السر لا تقل عن 10");
+                $("#text").text(" Your Password smaller than 4 char ");
+
+            }
+            
+            if ($("#pass").val().length == 0 || $("#user").val().length == 0 ) {
+                $("#user").css({"borderBottom":'2px solid red'});
+                $("#pass").css({"borderBottom":'2px solid red'});
+                $("#text").text(" Please Check from Your Information !! ");
+                $("#btnLogin").attr("disabled",true);
 
             }else {
                 $("#user").css({"borderBottom":'2px solid #3fa9f5'});
+                $("#pass").css({"borderBottom":'2px solid #3fa9f5'});
                 $("#text").text("");
+                $("#btnLogin").attr("disabled",false);
 
+                $("#btnLogin").on("click",function(){
+
+                
                 const user = $("#user").val(),
                       pass = $("#pass").val();
 
@@ -105,6 +119,8 @@ include 'init.php'; // include all files in resources
                     }
 
                 });
+
+            });
 
             }
         });
