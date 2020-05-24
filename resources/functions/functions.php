@@ -87,11 +87,11 @@ function Counter($table,$colName)
 // Function To Make Counter All in the dashboard:
 
 
-function Counter_All($table,$colName)
+function Counter_All($table,$colName,$do = null)
 {
     global $con;
 
-    $select = "SELECT COUNT($colName) FROM $table ";
+    $select = "SELECT COUNT($colName) FROM $table $do ";
     $getCount = $con->prepare($select);
     $getCount->execute();
     $counter = $getCount->fetchcolumn();

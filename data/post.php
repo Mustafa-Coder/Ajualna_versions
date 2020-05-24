@@ -43,11 +43,15 @@ switch($req) {
             $college = $_POST['college'];
             $avatar = $_POST['photo'];
             $private = $_POST['private'];
+            $date = new DateTime(); // Date now 
+            $setDatenow = $date->format("D : M j Y - H:i:s A"); // this is formater namedat month hour,....
+            $boxdate = $setDatenow;
             // echo $id . $name . $descp . $college . $avatar;
             
-                $post_statment = "INSERT INTO posts(username,college_group,avatar,`description`,country,userid,`private`)VALUES(:us,:colg,:avat,:descp,:coun,:id,:privates)";
+                $post_statment = "INSERT INTO posts(username,`datetime`,college_group,avatar,`description`,country,userid,`private`)VALUES(:us,:dates,:colg,:avat,:descp,:coun,:id,:privates)";
                 $poststa = $con->prepare($post_statment);
                 $poststa->bindparam(":us",$name);
+                $poststa->bindparam(":dates",$boxdate);
                 $poststa->bindparam(":colg",$college);
                 $poststa->bindparam(":avat",$avatar);
                 $poststa->bindparam(":descp",$descp);
@@ -66,18 +70,21 @@ switch($req) {
                     $desc = filter_var($_POST['desc'],FILTER_SANITIZE_STRING);
                     $namepage = filter_var($pagesforall['pageid']);
                     $typenotif = "post";
-                    $seen = 1;
+                    $seen = 0;
+                    $date = new DateTime(); // Date now 
+            $setDatenow = $date->format("D : M j Y - H:i:s A"); // this is formater namedat month hour,....
+            $boxdate = $setDatenow;
 
                     // Notification System Upload:     
-
-                    $notif = "INSERT INTO notifications(u_id,title,pagesname,typenotif,seen)
-                              VALUES(:userid,:descrp,:pn,:ti,:se)";
+                    $notif = "INSERT INTO notifications(u_id,title,pagesname,typenotif,seen,`times`)
+                              VALUES(:userid,:descrp,:pn,:ti,:se,:tim)";
                     $notification = $con->prepare($notif);
                     $notification->bindparam(":userid",$id);
                     $notification->bindparam(":descrp",$desc);
                     $notification->bindparam(":pn",$namepage);
                     $notification->bindparam(":ti",$typenotif);
                     $notification->bindparam(":se",$seen);
+                    $notification->bindparam(":tim",$boxdate);
                     $notification->execute();
                     $count = $notification->rowcount();
 
@@ -91,17 +98,17 @@ switch($req) {
         break;
         // END CREATE NEW POST FOR USER ====================================
         // START LIKE SYSTEM UPLOADE IN DATABASE =================================
-        case 'addlike':
+        case 'addlike': 
             if(is_numeric($_POST['id'])):
                 // VAR POST DATA:
-                $postid = filter_var($_POST['id']);
+                $postid = $_POST['postid'];
                 $id = $_SESSION['id'];
                 // INSERT DATA IN DATABASE: 
 
-                $post_statment = "INSERT INTO liker(liker_id,post_id)VALUES(:liker,:postid)";
+                $post_statment = "INSERT INTO liker(liker_id,like_id)VALUES(:liker,:like_id)";
                 $poststa = $con->prepare($post_statment);
                 $poststa->bindparam(":liker",$id);
-                $poststa->bindparam(":postid",$postid);
+                $poststa->bindparam(":like_id",$postid);
                 $poststa->execute();
                 $count = $poststa->rowcount();
 
@@ -113,7 +120,25 @@ switch($req) {
 
             endif;
         break;
+        case 'removelike': //  removelike
+        if(is_numeric($_POST['id'])):
+            // VAR POST DATA:
+            $postid = $_POST['postid'];
+            $id = $_SESSION['id'];
+            // INSERT DATA IN DATABASE: 
+
+            $deleted_user = "DELETE FROM liker WHERE liker_id = ? AND like_id = ? ";
+            $set_del = $con->prepare($deleted_user);
+            $set_del->execute(array($id,$postid));
+            echo 'remove';
+            
+        endif;
+        break;
         // END LIKE SYSTEM UPLOADE IN DATABASE =================================
+        // START EDIT POST 
+        case 'editpost':
+        break;
+        // END EDIT POST 
         // START  CREATE NEW POST FOR USER ====================================
         case 'createpostpage': // userid name college photo
             $id = $_POST['id'];
@@ -159,7 +184,15 @@ switch($req) {
             echo $_GET['com'];
         break;
         // END EDIT  POST FOR USER ====================================
-        
+        // Delete posts 
+        case 'delpost':
+            $idpost = $_POST['postid'];
+            // NOTIFICATION USER
+            $deleted_user = "DELETE FROM posts WHERE postid = ? ";
+            $set_del = $con->prepare($deleted_user);
+            $set_del->execute(array($idpost));
+            echo 'Delete';
+        break;
 }
 
 

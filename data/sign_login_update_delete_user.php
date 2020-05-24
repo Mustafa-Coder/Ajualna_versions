@@ -55,6 +55,7 @@ switch($req) {
                 $langs = $_POST['langs'];
                 $country = $_POST['country'];
                 $Np = $_POST['Np'];
+                $work = $_POST['work'];
 
        
                 // Send All information to database user
@@ -71,7 +72,8 @@ switch($req) {
                             numberphone = :numberphone,
                             Gender = :Gender,
                             languages = :langs,
-                            country = :coun
+                            country = :coun,
+                            work = :w
                             WHERE 
                             userid = :id
                            ";
@@ -88,6 +90,7 @@ switch($req) {
                 $setupdate->bindparam(":numberphone",$Np);
                 $setupdate->bindparam(":langs",$langs);
                 $setupdate->bindparam(":coun",$country);
+                $setupdate->bindparam(":w",$work);
                 $setupdate->bindparam(":id",$userid);
                 $setupdate->execute();
                 $count = $setupdate->rowcount();
@@ -205,6 +208,18 @@ switch($req) {
 
                          // Comments USER
                          $deleted_user = "DELETE FROM comment  WHERE i_user = ? ";
+                         $set_del = $con->prepare($deleted_user);
+                         $set_del->execute(array($userid));
+                         $logout = $set_del->rowcount();
+
+                         // Notes USER
+                         $deleted_user = "DELETE FROM mynotepad  WHERE author_id = ? ";
+                         $set_del = $con->prepare($deleted_user);
+                         $set_del->execute(array($userid));
+                         $logout = $set_del->rowcount();
+
+                         // Notes USER
+                         $deleted_user = "DELETE FROM liker  WHERE liker_id = ? ";
                          $set_del = $con->prepare($deleted_user);
                          $set_del->execute(array($userid));
                          $logout = $set_del->rowcount();

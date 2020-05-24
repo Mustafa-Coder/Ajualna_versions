@@ -6,5 +6,5 @@
 <script src="/Ajualna/layout/js/main.js"></script>
 <!-- <script src="https://kit.fontawesome.com/c06651fa48.js" crossorigin="anonymous"></script> -->
 
-<body>
+</body>
 </html>

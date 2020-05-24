@@ -82,16 +82,18 @@ switch($req) {
             $e = $_POST['e']; // email 
             $m = $_POST['m']; // message
             $i = $_POST['i']; // user id 
+            $s = $_POST['s']; // something
 
             // if ():
             // endif;
 
 
-            $statment = "INSERT INTO supportbox(username,email,messages,userid)VALUES(:us,:em,:me,:id)";
+            $statment = "INSERT INTO supportbox(username,email,messages,For_something,userid)VALUES(:us,:em,:me,:s,:id)";
             $setValue = $con->prepare($statment);
             $setValue->bindparam(":us",$u);
             $setValue->bindparam(":em",$e);
             $setValue->bindparam(":me",$m);
+            $setValue->bindparam(":s",$s);
             $setValue->bindparam(":id",$i);
             $setValue->execute();
             $count = $setValue->rowcount();
@@ -124,7 +126,53 @@ switch($req) {
             }
 
         break;
+        // Dark mode
+        case 'updatenotification':
+
+            $seen = $_POST['seen']; // username 
+            $id = $_POST['id'];
+
+            // if ():
+            // endif;
+
+            $statment = "UPDATE notifications SET seen = :seen  ";
+            $setValue = $con->prepare($statment);
+            // $setValue->bindparam(":id",$id);
+            $setValue->bindparam(":seen",$seen);
+            $setValue->execute();
+            $count = $setValue->rowcount();
+            if ($count > 0) {
+                echo 'Done';
+            }else {
+                echo 'wrong';
+            }
+
+        break;
+        // Uploade Notes 
+        case 'Notes':
+
+            $title = filter_var($_POST['title'],FILTER_SANITIZE_STRING); // title note  
+            $content = filter_var($_POST['content'],FILTER_SANITIZE_STRING); // content note 
+            $id = $_POST['id']; // id person note
+
+          
+
+            $statments = "INSERT INTO mynotepad(author_id,note_title,note_content)VALUES(:id,:t,:c) ";
+            $setValue = $con->prepare($statments);
+            // $setValue->bindparam(":id",$id);
+            $setValue->bindparam(":id",$id);
+            $setValue->bindparam(":t",$title);
+            $setValue->bindparam(":c",$content);
+            $setValue->execute();
+            $count = $setValue->rowcount();
+            if ($count > 0) {
+                echo 'Done';
+            }else {
+                echo 'wrong';
+            }
+
+        break;
 }
 
 
-endif; // end =====================================
+endif; // end ===================================== 

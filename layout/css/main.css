@@ -72,8 +72,8 @@ body
 
 .loginPages p
 {
-    color: rgb(175, 175, 175);
-    font-size: 15px;
+    color: rgb(101, 99, 99);
+    font-size: 13px;
 }
 
 .loginPages .card
@@ -81,6 +81,7 @@ body
     margin: 10% auto;
     box-shadow:  0 0 15px rgba(221, 221, 221, 0.555);
     border: 0;
+    width: 450px;
     min-height: 70vh;
     overflow: hidden;
 }
@@ -161,8 +162,8 @@ body
 
 .Signuppage p
 {
-    color: rgb(175, 175, 175);
-    font-size: 15px;
+    color: rgb(74, 71, 71);
+    font-size: 13px;
 }
 
 .Signuppage .card
@@ -173,6 +174,8 @@ body
     min-height: 70vh;
     overflow: hidden;
     margin-bottom: 31px;
+    width: 450px;
+    
 }
 
 
@@ -272,7 +275,7 @@ body
 .navbar-expand-lg .navbar-nav .nav-link {
     padding-right: 2.5rem;
     padding-left: 0.5rem;
-    color: black;
+    color: white;
 }
 
 
@@ -294,26 +297,6 @@ body
 
 
 /* End Navbar landing page */
-
-/* Home  page */
-
-.home-page
-{
-    margin-top: 25px;
-}
-
-.home-page .title-sign
-{
-    font-size: 22px;
-}
-
-.home-page .form-group .form-control
-{
-    margin-bottom: 15px;
-    border: 0;
-    border-bottom: 2px solid #3fa9f5;
-    border-radius: 0;
-}
 
 /* ======================================================== */
 /* Sign  up page */
@@ -415,6 +398,20 @@ body
     color:gray;
 }
 
+/* Landing page Desing  ##############################################################*/ 
+.home-page
+{
+    background-image: linear-gradient(165deg,rgb(111, 114, 242),rgb(91, 91, 237));
+    height: 700px;
+    border-radius: 0 0 13em 0;
+}
+
+.home-page .btn-primary
+{
+    width: 150px;
+}
+/* End  Landing page Desing  ##############################################################*/ 
+
 
 /* menu  Navbar */
 
@@ -481,13 +478,18 @@ body
 .menu-home .menu .link span
 {
     position: absolute;
-    background: rgb(255, 0, 0);
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    top: 24px;
-    left: 21px;
-    display: none;
+    color: rgb(255, 0, 0);
+    top: 8px;
+    left: 30px;
+    font-weight: 700;
+}
+
+.menu-home .menu .link .search
+{
+    width: 250px;
+    border-radius: 45px;
+    /* border: 1px solid rgb(0, 100, 0); */
+    margin-top: 5px;
 }
 
 /* moadl menu navbar */
@@ -500,7 +502,7 @@ body
     top: 48px;
     right: 100px;
     z-index: 2;
-    box-shadow: 0 0 10px #ddd;
+    /* box-shadow: 0 0 10px #ddd; */
     width: auto;
     /* overflow: hidden; */
     overflow: scroll;
@@ -513,15 +515,15 @@ body
     display:flex;
     position: relative;
     transition: .5s ease;
-    border-bottom: 1px solid #eee;
+    /* border-bottom: 1px solid #eee; */
  }
 
- .modalNotif .info:hover
+ /* .modalNotif .info:hover
  {
     background: #f8f8f8;
     transition: .5s ease;
     cursor: pointer;
- }
+ } */
 
  .modalNotif  .notif
  {
@@ -539,6 +541,7 @@ body
  }
 
 
+
  .modalNotif .info img
  {
     width: 40px;
@@ -546,6 +549,12 @@ body
     margin: 12px;
     margin-top: 11px;
     border-radius: 50%;
+ }
+
+ .modalNotif .info .dotoimg
+ {
+    width: 20px !important;
+    height: auto !important;
  }
 
  .modalNotif .info h2
@@ -759,7 +768,7 @@ body
 
 .settings  .set-box {
     box-shadow: 0px 0px 18px rgba(63, 81, 181, 0.16);
-
+    height: 80vh;
 }
 
 .settings .avatar-box
@@ -1176,7 +1185,7 @@ body
     color: rgb(177, 177, 179);
 }
 
-.homeglobal .fa-plus
+/* .homeglobal .fa-plus
 {
     padding: 5px 9px;
     width: 30px;
@@ -1187,7 +1196,7 @@ body
     margin: 0% auto;
     cursor: pointer;
     display: block;
-}
+} */
 
 .homeglobal .messagecard
 {
@@ -1281,36 +1290,96 @@ body
 .homeglobal .postshow .commetnbook .inputs .btn-light
 {
     position: absolute;
-    right: -10px;
+    right: -59px;
     top: 3px;
+}
+
+
+/* MODAL EDIT HIDE REBORT POST */
+
+.homeglobal .postshow .modalpost 
+{
+    position: absolute;
+    display: none;
+    top: 25px;
+    right: 4px;
+    box-shadow: 0 0 10px black !important;
+}
+
+/* END MODAL EDIT HIDE REBORT POST */
+
+
+/* NOTE PAD  */
+
+.homeglobal .notecreate .all
+{
+    display:flex;
+}
+
+.homeglobal .notecreate .all img 
+{
+    width: 25px;
+    margin-left: 20px;
+}
+
+.homeglobal .notecreate .all a 
+{
+    color:rgb(139, 142, 159);
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 14px;
+}
+.homeglobal .notecreate .newcollege
+{
+    list-style: none;
+}
+.homeglobal .notecreate .newcollege >  img 
+{
+    width: 30px;
+    height: 30px;
+    
 }
 
 /* BOX CHECK DATA */
 
-
-.homeglobal .checkdata
+.homeglobal .setuptext
 {
-
-    position: absolute;
-    top: 100%;
-    width: 100%;
-    align-items: center;
-    color: rgb(220, 89, 87);
+    font-size: 14px;
+}
+ 
+.homeglobal .checkdata 
+{
+    border-radius: 15px;
+    box-shadow: 0 0 20px #eeeeee;
+}
+.homeglobal .checkdata ul li 
+{
+    
+    padding: 10px 32px;
+    list-style: none;
+    line-height: 3;
+    
 }
 
-.homeglobal .checkdata .fa-frown-open
+.homeglobal .checkdata ul .errros
 {
-    font-size: 80px;
-    margin-bottom: 10px;
-
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    background: rgba(139, 142, 159, 0.16);
+    color: rgba(139, 142, 159, 0.4);
+    border-radius: 50px;
 }
 
-.homeglobal .checkdata .op
+.homeglobal .checkdata ul .trues
 {
-    font-weight: 500;
-    font-size: 30px;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    background: rgba(159, 250, 227, 0.16);
+    color: rgba(87, 255, 157, 0.4);
+    border-radius: 50px;
 }
-
 
 /* Info college personal  */
 
@@ -1352,6 +1421,9 @@ body
     color: rgb(139, 142, 159);
 }
 
+
+
+
 /* MODAL CREATE PAGE */
 
 .homeglobal .overlay-pages
@@ -1382,6 +1454,47 @@ body
   color: rgb(90, 94, 111);
 }
 
+/* menu-slide */
+
+.homeglobal .menu-slide
+{
+    float: right;
+}
+
+
+.homeglobal .menu-slide  .logo h2    
+{
+    font-size: 27px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+}
+
+.homeglobal .menu-slide ul 
+{
+    margin-top: 30px;
+}
+
+.homeglobal .menu-slide ul li 
+{
+    padding: 15px;
+    list-style: none;
+    width: 190px;
+    font-weight: 600;
+    border-radius: 50px;
+    margin-bottom: 1em;
+    cursor: pointer;
+    
+}
+
+
+
+.homeglobal .menu-slide ul li a 
+{
+    font-weight: 600;
+    color:black;
+    text-decoration: none;
+}
+
 /* PAGES============================================================================ */
 /* PAGES============================================================================ */
 /* PAGES============================================================================ */
@@ -1405,6 +1518,15 @@ body
     margin: 13% auto;
     display: block;
 
+}
+
+.pagehome .cardleft  .avatar_page 
+{
+    margin: -8px !important;
+    width: 154px !important;
+    height: 154px !important;
+    border-radius: 50% !important;
+    padding: 5px !important;
 }
 
 /* info */
@@ -1493,6 +1615,13 @@ body
     margin: 15px;
 }
 
+/* Right */
+.pagehome .infor-page ul li 
+{
+    list-style: none;
+    font-weight: bold;
+}
+
 /* supportbox */
 
 .supportbox .mesg
@@ -1569,7 +1698,7 @@ body
 }
 
 .supportbox .messagereportshow
-{  transition:.6s ease; filter: }
+{  transition:.6s ease; }
 /* .supportbox .messagereportshow:hover
 {
   transition:.6s ease;
@@ -1657,4 +1786,9 @@ body
 .text-color-grow
 {
     color: white !important;
+}
+
+.shadows 
+{
+    box-shadow: 0 0 10px #282828 !important;
 }

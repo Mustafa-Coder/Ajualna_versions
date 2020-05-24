@@ -133,8 +133,8 @@ switch($req) {
             <link rel="stylesheet" href="../layout/css/main.css">
             <title><?php title("Profile Edit | ".$Userinformation['username']." ") ?></title>
         </head>
-<body class="<?php echo $Userinformation['modes'] == 'dark'  ? "top" : " " ?>">
-    
+        
+        <body class="<?php echo $Userinformation['modes'] == 'dark'  ? "top" : " " ?>">
         <?php include "../../Ajualna/resources/templates/menu.php" ?>
     <div class="container settings  mt-5">
             <div class="row">
@@ -192,6 +192,7 @@ switch($req) {
                                     <option <?php  echo $_SESSION['sax'] == "famale" ? "selected"  : "" ; ?>   value="famale">Famale</option>
                             </select>
                         </div>
+                        
                         <div class="col-md-6">
                             <label for="user">New password</label>
                             <input id="old-pass"  type="hidden" value="<?php echo $Userinformation['password']; ?>">
@@ -220,8 +221,15 @@ switch($req) {
                              <?php include '../data/fetch_country.php' ?>
                             </select>
                         </div>
-                        <div class="col-md-3 mt-2">
+                        <div class="col-md-6 mt-2">
                             <button id="update" class="btn btn-primary mt-4">Save</button>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="user">Work</label>
+                            <select class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> " id="work">
+                                    <option <?php  echo $Userinformation['work'] == "teacher" ? "selected"  : "" ; ?>  value="teacher">Teacher or Doctor</option>
+                                    <option <?php  echo $Userinformation['work'] == "student" ? "selected"  : "" ; ?>   value="student">Student</option>
+                            </select>
                         </div>
                     </div>
                     </div>
@@ -271,8 +279,7 @@ switch($req) {
 
             // Check if end var == array:
                 if(in_array($end,$array)): // start if
-
-                    $newnameavatar = rand(0,10000000000) . '__'.$_SESSION['user'].'_62315.' . $end;
+                    $newnameavatar = rand(0,10000000000) . '__'.str_shuffle($_SESSION['user']).'_62315.' . $end;
                     move_uploaded_file($avatartmp,".\uploads\avatar\\" . $newnameavatar);
 
                     // Uploade file on data:

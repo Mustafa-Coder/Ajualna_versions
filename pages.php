@@ -1,6 +1,7 @@
 <?php 
 session_start();
-$PAGENAME = "PAGES | AJUALNA  ";
+error_reporting(0);
+$PAGENAME = "Pages | JEEL  ";
 include 'init.php';
 if(!isset($_SESSION['user'])):
     header("location:logout.php");
@@ -25,35 +26,38 @@ $pagesforall = get_something("pages","*","WHERE pageid = ".$Userinformation['col
 $postAll = get_something("posts","*","WHERE userid = ".$userid." ORDER BY postid DESC ","fetchAll");
 $usercollege = get_something("signup","*","WHERE college = ".$Userinfo['college']."","fetchAll"); // Get users colleges
 $posts = get_something("posts","*","WHERE userid = ".$userid."","fetch");
+$avatar = $Userinfo['avatar'];
+updatedata("postpublic","avatar","".$avatar."","WHERE userid = ".$userid.""); // update avatar in comment
+
 ?>
+<body class="<?php echo $Userinformation['modes'] == 'dark'  ? "top" : " " ?> ">
 <!-- START INCLUDE MENU -->
 <?php include $source . '/templates/menu.php' ?>
+
 <!-- END INCLUDE MENU -->
 <!-- CHECK IF THIS PAGE ID NUMERIC OR NOT  -->
 <?php $numberpage = filter_var($_GET['pageid'],FILTER_VALIDATE_INT); ?>
 <?php $namepage = filter_var($_GET['page'],FILTER_SANITIZE_STRING); ?>
 <?php 
 // if var number
-if(is_numeric($numberpage) & $numberpage == $pagesinfo['pageid']):
 // START CODE SWITCH ...
-echo $pagesinfo['pageid'];
 switch ($namepage) {
     case 'Home_me': ?>
     <!-- // START HOME PAGE FOR YOU ==================================== -->
-        <?php if($pagesinfo['pageid'] == $numberpage){ ?>
         <div class="container pagehome homeglobal">
-            <div class="row mt-5">
+            <div class="row mt-5"> 
                 <div class="col-lg-3">
-                    <div class="card cardleft mt-5 border-0">
-                        <div class="avatar">
-                            <?php echo empty($pagesforyou['pagecover']) ? "<i class='fas fa-university'></i>"  : "<img class='avatar_page' src='./u/uplaods/cover/".$pagesforyou['pagecover']."' >" ; ?>
+                    <div class="card cardleft mt-5 border-0 <?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?> ">
+                        <div class="avatar <?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?>">
+                            <?php echo empty($pagesforyou['pagecover']) ? "<i class='fas fa-university'></i>"  : "<img class='avatar_page' src='./u/uploads/cover/".$pagesforyou['pagecover']."' >" ; ?>
                         </div>
+                        <?php echo $pagesforyou['userid'] == $_SESSION['id'] ? '<button class="btn btn-primary btn-sm m-auto" style="width:150px;margin-bottom:10px !important;"> <i class="fas fa-edit"></i><a style="text-decoration:none;color:white;" href="'.$_SERVER['PHP_SELF'].'?pageid='.$_GET['pageid'].'&page=editpage">Edit Page</a></button>'  : ' ' ?>
                     </div>
                     <!-- START INFORMATION ABOUT PAGE -->
-                    <div class="card cardleft info mt-2 border-0">
+                    <div class="card cardleft info mt-2 border-0 <?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?>">
                         <h1 ><?php echo $pagesforyou['pagename'] ?></h1>
                         <p >From <?php echo $pagesforyou['country'] ?></p>
-                        <hr>
+                        <hr class="<?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?>">
                         <!-- pages click -->
                         <ul>
                             <li><i class="fas fa-user-graduate"></i> University concepts</li>
@@ -67,8 +71,8 @@ switch ($namepage) {
                          <!-- START SYSTEM POST  -->
                          <input id="namepage" type="hidden" value="<?php echo $pagesforyou['pagename']; ?>">
                          <input id="pageid" type="hidden" value="<?php echo $pagesforyou['pageid']; ?>">
-                        <div class="card  postsystem border-0 mt-5 p-3">  
-                            <textarea class="form-control"  id="description" placeholder="type.."></textarea>
+                        <div class="card  postsystem border-0 mt-5 p-3 <?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?>">  
+                            <textarea class="form-control <?php echo $Userinformation['modes'] == 'dark'  ? "input-text" : " " ?>"  id="description" placeholder="type.."></textarea>
                             <input id="name" type="hidden" value="<?php echo $Userinformation['username']; ?>">
                             <input id="namepage" type="hidden" value="<?php echo $pagesforyou['pagename']; ?>">
                             <input id="country" type="hidden" value="<?php echo $pagesforyou['country']; ?>">
@@ -85,13 +89,16 @@ switch ($namepage) {
                     <!-- END Center -->
                 </div>
                 <div class="col-lg-3">
-                    <div class="card mt-5 border-0">
-                        <?php 
-                            if($Userinformation['admin'] == 1):
-                                // code ..
-                            else: //  ecol admin = 0
-                                ?>
-                                <div class=" create-class p-2 ">
+                    <div class=" mt-5 border-0 ">
+                        <?php if($Userinformation['admin'] == 1): ?>
+                            <div class="card infor-page border-0 pt-3 <?php echo $Userinfo['modes'] == 'dark'  ? "bg-bor-col-dark" : " "  ?>">
+                                <ul class="d-flex">
+                                    <li style="margin-right:50px;">Students <br><span><?php echo Counter_All("signup","*","WHERE college = ".$pagesforyou['pageid']." "); ?></span></li>
+                                    <li>Posts <br><span style="margin:0% auto;"><?php echo Counter_All("posts","*","WHERE college_group = ".$pagesforyou['pageid']." "); ?></span></li>
+                                </ul>
+                            </div>
+                           <?php else: //  ecol admin = 0 ?>
+                                <div class=" create-class p-2 <?php echo $Userinfo['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?>">
                                     <span><i class="fas fa-plus"></i></span>
                                     <h2 class="tic">Create Your Class</h2>
                                 </div>
@@ -102,18 +109,160 @@ switch ($namepage) {
                 </div>
             </div>
         </div>
-            <?php
-
-            }
-            ?>
+          
     <!-- // END HOME PAGE FOR YOU  ===================================== -->
                                         
             <?php // endif;?>
        <?php break;
+       // EDIT PAGE UNIVERSITY ===============================================
+       case'editpage': ?>
+            
+        <body class="<?php echo $Userinformation['modes'] == 'dark'  ? "top" : " " ?>">
+    <div class="container settings  mt-5">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card menu-settings mt-5 <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> ">
+                        <div class="profile-info">
+                            <img class="img-fiuld text-center" <?php if(!empty($pagesforyou['pagecover'])): echo "src='/Ajualna/u/uploads/cover/".$pagesforyou['pagecover']."'"; else: echo "src=/Ajualna/layout/images/icons/user.png";endif;?> alt="image user">
+                            <h2 class="username"><?php echo $pagesforyou['pagename'] ?></h2>
+                        </div>
+                        <ul class="pages">
+                            <li class="nav-item"><a class="nav-link <?php echo $Userinformation['modes'] == 'dark' ? 'icons-co ' :' ' ?>  " href="<?php echo $_SERVER['PHP_SELF']; ?>?pageid=<?php echo $_GET['pageid']?>&page=editpage"><i class="fas fa-edit"></i>   Edit Details</a></li>
+                            <li class="nav-item"><a class="nav-link <?php echo $Userinformation['modes'] == 'dark' ? 'icons-co ' :' ' ?>  " href="<?php echo $_SERVER['PHP_SELF']; ?>?pageid=<?php echo $_GET['pageid']?>&page=picpage"><i class="fas fa-image"></i> Picture Page</a></li>
+                            <li class="nav-item"><a class="nav-link <?php echo $Userinformation['modes'] == 'dark' ? 'icons-co ' :' ' ?>  " href="<?php echo $_SERVER['PHP_SELF']; ?>?pageid=<?php echo $_GET['pageid']?>&page=Del"><i class="fas fa-trash"></i> Delete Page</a></li>
+                            <li class="nav-item"><a class="nav-link <?php echo $Userinformation['modes'] == 'dark' ? 'icons-co ' :' ' ?>  " href="<?php echo $_SERVER['PHP_SELF']; ?>?pageid=<?php echo $_GET['pageid']?>&page=students"><i class="fas fa-user"></i> Student</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9 mt-5">
+                     <!--  START Messages for update info -->
+                     <div id="html"></div>
+                    <!-- END Messages for update info -->
+                    <div class="card p-3 set-box  <?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark  " : " " ?>">
+
+                    <div class="row py-5">
+                        <div class="col-md-12 mb-4">
+                        <!-- INFORMATION HIDDEN -->
+                        <input id="pageid"  type="hidden" value="<?php echo $pagesforyou['pageid'] ?>">
+                        <!-- <input id="mycollege" type="hidden" value="<?php echo $_SESSION['college'] ?>"> -->
+
+                            <label for="Pagename">Pagename</label>
+                            <input id="Pagename" class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> " type="text" value="<?php echo $pagesforyou['pagename'] ?>">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="bio">Bio</label>
+                            <textarea id="bio" class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> " type="text" ><?php echo $pagesforyou['pagetitle'] ?></textarea>
+                        </div>
+                        
+                        
+                        <div class="col-md-12 mb-3">
+                            <label for="user">Public Page</label>
+                            <select class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> " id="public">
+                                    <option <?php  echo $pagesforyou['allowed'] == "1" ? "selected"  : "" ; ?>  value="1">Allowed</option>
+                                    <option <?php  echo $pagesforyou['allowed'] == "0" ? "selected"  : "" ; ?>   value="0">Not Allowed</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-12">  
+                            <label for="user">Country</label>
+
+                            <select id="country" name="country" class="form-control <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> ">
+                             <?php include './data/fetch_country.php' ?>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mt-2">
+                            <button id="updatepage" class="btn btn-primary mt-4">Save</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+       <?php break;
+       // END EDIT PAGE UNIVERSITY ===============================================
+       case 'picpage':
+
+          // Script Uploade file on database use request no Ajax:
+        if($_SERVER['REQUEST_METHOD'] == 'POST'):
+            $id = $_GET['pageid'];
+            $avatar = $_FILES['images'];
+            $avatarName = $_FILES['images']['name'];
+            $avatarSize = $_FILES['images']['size'];
+            $avatartmp = $_FILES['images']['tmp_name'];
+            $avatartype = $_FILES['images']['type'];
+            $array = ["png","svg","jpeg","jpg"];
+            // Get Last name from data:
+            $expload = explode('.',$avatarName);
+            
+            $end = end($expload);
+            // if($avatarSize < 9000):
+            // Check if end var == array:
+                if(in_array($end,$array)): // start if
+                    $newnameavatar = rand(0,10000000000) .'.' . $end;
+                    move_uploaded_file($avatartmp,".\u\uploads\cover\\" . $newnameavatar);
+
+                    // Uploade file on data:
+                    update("pages","pagecover","pageid",$newnameavatar,$id);
+                    $error =  "<div class='alert alert-success mt-2 p-2'>Uploaded Your Image</div>";
+
+                else :
+
+                    $error =  "<div class='alert alert-danger mt-2 p-2'>Your Image not in svg, jpg , jpeg</div>";
+
+                endif; // end if    
+            // else:
+
+                // $error =  "<div class='alert alert-danger mt-2 p-2'>Your Image Size Older than 9MG </div>";
+                
+
+            // endif;
+        endif;
+     ?>
+
+    <div class="container settings  mt-5">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card menu-settings mt-5 <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?> ">
+                            <div class="profile-info">
+                                <img class="img-fiuld text-center" <?php if(!empty($pagesforyou['pagecover'])): echo "src='/Ajualna/u/uploads/cover/".$pagesforyou['pagecover']."'"; else: echo "src=/Ajualna/layout/images/icons/user.png";endif;?> alt="image user">
+                                <h2 class="username"><?php echo $pagesforyou['pagename'] ?></h2>
+                            </div>
+                            <ul class="pages">
+                                <li class="nav-item"><a class="nav-link <?php echo $Userinformation['modes'] == 'dark' ? 'icons-co ' :' ' ?>  " href="<?php echo $_SERVER['PHP_SELF']; ?>?pageid=<?php echo $_GET['pageid']?>&page=editpage"><i class="fas fa-edit"></i>   Edit Details</a></li>
+                                <li class="nav-item"><a class="nav-link <?php echo $Userinformation['modes'] == 'dark' ? 'icons-co ' :' ' ?>  " href="<?php echo $_SERVER['PHP_SELF']; ?>?pageid=<?php echo $_GET['pageid']?>&page=picpage"><i class="fas fa-image"></i> Picture Page</a></li>
+                                <li class="nav-item"><a class="nav-link <?php echo $Userinformation['modes'] == 'dark' ? 'icons-co ' :' ' ?>  " href="<?php echo $_SERVER['PHP_SELF']; ?>?pageid=<?php echo $_GET['pageid']?>&page=Del"><i class="fas fa-trash"></i> Delete Page</a></li>
+                                <li class="nav-item"><a class="nav-link <?php echo $Userinformation['modes'] == 'dark' ? 'icons-co ' :' ' ?>  " href="<?php echo $_SERVER['PHP_SELF']; ?>?pageid=<?php echo $_GET['pageid']?>&page=students"><i class="fas fa-user"></i> Student</a></li>
+                            </ul>
+                        </div>
+                </div>
+                <div class="col-lg-9 mt-5">
+                     <!--  START Messages for update info -->
+                     <div id="html"></div>
+                    <!-- END Messages for update info -->
+                    <div class="card p-3  avatar-box <?php echo $Userinformation['modes'] == 'dark' ? 'bg-bor-col-dark ' :' ' ?>">
+                        <h2 class="display-4">Change Your Avatar About Your University Page..</h2>
+                        <div class="avatar">
+                            <?php if(!empty($pagesforyou['coverpage'])): ?>
+                            <img id="openfile" class="img-fiuld rounded" src="/u/uploads/cover/<?php echo $pagesforyou['avatar'] ?>" alt="">
+                            <?php else: ?>
+                            <img id="openfile" class="img-fiuld rounded" src="./layout/images/icons/011.png" alt="">
+                            <?php  endif; ?>
+                        </div>
+                        <form action="pages.php?pageid=<?php echo $_GET['pageid']?>&page=picpage" method="post" enctype="multipart/form-data">
+                            <input type="file" name="images" id="fileToUpload" hidden>
+                            <input type="submit" value="Upload" name="uploade"  class="btn btn-primary">
+                        </form>
+                        <?php echo $error; ?>
+                    </div>
+                </div>
+            </div>
+      </div>
+       <?php break;
+
    
 }
 
-endif;
+// endif;
 ?>
 <!-- End CHECK IF THE COLLEGE ECOLE COLLEGE HIM -->
 <!-- ------------------------------------------------------------------------- -->
@@ -134,10 +283,8 @@ $(function(){
                     console.log(stats); 
                     console.log(data);
                     $("#showposts").html(data);
-                },
-                // error:function(err){
-                //     console.log(err); 
-                // }
+                }
+               
                
             });
     });
@@ -189,13 +336,7 @@ let CreatePostPages = _ =>
                          console.log(stats);
                      }
 
-                    //  console.log(data);
-                    //      console.log(stats);
 
-                    // if(data){
-                        // console.log(data);
-                        // console.log(stats);
-                    // }
                 },
                 error:function(err){
                     console.log(err);
@@ -204,8 +345,7 @@ let CreatePostPages = _ =>
             });
 
             
-
-           
+       
 
 
             
@@ -283,6 +423,62 @@ let GoPages = (url) =>  {setTimeout(() => { window.location.href=""+ url +"" },5
             $("#createbtn").attr("disabled",false);
         }
    });
+
+   // Edit PAGE DETAILS 
+      
+   let EditPageDetails = _ =>
+    {
+         
+        var   pagen = $("#Pagename").val(),
+              bio = $("#bio").val(),
+              pub = $("#public").val(),
+              country = $("#country").val(),
+              pageid = $("#pageid").val();
+
+
+
+            $.ajax({
+
+                method:"POST",
+                url:"/Ajualna/data/pages.php",
+                data:{
+                    "req":"update",
+                    "pagen":pagen, 
+                    "bio":bio,
+                    "pub":pub,
+                    "coun":country,
+                    "pageid":pageid
+                    },
+                success:function(data,stats){
+                    if(data == 'Done'){
+                      $("#html").html('<div class="alert alert-primary">Succssfully Updating </div>');
+                    }
+
+                    if(data == 'wrong'){
+                        $("#html").html('<div class="alert alert-danger">Nothing Updating </div>');
+                    }
+
+                }
+
+            });
+
+
+
+
+
+
+    }
+
+    $("#updatepage").on("click",function(){
+        EditPageDetails();
+    });
+
+    
+ // Uploade file on database for avatar
+
+ $("#openfile").on("click",function(){
+    $("#fileToUpload").click();
+});
 
 });
 

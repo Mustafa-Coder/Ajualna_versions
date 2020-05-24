@@ -64,10 +64,7 @@ $(function () {
         $("#modalNotif").removeClass("display");
 
     });
-    $("#ShowNotification").on('click',function () {
-        $("#moadlMenu").removeClass('display');
-        $("#modalNotif").toggleClass("display");
-    });
+    
     $(".container").on('click', function () {
         $("#moadlMenu").removeClass('display');
         $("#modalNotif").removeClass("display");
@@ -81,6 +78,46 @@ $(function () {
    });
 
 
+    let UpdateNotification = _ =>
+
+    {
+        var seen = 1,
+            id = $("#userid").val();
+
+         $.ajax({
+                type:"post",
+                url:"/Ajualna/data/settings.php",
+                data:{"req":"updatenotification","seen":seen,"id":id},
+                success:function(data,stats){
+                    
+                    console.log(data);
+                    console.log(stats);
+
+                }
+            });
+
+
+        // Get data 
+
+        $.ajax({
+            type:"post",
+            url:"/Ajualna/data/fetch_data.php",
+            data:{"req":"getNotification"},
+            success:function(data,stats){
+                
+                $("#modalNotif").html(data);
+
+            }
+        });
+
+    }
+
+    $("#ShowNotification").on('click',function () {
+        $("#moadlMenu").removeClass('display');
+        $("#modalNotif").toggleClass("display");
+        UpdateNotification();
+    });
+
 
 //    console.log($("#oldcollege").val());
 
@@ -89,16 +126,11 @@ $(function () {
 //    SETTING
 
 // USER SYSTEM EDIT DELETE  ============================================================
-let male = $("#male").val(),
-   famale = $("#famale").val();
-    // console.log(male + famale);
+
     let editUserInfo = _ =>
     {
-        let oldcollege = $("#oldcollege").val(),
-              newcollege = $("#newcollege").val(),
-            //   saxuserman = $("#saxuserman").val(),
-            //   saxuserwomen = $("#saxuserwomen").val(),
-              Gender = $("#Gender").val(),
+         
+        let   Gender = $("#Gender").val(),
               national = $("#nationalnum").val(),
               lastN = $("#last").val(),
               userN = $("#user").val(),
@@ -110,7 +142,8 @@ let male = $("#male").val(),
               numphone = $("#numberphone").val(),
             //   information user
               userid = $("#userID").val(),
-              collegeid = $("#collegeid").val();
+              collegeid = $("#collegeid").val(),
+              work = $("#work").val();
 
 
             $.ajax({
@@ -131,7 +164,9 @@ let male = $("#male").val(),
                     "Np":numphone,
                     // "famale":famale,
                     "userid":userid,
-                    "collegeid":collegeid},
+                    "collegeid":collegeid,
+                    "work":work
+                },
                 success:function(data,stats){
                     if(data == 'Done'){
                       $("#html").html('<div class="alert alert-primary">Succssfully Updating </div>');
@@ -247,7 +282,7 @@ let male = $("#male").val(),
                 success:function(data,stats){
                     if(data == 'Done'){
                         $("#description").html('');
-                        $("#text").html('<div class="animated bounceOutDown slow" id="postsuccess"><i class="fas fa-mail-bulk"></i> Success</div>');
+                        $("#text").html('<div class="animated fadeOut slow" id="postsuccess"><i class="fas fa-mail-bulk"></i> Success</div>');
                         // $("#text").hide(10000);
                         $("#postmusic")[0].play();
                         $("#postmusicnotif")[0].play();
@@ -273,13 +308,7 @@ let male = $("#male").val(),
 
             // get all data about posts
 
-            $.ajax({
-                type:"post",
-                url:"/Ajualna/data/fetch_data.php",
-                data:{"req":"getposts"},
-                beforeSend:function(){$("#waitingpost").show(10);},
-                success:function(data,stats){console.log(stats); $("#showposts").html(data);$("#waitingpost").addClass("fadeIn");}
-            });
+           
 
 
 
@@ -304,6 +333,13 @@ let male = $("#male").val(),
 
     $("#postbtn").on("click",function(){
         CreatePost();
+        $.ajax({
+            type:"post",
+            url:"/Ajualna/data/fetch_data.php",
+            data:{"req":"getposts"},
+            beforeSend:function(){$("#waitingpost").show(10);},
+            success:function(data,stats){console.log(stats); $("#showposts").html(data);$("#waitingpost").addClass("fadeIn");}
+        });
     });
 
     // Foucs on add_post:::
@@ -416,15 +452,7 @@ let male = $("#male").val(),
             });
 
 
-            // get all data about posts
-
-            $.ajax({
-                type:"post",
-                url:"/Ajualna/data/fetch_data.php",
-                data:{"req":"getpages"},
-                success:function(data,stats){console.log(stats); $("#pages").html(data);}
-            });
-
+            
 
 
 
@@ -435,20 +463,24 @@ let male = $("#male").val(),
 
     }
 
-    // get all data about posts load page
+    // // get all data about posts load page
 
 
-      $.ajax({
-          type:"post",
-          url:"/Ajualna/data/fetch_data.php",
-          data:{"req":"getpages"},
-          success:function(data,stats){/*console.log(stats);*/ $("#pages").html(data);}
-      });
+    //   $.ajax({
+    //       type:"post",
+    //       url:"/Ajualna/data/fetch_data.php",
+    //       data:{"req":"getpages"},
+    //       success:function(data,stats){/*console.log(stats);*/ $("#pages").html(data);}
+    //   });
     
 
     // Show The Modal Create Page:
     $("#createpages").on("click",function (){
         $("#modalpage").show(100);
+    });
+
+    $("#hidemodalcreate").on("click",function(){
+        $("#modalpage").hide(100);
     });
 
     //  Create Page:

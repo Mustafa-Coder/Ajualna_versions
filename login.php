@@ -5,26 +5,68 @@ if(isset($_SESSION['user'])):
     header("location:dashboard.php");
     exit;
 endif;
-$PAGENAME = 'تسجيل الدخول'; // Name page
+$PAGENAME = 'Login | JEEL '; // Name page
 include 'init.php'; // include all files in resources
 ?>
-<body style="background-image:url('./layout/images/ico-bg.png');height:100%;background-repeat: no-repeat;">
+<!-- <body style="background-image:url('./layout/images/ico-bg.png');height:100%;background-repeat: no-repeat;"> -->
 <!-- Login page   -->
+<!-- Navbar -->
+<header>
+    <nav class=" bg-light">
+        <ul class="d-flex b-shadow ">
+            <li class="nav-item"><a class="nav-link" href="./index.php">JEEL</a></li>
+            <li class="nav-item"><a class="nav-link" href="">Team</a></li>
+            <li class="nav-item"><a class="nav-link" href="">Privce Police</a></li>
+        </ul>
+    </nav>
+</header>
+<style>
+    nav
+    {
+        box-shadow:0 0 19px #ddd;
+        /* padding:10px; */
+        width:100%;
+        height:50px;
+    }
+    nav ul 
+    {
+        padding-top: 2px;
+        list-style: none;
+    }
 
+    nav ul li a 
+    {
+        color:black;
+        border-bottom:0px solid;
+        transition:.2s ;
+        opacity:.6;
+    }
+
+    nav ul li a:hover {
+        border-bottom:2px solid blue;
+        transition:.2s ;
+        opacity:1;
+        color:black; 
+
+    }
+
+    
+</style>
+<!-- end  -->
 <section class="container loginPages">
     <div class="card">
         <div class="row">
-            <div class="col-lg-6">
-                <h1 class="login_name">Login | Ajualna</h1>
+            <div class="col-lg-12">
+                <h1 class="login_name">Login | JEEL</h1>
                 <div id="loginForm" class="form-group p-4">
                     <div class="row">
                         <div class="col-md-12">
                             <label for="user">Username</label>
-                            <input id="user"  type="text" class="form-control form-control-lg" placeholder="Username">
+                            <input id="user"  type="text" class="form-control" placeholder="Username">
                         </div>
                         <div class="col-md-12">
                             <label for="pass">password</label>
-                            <input id="pass" type="password" class="form-control form-control-lg" placeholder="password">
+                            <input id="pass" type="password" class="form-control" placeholder="password">
                         </div>
                         <div class="col-md-4">
                         <button id="btnLogin" class="btn btn-primary">Login</button>
@@ -38,18 +80,18 @@ include 'init.php'; // include all files in resources
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <!-- <div class="col-lg-6">
                 <div class="overlay">
-                <h1 class="py-3 mt-3 text-center">AJUALNA</h1>
+                <h1 class="py-3 mt-3 text-center">JEEL</h1>
                 <P class=" text-center">
                 Ajyalna website Share with us what is going on around your university, college or field of study
                 </P>
                 </div>
                 <img src="./layout/images/log-bg.jpeg"  class="img-fiuld log-img" alt="">
-            </div>
+            </div> -->
         </div>
     </div>
-            <p class="copy text-center">AJUALNA | copyright &copy; 2020</p>
+            <p class="copy text-center">JEEL | copyright &copy; 2020</p>
 </section>
     
 <!--End Login page   -->
@@ -61,7 +103,7 @@ include 'init.php'; // include all files in resources
     $(function (){
 
     
-        $('#pass').on('mousemove',function (){
+        $('#btnLogin').on('mousemove',function (){
             if ($("#user").val().length < 4) {
 
                 $("#user").css({"borderBottom":'2px solid red'});

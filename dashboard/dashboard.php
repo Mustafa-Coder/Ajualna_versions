@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['user']))  {
-    header("location:index.php");
+if (!isset($_GET['dash']) && $_GET['dash'] == " " )  {
+    header("location:./index.php");
     exit;
 }
 if(isset($_SESSION['user']) && $_SESSION['admin'] == 1 ): // START PAGE
@@ -313,7 +313,7 @@ switch ($dash) {
                                             <td><a href="../u/profile.php?user=profilepage&id=<?php echo $boxs['userid']; ?>" class="nav-link"><?php echo $userinfo['username']; ?></a></td>
                                             <td><?php echo $userinfo['email']; ?></td>
                                             <td><?php echo substr($boxs['messages'],0,50); ?>...</td>
-                                            <td><a href="dashboard.php?dash=rboxmessage&userid=<?php echo $boxs['userid'] ?>&id=<?php echo $boxs['id']; ?>" class="btn btn-primary"><i class="fas fa-reply"></i></a></td>
+                                            <td><a href="dashboard.php?dash=rboxmessage&userid=<?php echo $boxs['userid'] ?>&id=<?php echo $boxs['id']; ?>&Xsome=<?php echo $boxs['For_something']; ?>" class="btn btn-primary"><i class="fas fa-reply"></i></a></td>
                                             </tr>
                                                 <?php endif; ?>
 
@@ -358,7 +358,7 @@ switch ($dash) {
                                             <?php $userinfo = information("signup","*","WHERE userid = ".$_GET['userid']."","fetch");   ?>
                                             <?php $box = information("supportbox","*","WHERE userid = ".$_GET['userid']." and id = ".$_GET['id']." ","fetchAll");   ?>
                                                 <h1><i class="fas fa-paper-plane"></i> Welcome <?php echo $_SESSION['user'] ?> !</h1>
-                                                <p>Send Replace To <?php echo $userinfo['username'] ?></p>
+                                                <p>Send Replace To <?php echo $userinfo['username'] ?>  <?php echo  empty($_GET['Xsome']) ? ' ' : " | <a href='../posts/index.php?postid=".$_GET['Xsome']."&user=".$_GET['userid']."'>Your Report</a>" ?></p>
                                             </div>
                                         </div>
                                     </div>

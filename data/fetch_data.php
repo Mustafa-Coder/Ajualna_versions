@@ -14,10 +14,12 @@ $Users = get_something("signup","*"," ","fetchAll"); // get data users
 $Userinfo = get_something("signup","*","WHERE userid = $userid ","fetch"); // get data users
 $pagesforall = get_something("pages","*","WHERE pageid = ".$Userinfo['college']."","fetch"); // get page id you
 $pagesforyou = get_something("pages","*","WHERE pageid = ".$Userinfo['college']."","fetch"); // get page id you
-// $pagespublic = get_something("pages","*","WHERE pageid = ".$userid."","fetch"); // get pagepublic id you
-$pagesinfo = get_something_also("pages","*","WHERE userid = $userid "); // get all pages
+$pagesforall = get_something_also("pages","*","WHERE userid = $userid "); // get all pages
 $comment = get_something_also("comment","*"); // get all comments 
-
+$liker = get_something("liker","*","WHERE liker_id = ".$Userinfo['userid']."","fetch"); // get page id you
+$pages = get_something("pages","*"," ","fetchAll");
+$supportbox = get_something("supportbox","*"," ","fetchAll");
+$supportboxperson = get_something("supportbox","*"," ","fetch");
 switch($req) {
     case 'getposts': // POST PUBLIC
 
@@ -60,6 +62,10 @@ switch($req) {
                     endif;
                 endif;
 
+                // Stat get id liker 
+
+            
+
                 ?>
 
                 <!-- START SHOW POST  -->
@@ -76,7 +82,7 @@ switch($req) {
                             <h2 class="py-1"><?php echo $post['username'] ?></h2>
                             <span class="timespan"><?php echo $post['datetime'] ?></span>
                             <!-- <input class="postid" type="hidden" value=""> -->
-                            <i class="fas fa-ellipsis-h"></i>
+                            <a href="posts/index.php?postid=<?php echo $post['postid'] ?>&user=<?php echo $post['userid'] ?>"><i class="fas fa-ellipsis-h"></i></a>
                         </div>
                          <!-- Set modal Edit post -->
                        
@@ -84,21 +90,23 @@ switch($req) {
                         <div class="info-user">
                             <p class="desc">
                             <?php echo $post['description'] ?>
-                            <?php if ($post['college_group'] == $Userinfo['college']) {
+                           
+                            <?php // if ($post['college_group'] == $Userinfo['college']) {
                                 ?>
-                                <?php
-                                if ($post['college_group'] != 0 && !empty($post['college_group'])) { ?>
-                                    <a href="../pages.php?pageid=<?php echo $pagesforall['pageid']  ; ?>">#<?php echo $pagesforall['pagename']; ?></a>
-                                <?php }
-                                ?>
-                                <?php
-                            } ?>
+                                <!-- Report message -->
+                                <?php foreach($supportbox as $support): ?>
+                                    <?php if($support['For_something'] == $post['postid'] && $post['userid'] == $_SESSION['id']): ?>
+                                        <p class="text-danger " style="margin-top: 12px;font-size:13px;"><?php echo $support['username'] ?> Report Your Post <i class="fa fa-bug"></i> </p>
+                                    <?php endif; ?>
+                                <?php endforeach;?>
+                                <!-- end rebort message  -->
                             </p>
                         </div>
                         <hr>
                         <!-- LIKE COMMUNT SHARE SYSTEM -->
+                        
                         <ul class="lcs ">
-                            <li  class="like" value="<?php echo $post['postid'] ?>"><i class="fas fa-thumbs-up <?php echo $Userinfo['modes'] == 'dark'  ? "icons-co" : " " ?>"></i> <?php // echo $liker; ?> </li>
+                                <a href="posts/index.php?postid=<?php echo $post['postid'] ?>&user=<?php echo $post['userid'] ?>"><li  class="like" ><i class="fas fa-thumbs-up <?php echo $Userinfo['modes'] == 'dark'  ? "icons-co" : " " ?>"></i> <?php echo Counter_All("liker WHERE like_id = ".$post['postid']." ","*"); ?> </li></a>
                             <li id="commentspage"><i class="fas fa-comment commentpost commentspage <?php echo $Userinfo['modes'] == 'dark'  ? "icons-co" : " " ?>"></i>  <?php echo Counter_All("comment WHERE i_post = ".$post['postid']." ","*"); ?></li>
                             <li><i class="fas fa-share-alt <?php echo $Userinfo['modes'] == 'dark'  ? "icons-co" : " " ?>"></i> </li>
                         </ul>
@@ -139,11 +147,16 @@ switch($req) {
                                 <img class="rounded-cricle" src="<?php echo !empty($Userinfo['avatar']) ? "./u/uploads/avatar/".$Userinfo['avatar']."" : "./layout/images/icons/011.png" ?>"  alt="<?php echo $Userinfo['username'] ?>">
                             </div>
                             <div class="infor">
-                                <h2><?php echo $Userinfo['username'] ?></h2>
+                                <!-- <h2><?php echo $Userinfo['username'];  ?></h2> -->
                             </div>
                          </div>
                           <!-- end  --> 
-                          <div class="inputs">  
+                          <div class="inputs"> 
+                          
+                          <!-- Report message -->
+                                
+                            <!-- <?php  if($supportboxperson['For_something'] != $post['postid'] ): ?> -->
+                                <!-- end rebort message  --> 
                           <form method="post" action="http://localhost/Ajualna/home.php">
                             <input name="comment" class="form-control ucomment <?php echo $Userinfo['modes'] == 'dark'  ? "input-user " : " " ?>" type="text" placeholder="comment..<?php echo $Userinfo['username']; ?>">
                             <input name="names" type="hidden" value="<?php echo $Userinfo['username'] ?>">
@@ -153,6 +166,7 @@ switch($req) {
                             <input id="submit" type="submit" hidden >
                             <button name="btnsendcomment" class="btn btn-light btn-sm btnsendcomment <?php echo $Userinfo['modes'] == 'dark'  ? "btn-dark-color " : " " ?>"><i class="fas fa-paper-plane"></i></button>
                           </form>
+                            <!-- <?php  endif; ?> -->
                           </div>
                         </div>
                           <?php endif; ?>
@@ -220,7 +234,7 @@ switch($req) {
                 <!-- START SHOW POST  -->
                 <?php foreach ($posts as $post) { ?>
 
-                    <div class="postshow card border-0">
+                    <div class="postshow card border-0 <?php echo $Userinfo['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?>">
                         <div class="avatar">
                             <?php echo empty($post['avatar']) ? '<img class="img-fiuld rounded-circle" src="./layout/images/icons/011.png" alt="">' : '<img class="img-fiuld rounded-circle" src="./u/uploads/avatar/'.$post['avatar'].'" alt="">' ?>
                             <h2 class="py-1"><?php echo $post['titlename'] . " > " ?><?php echo substr($post['pagename'],0,40) ?>...</h2>
@@ -235,7 +249,7 @@ switch($req) {
                         </div>
                         <hr>
                         <!-- LIKE COMMUNT SHARE SYSTEM -->
-                        <ul class="lcs">
+                        <ul class="lcs <?php echo $Userinfo['modes'] == 'dark'  ? "icons-co" : " " ?>">
                             <li  class="like" value="<?php echo $post['postid'] ?>"><i class="fas fa-thumbs-up"></i> <?php // echo $liker; ?> Like</li>
                             <li><i class="fas fa-comment"></i> Comment</li>
                             <li><i class="fas fa-share-alt"></i> Share</li>
@@ -251,7 +265,7 @@ switch($req) {
 
 
 
-                    <p class="copyright">  Ajualna &copy; <?php echo date("Y"); ?>  </p>
+                    <p class="copyright">  JEEL &copy; <?php echo date("Y"); ?>  </p>
 
 
 
@@ -267,6 +281,53 @@ switch($req) {
             echo ' <li><a href="pages.php?pageid='.$pageadmin['pageid'].'&page=Home_me"><i class="fas fa-university"></i> '. $pageadmin['pagename'] .'</a></li>';
           }
           break;
+        /// Fetch All notification 
+        case 'getNotification': 
+
+          $get_notification = get_something("notifications","*","WHERE pagesname = ".$college_session." ORDER BY id DESC ","fetchAll"); // get data users
+          $get_notification_id = get_something("notifications","u_id","WHERE u_id = ".$userid."","fetch"); // get data users
+
+
+?>
+            
+
+       <?php  foreach ($get_notification as $value) { ?>
+        <?php if($value['pagesname'] == $Userinfo['college']): ?>
+            <?php
+                $select = "SELECT *  FROM signup WHERE userid = :userid ";
+                $notif = $con->prepare($select);
+                $notif->bindparam(":userid",$value['u_id']);
+                $notif->execute();
+                $rowdata = $notif->fetch();
+            ?>
+        <div class="info">
+            <div class="avatar">
+            <img src="./u/uploads/avatar/<?php echo $rowdata['avatar']; ?>" alt="">
+            </div>
+            <div class="user">
+                <h2 class="username"> <?php echo $rowdata['username'] . " " .  $rowdata['lastname']  ?> <!-- > <a href="#"><?php echo $pagesforyou["pagename"] ?></a>--></h2>
+                <p class="time"><i class="fas fa-clock"></i><?php echo $value['times'] ?></p>
+                <?php if($value['typenotif'] == 'comment'): ?>
+                    <p class="desc">
+                         <img class="dotoimg" src="./layout/images/icons/1f5e8.png" alt="icons">  <?php echo $rowdata['username'] ?> <?php echo $_SESSION['id'] == $value['u_id'] ? 'your' : ' ' ?>  comment   <?php  echo  substr($value['title'],0,65) . "..." ?>
+                    </p>
+                <?php endif;?>
+                <?php if($value['typenotif'] == 'post'): ?>
+                    <p class="desc">
+                     <img class="dotoimg" src="./layout/images/icons/1f4f0.png" alt="icons">   <?php echo $_SESSION['id'] == $value['u_id'] ? 'your' : ' '  ?> Post: <?php  echo  substr($value['title'],0,65) . "..." ?> -->
+                    </p>
+                <?php endif;?>
+                <?php if($value['typenotif'] == 'updatePost'): ?>
+                    <p class="desc">
+                         <img class="dotoimg" src="./layout/images/icons/1f4e4.png" alt="icons">   <?php echo $_SESSION['id'] == $value['u_id'] ? 'your ' : ' '  ?>Update Post: <?php  echo  substr($value['title'],0,65) . "..." ?> -->
+                    </p>
+                <?php endif;?>
+            </div>
+        </div>
+        <?php endif; ?>
+        <?php  }  ?>
+                
+        <?php break;
 }
 
 

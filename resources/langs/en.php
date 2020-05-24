@@ -6,7 +6,7 @@ function lang($translate)
     static $lang  = array(
 
         // Navbar:
-        "name_site" => "Ajualna",
+        "name_site" => "JEEL",
         "name_home" => " Home",
         "Ques" =>  " Questions ",
         "pf" => "Profile",
@@ -15,10 +15,10 @@ function lang($translate)
         "dash" => "Dashboard",
         "add" => "Create Page",
         "sup" => "Support Box",
-        "" => "",
-        "" => "",
-        "" => "",
-        "" => "",
+        "ed" => "Edit",
+        "de" => "Delete",
+        "hi" => "Hidden",
+        "re" => "Rebort",
         // home page:
         "col_tar" => "Colleges pages",
         "stu_tra" => "Students your College",

@@ -2,25 +2,20 @@
 <header>
     <nav class="navbar navbar-expand-lg  ">
   <a class="navbar-brand" href="#">
-    <h1><span class="text">A</span> <span class="text-two">JUALNA</span></h1>
+    <h1><span class="text"><img src="./layout/images/logoindex.png" style="width:50px" alt="Jeel"></span></h1>
   </a>
   <div class="collapse navbar-collapse"> 
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">الصفحة الرئيسية</a>
+        <a class="nav-link" href="#">About Us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#about">ماذا نحن</a>
+        <a class="nav-link" href="#about">What's New</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#service">مؤسسة الازهر</a>
+        <a class="nav-link" href="#service">Blog</a>
       </li>
-      <li class="nav-item">
-            <button id="signuppage" class="btn btn-outline-primary">تسجيل</button>
-      </li>
-      <li class="nav-item">
-        <button id="login" class="btn btn-dark">دخول</button>
-      </li>
+      
     </ul>
   </div>
 </nav>
