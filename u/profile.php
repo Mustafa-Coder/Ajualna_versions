@@ -177,12 +177,15 @@ switch($req) {
                                         <option id="newcollege" value="<?php echo $page['pageid'] ?>"><?php echo $page['pagename']; ?></option>
                                    <?php }
                                 endif; // When User the college is not ecoal zero
-                                if($Userinformation['college'] > 0):
-                                 ?> <option id="oldcollege" value="<?php echo $pagesforyou['pageid'] ?>"><?php echo $pagesforyou['pagename'] ?? $pagesforyou['pagename'] ?></option> <?php
-                                 foreach($pagesinfo as $page){ ?>
+                                if(!empty($pagesinfo)):
+                                    if($Userinformation['college'] > 0):
+                                    ?> <option id="oldcollege" value="<?php echo isset($pagesforyou['pageid']) ? $pagesforyou['pageid'] : ''  ?>"><?php echo isset($pagesforyou['pagename']) ? $pagesforyou['pagename'] :  "Select Your University " ?></option> <?php
+                                    foreach($pagesinfo as $page){ ?>
                                         <option id="newcollege" value="<?php echo $page['pageid'] ?>"><?php echo $page['pagename']; ?></option>
-                                   <?php }
+                                    <?php }
+                                    endif;
                                 endif;
+                               
                             ?> </select>
                         </div>
                         <div class="col-md-6">

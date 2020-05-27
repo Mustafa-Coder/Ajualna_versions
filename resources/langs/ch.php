@@ -1,9 +1,9 @@
-<?php
+<?php 
 
 
 function lang($translate)
 {
-    static $lang  = array(
+    static $lang = array (
 
         // Navbar:
         "name_site" => "JEEL",
@@ -22,22 +22,24 @@ function lang($translate)
         // home page:
         "col_tar" => "Colleges pages",
         "stu_tra" => "Students your College",
-        'just_now' => 'Just now',
-        'minute_ago' => 'minute',
-        'minutes_ago' => 'minutes ago',
-        'hour_ago' => 'hour',
+        // time 
+        'just_now' => '现在',
+        'minute_ago' => '分钟前',
+        'minutes_ago' => '几分钟前',
+        'hour_ago' => 'hour ago',
         'hours_ago' => 'hours ago',
-        'day_ago' => 'day',
+        'day_ago' => 'day ago',
         'days_ago' => 'days ago',
-        'week_ago' => 'week',
+        'week_ago' => 'week ago',
         'weeks_ago' => 'weeks ago',
-        'month_ago' => 'month',
+        'month_ago' => 'month ago',
         'months_ago' => 'months ago',
-        'year_ago' => 'year',
+        'year_ago' => 'year ago',
         'years_ago' => 'years ago'
 
 
     );
+
 
     return $lang[$translate];
 }

@@ -43,9 +43,9 @@ switch($req) {
             $college = $_POST['college'];
             $avatar = $_POST['photo'];
             $private = $_POST['private'];
-            $date = new DateTime(); // Date now 
-            $setDatenow = $date->format("D : M j Y - H:i:s A"); // this is formater namedat month hour,....
-            $boxdate = $setDatenow;
+            // $date = new DateTime(); // Date now 
+            // $setDatenow = $date->format("j-m-Y H:i:s"); // this is formater namedat month hour,....
+            $boxdate = time();
             // echo $id . $name . $descp . $college . $avatar;
             
                 $post_statment = "INSERT INTO posts(username,`datetime`,college_group,avatar,`description`,country,userid,`private`)VALUES(:us,:dates,:colg,:avat,:descp,:coun,:id,:privates)";
@@ -66,27 +66,27 @@ switch($req) {
                 if ($count > 0) {
                     echo 'Done';
                     
-                    $id = $Userinfo['userid'];
-                    $desc = filter_var($_POST['desc'],FILTER_SANITIZE_STRING);
-                    $namepage = filter_var($pagesforall['pageid']);
-                    $typenotif = "post";
-                    $seen = 0;
-                    $date = new DateTime(); // Date now 
-            $setDatenow = $date->format("D : M j Y - H:i:s A"); // this is formater namedat month hour,....
-            $boxdate = $setDatenow;
+                    // $id = $Userinfo['userid'];
+                    // $desc = filter_var($_POST['desc'],FILTER_SANITIZE_STRING);
+                    // $pageid = filter_var($pagesforall['pageid']);
+                    // $typenotif = "post";
+                    // $seen = 0;
+                    // $date = new DateTime(); // Date now 
+                    // $setDatenow = $date->format("j-m-Y H:i:s"); // this is formater namedat month hour,....
+                    // $boxdate = $setDatenow;
 
-                    // Notification System Upload:     
-                    $notif = "INSERT INTO notifications(u_id,title,pagesname,typenotif,seen,`times`)
-                              VALUES(:userid,:descrp,:pn,:ti,:se,:tim)";
-                    $notification = $con->prepare($notif);
-                    $notification->bindparam(":userid",$id);
-                    $notification->bindparam(":descrp",$desc);
-                    $notification->bindparam(":pn",$namepage);
-                    $notification->bindparam(":ti",$typenotif);
-                    $notification->bindparam(":se",$seen);
-                    $notification->bindparam(":tim",$boxdate);
-                    $notification->execute();
-                    $count = $notification->rowcount();
+                    // // Notification System Upload:     
+                    // $notif = "INSERT INTO notifications(u_id,title,typenotfi_id,typenotif,seen,`times`)
+                    //           VALUES(:userid,:descrp,:pn,:ti,:se,:tim)";
+                    // $notification = $con->prepare($notif);
+                    // $notification->bindparam(":userid",$id);
+                    // $notification->bindparam(":descrp",$desc);
+                    // $notification->bindparam(":typenotfi_id",$pageid);
+                    // $notification->bindparam(":ti",$typenotif);
+                    // $notification->bindparam(":se",$seen);
+                    // $notification->bindparam(":tim",$boxdate);
+                    // $notification->execute();
+                    // $count = $notification->rowcount();
 
             
                     // echo $id . " " . $desc . " " . $namepage . " " . $typenotif . " " . $seen;
@@ -147,31 +147,27 @@ switch($req) {
             $descp = $_POST['desc'];
             $country = $_SESSION['country'];
             $avatar = $_POST['photo'];
+            $pageid = $_POST['pageid'];
+            // $datetime =   new DateTime("Now");
+            // $makeformat = $datetime->format("j-m-Y H:i:s");
+            $boxTime = time();
 
-            // echo $id . $name . $descp . $npage . $avatar .$country;
-            
-                $post_statment = "INSERT INTO postpublic(titlename,`description`,pagename,country,avatar,userid)
-                VALUES(:us,:descp,:npage,:coun,:avatar,:id)";
+
+                $post_statment = "INSERT INTO postpublic(titlename,`description`,pagename,country,avatar,pageid,`times`,userid)
+                VALUES(:us,:descp,:npage,:coun,:avatar,:pageid,:timesa,:id)";
                 $poststa = $con->prepare($post_statment);
                 $poststa->bindparam(":us",$name);
                 $poststa->bindparam(":descp",$descp);
                 $poststa->bindparam(":npage",$npage);
                 $poststa->bindparam(":coun",$country);
                 $poststa->bindparam(":avatar",$avatar);
+                $poststa->bindparam(":pageid",$pageid);
+                $poststa->bindparam(":timesa",$boxTime);
                 $poststa->bindparam(":id",$id);
                 $poststa->execute();
                 $count = $poststa->rowcount();
 
-                // // FUNCTION CREATE TO POST IT ---------
-                // Createall(
-                //     // TABLES AND COLUMNS NAMES VALUES(:us,:colg,:avat,:descp,:id)";
-                //      "posts","username","college_group","avatar","`description`","userid",
-                //      // VALUES
-                //      ":us",":colg",":avat",":descp",":id",
-                //      // DATA 
-                //      "$name","$college","$avatar","$descp","$id"
-                //     );
-
+            
                 if ($count > 0) {
                     echo 'Done';
                 }else {

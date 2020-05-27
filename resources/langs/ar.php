@@ -23,14 +23,19 @@ function lang($translate)
         // home page:
         "col_tar" => "جميع الكليات",
         "stu_tra" => "طلاب جامعتك",
-        "" => "",
-        "" => "",
-        "" => "",
-        "" => "",
-        "" => "",
-        "" => "",
-        "" => "",
-        "" => "",
+        'just_now' => 'الان',
+        'minute_ago' => 'دقيقة',
+        'minutes_ago' => 'دقائق',
+        'hour_ago' => 'ساعة',
+        'hours_ago' => 'ساعات',
+        'day_ago' => 'يوم',
+        'days_ago' => 'ايام',
+        'week_ago' => 'أسبوع',
+        'weeks_ago' => 'أسابيع',
+        'month_ago' => 'شهر',
+        'months_ago' => 'شهور',
+        'year_ago' => 'سنة',
+        'years_ago' => 'سنين'
 
 
     );

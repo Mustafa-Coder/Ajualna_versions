@@ -49,6 +49,7 @@ switch($req) {
                 $last = $_POST['last'];
                 $email = $_POST['email'];
                 $pass = !empty($_POST['newpass']) ? $_POST['newpass'] : $_POST['oldpass'] ;
+                $hash = md5($pass);
                 $nationnum  = $_POST['national'];
                 $collegeid = $_POST['collegeid'];
                 $Gender = $_POST['Gender'];
@@ -81,7 +82,7 @@ switch($req) {
                 $setupdate->bindparam(":user",$user);
                 $setupdate->bindparam(":lastN",$last);
                 $setupdate->bindparam(":email",$email);
-                $setupdate->bindparam(":pass",$pass);
+                $setupdate->bindparam(":pass",$hash);
                 // $setupdate->bindparam(":man",$male);
                 $setupdate->bindparam(":Gender",$Gender);
                 // $setupdate->bindparam(":sax",$sax);

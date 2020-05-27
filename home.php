@@ -1,6 +1,7 @@
 <?php
 // session_cache_expire(1440); // This The Chace Time about your session and this 30 value is minute
 session_start();
+ob_start();
 $PAGENAME = "Home | JEEL "  ;
 include 'init.php';
 if(!isset($_SESSION['user'])):
@@ -40,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $po  = $_POST['postid'];
     $us = $_POST['userid'];
+    $useridpost = $_POST['useridpost'];
     $na = $_POST['names'];
     $ava = $_POST['avatar'];
     $com = $_POST['comment'];
@@ -57,19 +59,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $id = $Userinformation['userid'];
     $desc = filter_var($_POST['comment'],FILTER_SANITIZE_STRING);
-    $namepage = filter_var($Userinformation['college']);
+    $postid = filter_var($po);
     $typenotif = "comment";
     $seen = 0;
     $date = new DateTime(); // Date now 
     $setDatenow = $date->format("D : M j Y  - h:i:s A"); // this is formater namedat month hour,....
     $boxdate = $setDatenow;
      // Notification System Upload:     
-    $notif = "INSERT INTO notifications(u_id,title,pagesname,typenotif,seen,`times`)
-                VALUES(:userid,:descrp,:pn,:ti,:se,:tim)";
+    $notif = "INSERT INTO notifications(u_id,for_id,title,typenotfi_id,typenotif,seen,`times`)
+                VALUES(:userid,:for,:descrp,:typenotfi_id,:ti,:se,:tim)";
     $notification = $con->prepare($notif);
     $notification->bindparam(":userid",$id);
+    $notification->bindparam(":for",$useridpost);
     $notification->bindparam(":descrp",$desc);
-    $notification->bindparam(":pn",$namepage);
+    $notification->bindparam(":typenotfi_id",$postid);
     $notification->bindparam(":ti",$typenotif);
     $notification->bindparam(":se",$seen);
     $notification->bindparam(":tim",$boxdate);
@@ -112,11 +115,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             <!-- SHECK IF THE USERNAME COLLEGE EQUEL SAME COLLEGE -->
             <div class="card user-info border-0 mt-2 user-info-college p-3  <?php echo $Userinformation['modes'] == 'dark'  ? "bg-bor-col-dark" : " " ?> ">
-                    <h2><?php  echo lang("stu_tra") ?></h2>
+                    <h2><?php  echo lang("stu_tra") ?> <?php  echo !empty($pagesforyou['pageid']) ?  Counter_All("signup","*","WHERE college = ".$pagesforyou['pageid']."") > 9 ? '<a href="#">+ more</a>' : '' : ' ' ?> </h2>
                     <br>
                     <?php foreach ($usercollege as $collegme) { ?>
                          <?php if($collegme??['college'] == $pagesforyou['pageid'] && $collegme['userid'] != $_SESSION['id']): ?>
-                            <?php if($collegme['college'] != 0 && $collegme['userid'] != $_SESSION['id'] & $Userinformation['country'] == $collegme['country']  ): ?>
+                            <?php if($collegme['college'] != 0 && $collegme['userid'] != $_SESSION['id'] /*& $Userinformation['country'] == $collegme['country']*/  ): ?>
                             <div class="person">
                                 <div class="avatar">
                                     <?php if(empty($collegme['avatar'])): ?>
@@ -132,21 +135,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                                 <div class="info">
                                     <h1><?php echo strtolower($collegme['username']); ?></h1>
+                                    <p>@ <?php echo strtolower($collegme['lastname']); ?> </p>
                                     <?php $pageme = get_something("pages","*","WHERE pageid = ".$collegme['college']."","fetch"); // get page id you ?>
-                                    <?php if($pageme['pagename'] >= 25):  ?>
-                                    <p><?php echo !empty($collegme['college']) ? "<i class='fas fa-university'></i> " . '<a href="pages.php?pageid='.$collegme['college'].'" title="'.$pageme['pagename'] .'">'. substr($pageme['pagename'] ,0,15).'...</a>' : "<i class='fas fa-university'></i> No College Here !" ?></p>
-                                    <?php else: ?>
-                                        <p><?php echo !empty($collegme['college']) ? "<i class='fas fa-university'></i> " . '<a href="pages.php?pageid='.$collegme['college'].'" title="'.$pageme['pagename'] .'">'.$pageme['pagename'].'...</a>' : "<i class='fas fa-university'></i> No College Here !" ?></p>
-                                   <?php endif; ?>
+                                    <!-- <?php if(!empty($pageme['pagename'])):  ?>
+                                         <?php if($pageme['pagename'] > 25):  ?>
+                                        <p><?php echo !empty($pageme['pagename']) ? "<i class='fas fa-university'></i> " . '<a href="pages.php?pageid='. $collegme['college'].'" title="'.$pageme['pagename'] .'">'. substr($pageme['pagename'] ,0,15).'...</a>' : "<i class='fas fa-university'></i> No College Here !" ?></p>
+                                        <?php else: ?>
+                                            <p><?php echo !empty($pageme['pagename']) ? "<i class='fas fa-university'></i> " . '<a href="pages.php?pageid='.$collegme['college'].'" title="'.$pageme['pagename'] .'">'.$pageme['pagename'].'</a>' : "<i class='fas fa-university'></i> No College Here !" ?></p>
+                                        <?php endif; ?> -->
+                                    <!-- <?php else: ?> -->
+                                        <!-- <p><i class='fas fa-university'></i> Select Your university</p> -->
+                                   <!-- <?php endif; ?>  -->
                                 </div>
                             </div>
+                        
                              <!-- <p class="Mesgcollege"><i class='fas fa-university'></i>  There is no one in your college</p> -->
                             <?php endif; ?>
 
                         <?php endif; ?>
                     <?php  } ?>
 
-
+              
             </div>
             <!-- end  -->
 
@@ -184,6 +193,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div id="showposts">
                 </div>
             </div>
+<!-- <input id="useridpost" type="hidden" value="<?php echo $_POST['postid']; ?>"> -->
+
             <!-- END SHOW POSTS ALL  -->
             
         </div>
@@ -221,7 +232,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <!-- START SHOW PAGES  -->
                     <a class="py-2 ml-2"><?php  echo lang("col_tar") ?></a>
                         <!-- show pagename -->
-                            <ul id="pages">
+                            <ul id="pages" style="    margin-left: -23px;">
                                 <?php foreach($pagesall as $pa): ?>
                                     <?php if($pa['pagecover'] != null ): ?>
                                         <li class="newcollege mt-3"> <img class="rounded-circle" src="./u/uploads/cover/<?php echo $pa['pagecover']; ?>" alt="<?php echo $pa['pagecover']; ?>" /> <a style=" color: rgb(139, 142, 159);" href="pages.php?pageid=<?php echo $pa['pageid']; ?>&page=Home_me"><?php echo $pa['pagename']; ?></a></li>
@@ -282,8 +293,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 <!-- END PAGE HTML -->
 <!-- ######################################################################## -->
-<?php include $source . '/templates/footer.php' ?>
-<script>
-
-
-</script>
+<?php
+ include $source . '/templates/footer.php';
+  ?>

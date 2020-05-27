@@ -26,7 +26,7 @@
 <?php
 
 // Functions data: ;
-    $get_notification = get_something("notifications","*","WHERE pagesname = ".$college_session." ORDER BY id DESC ","fetchAll"); // get data users
+    $get_notification = get_something("notifications","*","WHERE typenotfi_id = ".$college_session." ORDER BY id DESC ","fetchAll"); // get data users
     $get_notification_id = get_something("notifications","u_id","WHERE u_id = ".$userid."","fetch"); // get data users
 
 

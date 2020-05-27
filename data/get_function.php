@@ -9,7 +9,7 @@ $pagesforyou = get_something("pages","*","WHERE pageid = ".$Userinformation['col
 $pagesforall = get_something("pages","*","WHERE pageid = ".$Userinformation['college']."","fetchAll"); // get page id you
 $postAll = get_something("posts","*","WHERE userid = ".$userid." ORDER BY postid DESC ","fetchAll");
 $pagesall = get_something("pages","*","WHERE userid = ".$userid." ORDER BY pageid DESC ","fetchAll");
-$usercollege = get_something("signup","*","WHERE college = ".$Userinfo['college']."","fetchAll"); // Get users colleges
+$usercollege = get_something("signup","*","WHERE college = ".$Userinfo['college']." LIMIT 6","fetchAll"); // Get users colleges
 $posts = get_something("posts","*","WHERE userid = ".$userid."","fetch");
 ?>
 

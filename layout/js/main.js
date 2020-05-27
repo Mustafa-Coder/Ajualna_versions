@@ -78,45 +78,7 @@ $(function () {
    });
 
 
-    let UpdateNotification = _ =>
-
-    {
-        var seen = 1,
-            id = $("#userid").val();
-
-         $.ajax({
-                type:"post",
-                url:"/Ajualna/data/settings.php",
-                data:{"req":"updatenotification","seen":seen,"id":id},
-                success:function(data,stats){
-                    
-                    console.log(data);
-                    console.log(stats);
-
-                }
-            });
-
-
-        // Get data 
-
-        $.ajax({
-            type:"post",
-            url:"/Ajualna/data/fetch_data.php",
-            data:{"req":"getNotification"},
-            success:function(data,stats){
-                
-                $("#modalNotif").html(data);
-
-            }
-        });
-
-    }
-
-    $("#ShowNotification").on('click',function () {
-        $("#moadlMenu").removeClass('display');
-        $("#modalNotif").toggleClass("display");
-        UpdateNotification();
-    });
+    
 
 
 //    console.log($("#oldcollege").val());
@@ -548,7 +510,6 @@ let SendMessageSupport = _ =>
         $("#sbm")[0].play();
 
     });
-
 
 
 

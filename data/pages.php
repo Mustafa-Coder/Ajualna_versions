@@ -68,6 +68,21 @@ switch($req) {
             }
 
         break;
+        // Delete page all info 
+        case 'Del':
+            $ID = filter_var($_POST['pageid'],FILTER_VALIDATE_INT);
+            // NOTIFICATION USER
+            $deleted_pages = "DELETE FROM pages WHERE pageid = ? ";
+            $set_del = $con->prepare($deleted_pages);
+            $set_del->execute(array($ID));
+            $DEL = $set_del->rowcount();
+            if($DEL == 1):
+                echo 'Done';
+            else:
+                echo 'wrong';
+            endif;
+            
+        break;
         
 
 }

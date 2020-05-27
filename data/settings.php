@@ -129,16 +129,17 @@ switch($req) {
         // Dark mode
         case 'updatenotification':
 
-            $seen = $_POST['seen']; // username 
+            $seen = $_POST['seen']; // user
             $id = $_POST['id'];
 
             // if ():
             // endif;
 
-            $statment = "UPDATE notifications SET seen = :seen  ";
+            $statment = "UPDATE notifications SET  seen = :seen  WHERE for_id = :id ";
             $setValue = $con->prepare($statment);
             // $setValue->bindparam(":id",$id);
             $setValue->bindparam(":seen",$seen);
+            $setValue->bindparam(":id",$id);
             $setValue->execute();
             $count = $setValue->rowcount();
             if ($count > 0) {
